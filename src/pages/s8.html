@@ -25,33 +25,30 @@
     <div class="node q">You're IP. You want to bet. How strong?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Strong value</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Strong value</span></div>
         <div class="node q">Villain's nut ratio?</div>
         <div class="branch">
-          <div class="col"><div class="edge">Low (capped)</div><div class="arrow">↓</div><div class="node yes">Overbet / pot<br>(geometric to get stacks in)</div></div>
-          <div class="col"><div class="edge">High (nuts possible)</div><div class="arrow">↓</div><div class="node yes">~70% pot<br>(large, not overbet)</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Low (capped)</span></div><div class="node yes">Overbet / pot<br>(geometric to get stacks in)</div></div>
+          <div class="col"><div class="conn cont"><span class="el">High (nuts possible)</span></div><div class="node yes">~70% pot<br>(large, not overbet)</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Thin value</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Thin value</span></div>
         <div class="node q">Bet small (&lt;50%)?</div>
         <div class="branch">
-          <div class="col"><div class="edge">Almost never correct</div><div class="arrow">↓</div><div class="node no">CHECK<br>(don't bet thin hands small)</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Almost never correct</span></div><div class="node no">CHECK<br>(don't bet thin hands small)</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Medium-strong (merge)</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Medium-strong (merge)</span></div>
         <div class="node q">Folds better AND called by worse?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Bet pot (merge)<br>e.g. pocket Queens</div></div>
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">Check</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Bet pot (merge)<br>e.g. pocket Queens</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Check</div></div>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q" style="margin-top:14px">Risk: reopening action = being CR'd off equity.<br><span class="small">Small bets don't justify that risk → bet bigger</span></div>
   </div>
 </section>

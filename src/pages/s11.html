@@ -27,35 +27,31 @@
   <h2>Decision Flow</h2>
   <div class="flow">
     <div class="node q">River. Villain bets. You have a bluff catcher.</div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q">Can you identify where their bluffs come from?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">NO (no natural bluffs)</div>
-        <div class="arrow">↓</div>
+        <div class="conn no"><span class="el">NO (no natural bluffs)</span></div>
         <div class="node no">Fold — even if MDF says call</div>
       </div>
       <div class="col">
-        <div class="edge">YES</div>
-        <div class="arrow">↓</div>
+        <div class="conn yes"><span class="el">YES</span></div>
         <div class="node q">How wide is their value range?</div>
         <div class="branch">
           <div class="col">
-            <div class="edge">Wide</div>
-            <div class="arrow">↓</div>
+            <div class="conn cont"><span class="el">Wide</span></div>
             <div class="node q">Does your hand unblock bluffs?</div>
             <div class="branch">
-              <div class="col"><div class="edge">YES (4-x, 3-x, 2-x)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
-              <div class="col"><div class="edge">NO (8-x, 9-x, T-x)</div><div class="arrow">↓</div><div class="node no">Fold — blocks bluffs</div></div>
+              <div class="col"><div class="conn yes"><span class="el">YES (4-x, 3-x, 2-x)</span></div><div class="node yes">Call</div></div>
+              <div class="col"><div class="conn no"><span class="el">NO (8-x, 9-x, T-x)</span></div><div class="node no">Fold — blocks bluffs</div></div>
             </div>
           </div>
           <div class="col">
-            <div class="edge">Narrow</div>
-            <div class="arrow">↓</div>
+            <div class="conn cont"><span class="el">Narrow</span></div>
             <div class="node q">Does your hand block value?</div>
             <div class="branch">
-              <div class="col"><div class="edge">YES (King — blocks KK, KQ)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
-              <div class="col"><div class="edge">NO (8/9 — blocks nothing valuable)</div><div class="arrow">↓</div><div class="node no">Fold</div></div>
+              <div class="col"><div class="conn yes"><span class="el">YES (King — blocks KK, KQ)</span></div><div class="node yes">Call</div></div>
+              <div class="col"><div class="conn no"><span class="el">NO (8/9 — blocks nothing valuable)</span></div><div class="node no">Fold</div></div>
             </div>
           </div>
         </div>

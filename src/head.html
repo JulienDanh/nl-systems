@@ -35,13 +35,42 @@
   th{background:var(--panel2);color:var(--accent2);font-weight:600}
   .s{color:var(--spade)}.h{color:var(--heart)}.d{color:var(--diamond)}.c{color:var(--club)}
   .board{display:inline-flex;gap:4px;font-weight:700;font-size:16px;background:#0c1117;border:1px solid var(--line);padding:6px 10px;border-radius:10px;margin:4px 0}
-  .flow{display:flex;flex-direction:column;align-items:center;gap:10px;margin:10px 0}
-  .node{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 18px;text-align:center;min-width:240px;max-width:90%;font-size:14px}
-  .node.q{border-color:var(--accent2)}.node.yes{border-color:var(--good)}.node.no{border-color:var(--bad)}
-  .arrow{color:var(--muted);font-size:20px;line-height:1}
-  .branch{display:flex;gap:30px;flex-wrap:wrap;justify-content:center;width:100%}
-  .branch .col{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;min-width:220px}
-  .edge{font-size:12px;color:var(--muted);font-weight:600}
+  /* ---- Decision Flow ---- */
+  .flow{display:flex;flex-direction:column;align-items:center;gap:0;margin:10px 0}
+  .node{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 18px;text-align:center;min-width:240px;max-width:90%;font-size:14px;position:relative;z-index:1;transition:box-shadow .2s,border-color .2s,transform .2s}
+  .node.q{border-color:var(--accent2);background:rgba(106,166,255,.08)}
+  .node.q::before{content:'?';position:absolute;left:10px;top:8px;font-size:11px;color:var(--accent2);opacity:.5;font-weight:700}
+  .node.yes{border-color:var(--good);background:rgba(95,208,168,.13);font-weight:600;box-shadow:0 0 0 1px rgba(95,208,168,.2)}
+  .node.yes::before{content:'▶';position:absolute;left:10px;top:8px;font-size:10px;color:var(--good);opacity:.6}
+  .node.no{border-color:var(--bad);background:rgba(239,111,111,.13);font-weight:600;box-shadow:0 0 0 1px rgba(239,111,111,.2)}
+  .node.no::before{content:'✕';position:absolute;left:10px;top:8px;font-size:11px;color:var(--bad);opacity:.5;font-weight:700}
+  .node.warn{border-color:var(--warn);background:rgba(240,184,110,.1)}
+  /* connector: vertical line replacing ↓ */
+  .conn{width:2px;flex:1;min-height:18px;position:relative}
+  .conn.yes{background:var(--good)}
+  .conn.no{background:var(--bad)}
+  .conn.cont{background:var(--accent2)}
+  .conn.neutral{background:var(--line)}
+  /* edge label pill sitting on the connector */
+  .conn .el{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:999px;background:#1a2230;border:1px solid var(--line);white-space:nowrap}
+  .conn.yes .el{color:var(--good);border-color:var(--good)}
+  .conn.no .el{color:var(--bad);border-color:var(--bad)}
+  .conn.cont .el{color:var(--accent2);border-color:var(--accent2)}
+  .conn.neutral .el{color:var(--muted)}
+  .branch{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;width:100%;align-items:stretch}
+  .branch .col{display:flex;flex-direction:column;align-items:center;gap:0;flex:1;min-width:200px}
+  /* hover path highlight */
+  .flow.highlight .node,.flow.highlight .conn{opacity:.35}
+  .flow.highlight .node.hl,.flow.highlight .conn.hl{opacity:1}
+  .flow.highlight .node.hl.yes{box-shadow:0 0 0 2px var(--good),0 0 20px rgba(95,208,168,.3)}
+  .flow.highlight .node.hl.no{box-shadow:0 0 0 2px var(--bad),0 0 20px rgba(239,111,111,.3)}
+  .flow.highlight .node.hl.q{box-shadow:0 0 0 2px var(--accent2),0 0 20px rgba(106,166,255,.25)}
+  /* scroll entrance */
+  .flow .node,.flow .conn{opacity:0;transform:translateY(8px)}
+  .flow.in .node,.flow .in.conn,.flow.in .conn{animation:flowIn .4s ease forwards}
+  .flow.in .node{animation:flowIn .4s ease forwards}
+  @keyframes flowIn{to{opacity:1;transform:translateY(0)}}
+  @media(max-width:560px){.branch{flex-direction:column}.branch .col{min-width:100%}}
   .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
   .flip{perspective:1000px;height:150px;cursor:pointer}
   .flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}

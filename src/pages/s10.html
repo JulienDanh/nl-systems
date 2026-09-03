@@ -30,29 +30,27 @@
   <h2>Decision Flow</h2>
   <div class="flow">
     <div class="node q">River. You have a medium-strong hand. Villain's range?</div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q">Inflection points weakened villain?<br><span class="small">checked turn · no raising · small bets</span></div>
     <div class="branch">
       <div class="col">
-        <div class="edge">YES — villain capped</div>
-        <div class="arrow">↓</div>
+        <div class="conn yes"><span class="el">YES — villain capped</span></div>
         <div class="node q">Can you check-raise?</div>
         <div class="branch">
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node yes">BET for value<br>don't let IP polarize by checking</div></div>
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Check-raise</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">BET for value<br>don't let IP polarize by checking</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Check-raise</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">NO — villain strong</div>
-        <div class="arrow">↓</div>
+        <div class="conn no"><span class="el">NO — villain strong</span></div>
         <div class="node q">Sizing?</div>
         <div class="branch">
-          <div class="col"><div class="edge">High nut ratio</div><div class="arrow">↓</div><div class="node yes">Bet small<br>(nuts frequency constrains)</div></div>
-          <div class="col"><div class="edge">Short SPR (&lt;2x pot)</div><div class="arrow">↓</div><div class="node yes">Prefer jamming</div></div>
+          <div class="col"><div class="conn cont"><span class="el">High nut ratio</span></div><div class="node yes">Bet small<br>(nuts frequency constrains)</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Short SPR (&lt;2x pot)</span></div><div class="node yes">Prefer jamming</div></div>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node no" style="margin-top:14px">WARNING: checking converts strong hands into bluff catchers<br><span class="small">IP auto-polarizes — bets hands that beat you, checks hands you beat</span></div>
   </div>
 </section>

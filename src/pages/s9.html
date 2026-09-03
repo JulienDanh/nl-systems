@@ -35,32 +35,29 @@
     <div class="node q">Villain c-bets. What's your hand type?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Weak pair + BDFD</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Weak pair + BDFD</span></div>
         <div class="node yes">Call (BDFD > kicker)</div>
       </div>
       <div class="col">
-        <div class="edge">Gut shot</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Gut shot</span></div>
         <div class="node q">Also has BDFD?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES (super gut shot)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
-          <div class="col"><div class="edge">With overcard</div><div class="arrow">↓</div><div class="node yes">Call/mix</div></div>
-          <div class="col"><div class="edge">Naked (double unders)</div><div class="arrow">↓</div><div class="node no">Fold</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES (super gut shot)</span></div><div class="node yes">Call</div></div>
+          <div class="col"><div class="conn cont"><span class="el">With overcard</span></div><div class="node yes">Call/mix</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Naked (double unders)</span></div><div class="node no">Fold</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">High card</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">High card</span></div>
         <div class="node q">BDFD? Overcards?</div>
         <div class="branch">
-          <div class="col"><div class="edge">Double overs + BDFD</div><div class="arrow">↓</div><div class="node yes">Pure call</div></div>
-          <div class="col"><div class="edge">A-high + BDFD</div><div class="arrow">↓</div><div class="node yes">Pure call (vs small)</div></div>
-          <div class="col"><div class="edge">No BDFD</div><div class="arrow">↓</div><div class="node q">3-straight + 3-flush?</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Double overs + BDFD</span></div><div class="node yes">Pure call</div></div>
+          <div class="col"><div class="conn cont"><span class="el">A-high + BDFD</span></div><div class="node yes">Pure call (vs small)</div></div>
+          <div class="col"><div class="conn no"><span class="el">No BDFD</span></div><div class="node q">3-straight + 3-flush?</div></div>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q" style="margin-top:14px">CR criteria: direct equity + BD straight + BD flush + opponent missed + small bet<br><span class="small">high card of suit &gt; low card (blocks linear RFI better)</span></div>
   </div>
 </section>

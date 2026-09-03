@@ -36,32 +36,28 @@
     <div class="node q">Stack depth?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">> 35bb</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">> 35bb</span></div>
         <div class="node q">What kind of hand?</div>
         <div class="branch">
-          <div class="col"><div class="edge">Nuts (sets, two pair)</div><div class="arrow">↓</div><div class="node yes">Check-raise</div></div>
-          <div class="col"><div class="edge">Top pair, great kicker</div><div class="arrow">↓</div><div class="node yes">Mix CR</div></div>
-          <div class="col"><div class="edge">Top pair, weak kicker</div><div class="arrow">↓</div><div class="node no">Check-call</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Nuts (sets, two pair)</span></div><div class="node yes">Check-raise</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Top pair, great kicker</span></div><div class="node yes">Mix CR</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Top pair, weak kicker</span></div><div class="node no">Check-call</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">≤ 35bb</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">≤ 35bb</span></div>
         <div class="node q">What kind of hand?</div>
         <div class="branch">
           <div class="col">
-            <div class="edge">Top pair</div>
-            <div class="arrow">↓</div>
+            <div class="conn cont"><span class="el">Top pair</span></div>
             <div class="node q">Backdoor flush draw?</div>
             <div class="branch">
-              <div class="col"><div class="edge">NO (offsuit)</div><div class="arrow">↓</div><div class="node yes">Check-raise</div></div>
-              <div class="col"><div class="edge">YES (suited)</div><div class="arrow">↓</div><div class="node no">Check-call<br>(realize flush draw)</div></div>
+              <div class="col"><div class="conn no"><span class="el">NO (offsuit)</span></div><div class="node yes">Check-raise</div></div>
+              <div class="col"><div class="conn yes"><span class="el">YES (suited)</span></div><div class="node no">Check-call<br>(realize flush draw)</div></div>
             </div>
           </div>
           <div class="col">
-            <div class="edge">Two pair / sets</div>
-            <div class="arrow">↓</div>
+            <div class="conn cont"><span class="el">Two pair / sets</span></div>
             <div class="node no">Trap (check-call)<br>SPR short enough to shove river</div>
           </div>
         </div>

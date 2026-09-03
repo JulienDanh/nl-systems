@@ -35,13 +35,42 @@
   th{background:var(--panel2);color:var(--accent2);font-weight:600}
   .s{color:var(--spade)}.h{color:var(--heart)}.d{color:var(--diamond)}.c{color:var(--club)}
   .board{display:inline-flex;gap:4px;font-weight:700;font-size:16px;background:#0c1117;border:1px solid var(--line);padding:6px 10px;border-radius:10px;margin:4px 0}
-  .flow{display:flex;flex-direction:column;align-items:center;gap:10px;margin:10px 0}
-  .node{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 18px;text-align:center;min-width:240px;max-width:90%;font-size:14px}
-  .node.q{border-color:var(--accent2)}.node.yes{border-color:var(--good)}.node.no{border-color:var(--bad)}
-  .arrow{color:var(--muted);font-size:20px;line-height:1}
-  .branch{display:flex;gap:30px;flex-wrap:wrap;justify-content:center;width:100%}
-  .branch .col{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;min-width:220px}
-  .edge{font-size:12px;color:var(--muted);font-weight:600}
+  /* ---- Decision Flow ---- */
+  .flow{display:flex;flex-direction:column;align-items:center;gap:0;margin:10px 0}
+  .node{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 18px;text-align:center;min-width:240px;max-width:90%;font-size:14px;position:relative;z-index:1;transition:box-shadow .2s,border-color .2s,transform .2s}
+  .node.q{border-color:var(--accent2);background:rgba(106,166,255,.08)}
+  .node.q::before{content:'?';position:absolute;left:10px;top:8px;font-size:11px;color:var(--accent2);opacity:.5;font-weight:700}
+  .node.yes{border-color:var(--good);background:rgba(95,208,168,.13);font-weight:600;box-shadow:0 0 0 1px rgba(95,208,168,.2)}
+  .node.yes::before{content:'▶';position:absolute;left:10px;top:8px;font-size:10px;color:var(--good);opacity:.6}
+  .node.no{border-color:var(--bad);background:rgba(239,111,111,.13);font-weight:600;box-shadow:0 0 0 1px rgba(239,111,111,.2)}
+  .node.no::before{content:'✕';position:absolute;left:10px;top:8px;font-size:11px;color:var(--bad);opacity:.5;font-weight:700}
+  .node.warn{border-color:var(--warn);background:rgba(240,184,110,.1)}
+  /* connector: vertical line replacing ↓ */
+  .conn{width:2px;flex:1;min-height:18px;position:relative}
+  .conn.yes{background:var(--good)}
+  .conn.no{background:var(--bad)}
+  .conn.cont{background:var(--accent2)}
+  .conn.neutral{background:var(--line)}
+  /* edge label pill sitting on the connector */
+  .conn .el{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:10px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:999px;background:#1a2230;border:1px solid var(--line);white-space:nowrap}
+  .conn.yes .el{color:var(--good);border-color:var(--good)}
+  .conn.no .el{color:var(--bad);border-color:var(--bad)}
+  .conn.cont .el{color:var(--accent2);border-color:var(--accent2)}
+  .conn.neutral .el{color:var(--muted)}
+  .branch{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;width:100%;align-items:stretch}
+  .branch .col{display:flex;flex-direction:column;align-items:center;gap:0;flex:1;min-width:200px}
+  /* hover path highlight */
+  .flow.highlight .node,.flow.highlight .conn{opacity:.35}
+  .flow.highlight .node.hl,.flow.highlight .conn.hl{opacity:1}
+  .flow.highlight .node.hl.yes{box-shadow:0 0 0 2px var(--good),0 0 20px rgba(95,208,168,.3)}
+  .flow.highlight .node.hl.no{box-shadow:0 0 0 2px var(--bad),0 0 20px rgba(239,111,111,.3)}
+  .flow.highlight .node.hl.q{box-shadow:0 0 0 2px var(--accent2),0 0 20px rgba(106,166,255,.25)}
+  /* scroll entrance */
+  .flow .node,.flow .conn{opacity:0;transform:translateY(8px)}
+  .flow.in .node,.flow .in.conn,.flow.in .conn{animation:flowIn .4s ease forwards}
+  .flow.in .node{animation:flowIn .4s ease forwards}
+  @keyframes flowIn{to{opacity:1;transform:translateY(0)}}
+  @media(max-width:560px){.branch{flex-direction:column}.branch .col{min-width:100%}}
   .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
   .flip{perspective:1000px;height:150px;cursor:pointer}
   .flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
@@ -150,12 +179,12 @@
   <h2>Decision Flow (Bucket 1)</h2>
   <div class="flow">
     <div class="node q">Flop is T-high or higher?</div>
-    <div class="arrow">↓ yes</div>
+    <div class="conn cont"></div>
     <div class="node q">Any risk factor?<br><span class="small">straights · ace-monotone · AKx · high-low-low · deep stacks</span></div>
     <div class="branch">
-      <div class="col"><div class="edge">NO — clean</div><div class="arrow">↓</div>
+      <div class="col"><div class="conn no"><span class="el">NO — clean</span></div>
         <div class="node yes">C-bet <strong>100%</strong><br>small size (~25–40%)<br>no checks, any hand</div></div>
-      <div class="col"><div class="edge">YES — risk factor</div><div class="arrow">↓</div>
+      <div class="col"><div class="conn yes"><span class="el">YES — risk factor</span></div>
         <div class="node no">Slow down — mix<br><strong>Bet:</strong> very strong + very weak<br><strong>Check:</strong> medium-strength</div></div>
     </div>
   </div>
@@ -226,26 +255,23 @@
     <div class="node q">What's the flop?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Ace-high</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Ace-high</span></div>
         <div class="node q">Risk factor?<br><span class="small">deep · monotone · paired</span></div>
         <div class="branch">
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node yes">C-bet 100%</div></div>
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">T–K high + 2 or 3</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">T–K high + 2 or 3</span></div>
         <div class="node q">Risk factor?<br><span class="small">two low cards · monotone</span></div>
         <div class="branch">
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node yes">C-bet 100%</div></div>
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">9-high & below</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">9-high & below</span></div>
         <div class="node no">Always mix (~60/40)<br><strong>Bet:</strong> strong + weak (selective)<br><strong>Check:</strong> medium</div>
       </div>
     </div>
@@ -316,36 +342,33 @@
   <h2>Decision Flow</h2>
   <div class="flow">
     <div class="node q">Identify key card<br><span class="small">ignore ace & deuce; use the others</span></div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q">Classify your hand around key card</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Double overs</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Double overs</span></div>
         <div class="node q">Key card high (8+) or low (5-)?</div>
         <div class="branch">
-          <div class="col"><div class="edge">High</div><div class="arrow">↓</div><div class="node yes">Rare → defend</div></div>
-          <div class="col"><div class="edge">Low</div><div class="arrow">↓</div><div class="node no">May fold<br>(plenty worse below)</div></div>
+          <div class="col"><div class="conn cont"><span class="el">High</span></div><div class="node yes">Rare → defend</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Low</span></div><div class="node no">May fold<br>(plenty worse below)</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Over-under</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Over-under</span></div>
         <div class="node no">Worst hands live here</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"></div>
         <div class="node q">BDFD or 3-straight?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Defend</div></div>
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">Fold</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Defend</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Fold</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Double unders</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Double unders</span></div>
         <div class="node q">Gut shot / 3-straight?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Pure call</div></div>
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">Fold<br>(unless BDFD rescues)</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Pure call</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Fold<br>(unless BDFD rescues)</div></div>
         </div>
       </div>
     </div>
@@ -391,32 +414,30 @@
   <div class="flow">
     <div class="node q">You have a value bet on the river?</div>
     <div class="branch">
-      <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">No bluffs needed<br>(rare — only in very strong ranges)</div></div>
-      <div class="col"><div class="edge">YES → you need bluffs</div><div class="arrow">↓</div>
+      <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">No bluffs needed<br>(rare — only in very strong ranges)</div></div>
+      <div class="col"><div class="conn yes"><span class="el">YES → you need bluffs</span></div>
         <div class="node q">Board 3-flush or obvious suit blanked?</div>
         <div class="branch">
           <div class="col">
-            <div class="edge">YES (easy System 2)</div>
-            <div class="arrow">↓</div>
+            <div class="conn yes"><span class="el">YES (easy System 2)</span></div>
             <div class="node q">Block the suit villain calls with</div>
-            <div class="arrow">↓</div>
+            <div class="conn cont"></div>
             <div class="node yes">Bluff with one card of that suit<br>(blocks flushes + hero calls)</div>
           </div>
           <div class="col">
-            <div class="edge">NO (wide ranges)</div>
-            <div class="arrow">↓</div>
+            <div class="conn no"><span class="el">NO (wide ranges)</span></div>
             <div class="node q">System 1: bottom of range up</div>
-            <div class="arrow">↓</div>
+            <div class="conn cont"></div>
             <div class="node yes">Bluff weakest hands first<br>prioritize the LOW card in hand</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q">Realism check: can you actually have this hand?<br><span class="small">if it bet flop/turn with equity, you won't have it on river</span></div>
     <div class="branch">
-      <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Bluff</div></div>
-      <div class="col"><div class="edge">NO — ideal unreachable</div><div class="arrow">↓</div><div class="node no">Bluff with what you<br>realistically arrived with</div></div>
+      <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Bluff</div></div>
+      <div class="col"><div class="conn no"><span class="el">NO — ideal unreachable</span></div><div class="node no">Bluff with what you<br>realistically arrived with</div></div>
     </div>
   </div>
 </section>
@@ -469,30 +490,27 @@
   <h2>Decision Flow</h2>
   <div class="flow">
     <div class="node q">You c-bet flop, got called. Turn card.</div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q">How strong is your hand?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Very strong (nuts, sets)</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Very strong (nuts, sets)</span></div>
         <div class="node yes">BET (value)<br>pot-ish or overbet</div>
       </div>
       <div class="col">
-        <div class="edge">Medium strength</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Medium strength</span></div>
         <div class="node q">Strong enough to fold better<br>AND get called by worse?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES (merge)</div><div class="arrow">↓</div><div class="node yes">BET (merge)<br>e.g. ATo on Q73→J</div></div>
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">CHECK<br>keep as bluff catcher</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES (merge)</span></div><div class="node yes">BET (merge)<br>e.g. ATo on Q73→J</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">CHECK<br>keep as bluff catcher</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Weak / trash</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Weak / trash</span></div>
         <div class="node q">Enough value bets to carry bluffs?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">BET (selective bluff)<br>not all trash — only some</div></div>
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">CHECK</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">BET (selective bluff)<br>not all trash — only some</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">CHECK</div></div>
         </div>
       </div>
     </div>
@@ -552,32 +570,28 @@
     <div class="node q">Stack depth?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">> 35bb</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">> 35bb</span></div>
         <div class="node q">What kind of hand?</div>
         <div class="branch">
-          <div class="col"><div class="edge">Nuts (sets, two pair)</div><div class="arrow">↓</div><div class="node yes">Check-raise</div></div>
-          <div class="col"><div class="edge">Top pair, great kicker</div><div class="arrow">↓</div><div class="node yes">Mix CR</div></div>
-          <div class="col"><div class="edge">Top pair, weak kicker</div><div class="arrow">↓</div><div class="node no">Check-call</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Nuts (sets, two pair)</span></div><div class="node yes">Check-raise</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Top pair, great kicker</span></div><div class="node yes">Mix CR</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Top pair, weak kicker</span></div><div class="node no">Check-call</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">≤ 35bb</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">≤ 35bb</span></div>
         <div class="node q">What kind of hand?</div>
         <div class="branch">
           <div class="col">
-            <div class="edge">Top pair</div>
-            <div class="arrow">↓</div>
+            <div class="conn cont"><span class="el">Top pair</span></div>
             <div class="node q">Backdoor flush draw?</div>
             <div class="branch">
-              <div class="col"><div class="edge">NO (offsuit)</div><div class="arrow">↓</div><div class="node yes">Check-raise</div></div>
-              <div class="col"><div class="edge">YES (suited)</div><div class="arrow">↓</div><div class="node no">Check-call<br>(realize flush draw)</div></div>
+              <div class="col"><div class="conn no"><span class="el">NO (offsuit)</span></div><div class="node yes">Check-raise</div></div>
+              <div class="col"><div class="conn yes"><span class="el">YES (suited)</span></div><div class="node no">Check-call<br>(realize flush draw)</div></div>
             </div>
           </div>
           <div class="col">
-            <div class="edge">Two pair / sets</div>
-            <div class="arrow">↓</div>
+            <div class="conn cont"><span class="el">Two pair / sets</span></div>
             <div class="node no">Trap (check-call)<br>SPR short enough to shove river</div>
           </div>
         </div>
@@ -638,34 +652,31 @@
   <h2>Decision Flow</h2>
   <div class="flow">
     <div class="node q">You c-bet, villain check-raises.<br>Calculate MDF: Risk / (Pot + Risk)</div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q">Organize around highest unpaired card.<br>Where is your hand?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Two overcards</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Two overcards</span></div>
         <div class="node yes">Pure call</div>
       </div>
       <div class="col">
-        <div class="edge">One over, one under</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">One over, one under</span></div>
         <div class="node q">Draws? (BDFD, 3-straight, BD straight)</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Call (defend priority)</div></div>
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">Fold candidate</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Call (defend priority)</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Fold candidate</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Double undercards</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Double undercards</span></div>
         <div class="node q">Any redeeming equity?<br><span class="small">ace-high · BDFD · 3-straight</span></div>
         <div class="branch">
-          <div class="col"><div class="edge">YES (high in priority)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
-          <div class="col"><div class="edge">NO (naked, worst hands)</div><div class="arrow">↓</div><div class="node no">Fold</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES (high in priority)</span></div><div class="node yes">Call</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO (naked, worst hands)</span></div><div class="node no">Fold</div></div>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q" style="margin-top:14px">Remember: actual fold% &lt; MDF%<br><span class="small">villain's bluffs have real equity → defend MORE</span></div>
   </div>
 </section>
@@ -707,33 +718,30 @@
     <div class="node q">You're IP. You want to bet. How strong?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Strong value</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Strong value</span></div>
         <div class="node q">Villain's nut ratio?</div>
         <div class="branch">
-          <div class="col"><div class="edge">Low (capped)</div><div class="arrow">↓</div><div class="node yes">Overbet / pot<br>(geometric to get stacks in)</div></div>
-          <div class="col"><div class="edge">High (nuts possible)</div><div class="arrow">↓</div><div class="node yes">~70% pot<br>(large, not overbet)</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Low (capped)</span></div><div class="node yes">Overbet / pot<br>(geometric to get stacks in)</div></div>
+          <div class="col"><div class="conn cont"><span class="el">High (nuts possible)</span></div><div class="node yes">~70% pot<br>(large, not overbet)</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Thin value</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Thin value</span></div>
         <div class="node q">Bet small (&lt;50%)?</div>
         <div class="branch">
-          <div class="col"><div class="edge">Almost never correct</div><div class="arrow">↓</div><div class="node no">CHECK<br>(don't bet thin hands small)</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Almost never correct</span></div><div class="node no">CHECK<br>(don't bet thin hands small)</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Medium-strong (merge)</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Medium-strong (merge)</span></div>
         <div class="node q">Folds better AND called by worse?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Bet pot (merge)<br>e.g. pocket Queens</div></div>
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">Check</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Bet pot (merge)<br>e.g. pocket Queens</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Check</div></div>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q" style="margin-top:14px">Risk: reopening action = being CR'd off equity.<br><span class="small">Small bets don't justify that risk → bet bigger</span></div>
   </div>
 </section>
@@ -797,32 +805,29 @@
     <div class="node q">Villain c-bets. What's your hand type?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Weak pair + BDFD</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Weak pair + BDFD</span></div>
         <div class="node yes">Call (BDFD > kicker)</div>
       </div>
       <div class="col">
-        <div class="edge">Gut shot</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Gut shot</span></div>
         <div class="node q">Also has BDFD?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES (super gut shot)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
-          <div class="col"><div class="edge">With overcard</div><div class="arrow">↓</div><div class="node yes">Call/mix</div></div>
-          <div class="col"><div class="edge">Naked (double unders)</div><div class="arrow">↓</div><div class="node no">Fold</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES (super gut shot)</span></div><div class="node yes">Call</div></div>
+          <div class="col"><div class="conn cont"><span class="el">With overcard</span></div><div class="node yes">Call/mix</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Naked (double unders)</span></div><div class="node no">Fold</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">High card</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">High card</span></div>
         <div class="node q">BDFD? Overcards?</div>
         <div class="branch">
-          <div class="col"><div class="edge">Double overs + BDFD</div><div class="arrow">↓</div><div class="node yes">Pure call</div></div>
-          <div class="col"><div class="edge">A-high + BDFD</div><div class="arrow">↓</div><div class="node yes">Pure call (vs small)</div></div>
-          <div class="col"><div class="edge">No BDFD</div><div class="arrow">↓</div><div class="node q">3-straight + 3-flush?</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Double overs + BDFD</span></div><div class="node yes">Pure call</div></div>
+          <div class="col"><div class="conn cont"><span class="el">A-high + BDFD</span></div><div class="node yes">Pure call (vs small)</div></div>
+          <div class="col"><div class="conn no"><span class="el">No BDFD</span></div><div class="node q">3-straight + 3-flush?</div></div>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q" style="margin-top:14px">CR criteria: direct equity + BD straight + BD flush + opponent missed + small bet<br><span class="small">high card of suit &gt; low card (blocks linear RFI better)</span></div>
   </div>
 </section>
@@ -870,29 +875,27 @@
   <h2>Decision Flow</h2>
   <div class="flow">
     <div class="node q">River. You have a medium-strong hand. Villain's range?</div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q">Inflection points weakened villain?<br><span class="small">checked turn · no raising · small bets</span></div>
     <div class="branch">
       <div class="col">
-        <div class="edge">YES — villain capped</div>
-        <div class="arrow">↓</div>
+        <div class="conn yes"><span class="el">YES — villain capped</span></div>
         <div class="node q">Can you check-raise?</div>
         <div class="branch">
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node yes">BET for value<br>don't let IP polarize by checking</div></div>
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Check-raise</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">BET for value<br>don't let IP polarize by checking</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Check-raise</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">NO — villain strong</div>
-        <div class="arrow">↓</div>
+        <div class="conn no"><span class="el">NO — villain strong</span></div>
         <div class="node q">Sizing?</div>
         <div class="branch">
-          <div class="col"><div class="edge">High nut ratio</div><div class="arrow">↓</div><div class="node yes">Bet small<br>(nuts frequency constrains)</div></div>
-          <div class="col"><div class="edge">Short SPR (&lt;2x pot)</div><div class="arrow">↓</div><div class="node yes">Prefer jamming</div></div>
+          <div class="col"><div class="conn cont"><span class="el">High nut ratio</span></div><div class="node yes">Bet small<br>(nuts frequency constrains)</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Short SPR (&lt;2x pot)</span></div><div class="node yes">Prefer jamming</div></div>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node no" style="margin-top:14px">WARNING: checking converts strong hands into bluff catchers<br><span class="small">IP auto-polarizes — bets hands that beat you, checks hands you beat</span></div>
   </div>
 </section>
@@ -937,35 +940,31 @@
   <h2>Decision Flow</h2>
   <div class="flow">
     <div class="node q">River. Villain bets. You have a bluff catcher.</div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q">Can you identify where their bluffs come from?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">NO (no natural bluffs)</div>
-        <div class="arrow">↓</div>
+        <div class="conn no"><span class="el">NO (no natural bluffs)</span></div>
         <div class="node no">Fold — even if MDF says call</div>
       </div>
       <div class="col">
-        <div class="edge">YES</div>
-        <div class="arrow">↓</div>
+        <div class="conn yes"><span class="el">YES</span></div>
         <div class="node q">How wide is their value range?</div>
         <div class="branch">
           <div class="col">
-            <div class="edge">Wide</div>
-            <div class="arrow">↓</div>
+            <div class="conn cont"><span class="el">Wide</span></div>
             <div class="node q">Does your hand unblock bluffs?</div>
             <div class="branch">
-              <div class="col"><div class="edge">YES (4-x, 3-x, 2-x)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
-              <div class="col"><div class="edge">NO (8-x, 9-x, T-x)</div><div class="arrow">↓</div><div class="node no">Fold — blocks bluffs</div></div>
+              <div class="col"><div class="conn yes"><span class="el">YES (4-x, 3-x, 2-x)</span></div><div class="node yes">Call</div></div>
+              <div class="col"><div class="conn no"><span class="el">NO (8-x, 9-x, T-x)</span></div><div class="node no">Fold — blocks bluffs</div></div>
             </div>
           </div>
           <div class="col">
-            <div class="edge">Narrow</div>
-            <div class="arrow">↓</div>
+            <div class="conn cont"><span class="el">Narrow</span></div>
             <div class="node q">Does your hand block value?</div>
             <div class="branch">
-              <div class="col"><div class="edge">YES (King — blocks KK, KQ)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
-              <div class="col"><div class="edge">NO (8/9 — blocks nothing valuable)</div><div class="arrow">↓</div><div class="node no">Fold</div></div>
+              <div class="col"><div class="conn yes"><span class="el">YES (King — blocks KK, KQ)</span></div><div class="node yes">Call</div></div>
+              <div class="col"><div class="conn no"><span class="el">NO (8/9 — blocks nothing valuable)</span></div><div class="node no">Fold</div></div>
             </div>
           </div>
         </div>
@@ -1022,25 +1021,23 @@
     <div class="node q">You called a 3-bet OOP. Flop comes. Board height?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">T-high+ (Broadway)</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">T-high+ (Broadway)</span></div>
         <div class="node q">A-high or K-high?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node no">Extreme caution<br>fold 50%+ (most over-defended)<br>fold 77/88/99, BDFDs</div></div>
-          <div class="col"><div class="edge">NO (Q-J-T high)</div><div class="arrow">↓</div><div class="node no">Tight / fit-or-fold<br>fold 50%+</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Extreme caution<br>fold 50%+ (most over-defended)<br>fold 77/88/99, BDFDs</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO (Q-J-T high)</span></div><div class="node no">Tight / fit-or-fold<br>fold 50%+</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">9-high & below</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">9-high & below</span></div>
         <div class="node q">Risk factors?<br><span class="small">paired · disconnected · deuce</span></div>
         <div class="branch">
-          <div class="col"><div class="edge">NONE</div><div class="arrow">↓</div><div class="node yes">Resilient / sticky<br>defend near MDF (~25%)<br>call pairs, gut shots, BDFDs</div></div>
-          <div class="col"><div class="edge">YES (disconnected + deuce)</div><div class="arrow">↓</div><div class="node no">Elevated fold %<br>(want straights; deuce favors 3-bettor)</div></div>
+          <div class="col"><div class="conn no"><span class="el">NONE</span></div><div class="node yes">Resilient / sticky<br>defend near MDF (~25%)<br>call pairs, gut shots, BDFDs</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES (disconnected + deuce)</span></div><div class="node no">Elevated fold %<br>(want straights; deuce favors 3-bettor)</div></div>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q" style="margin-top:14px">Remember: 3-bettor is ahead preflop.<br><span class="small">High boards favor them; low boards favor you. Fold far more than MDF on high.</span></div>
   </div>
 </section>
@@ -1082,9 +1079,9 @@
   <h2>The pyramid (appears everywhere)</h2>
   <div class="flow">
     <div class="node yes">BET — very strong (value)</div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node no">CHECK — medium strength</div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node yes">BET — very weak (bluff, selective)</div>
   </div>
   <p class="small">This "bet top, bet bottom, check middle" structure recurs in Systems 2, 3, 4, 5, and beyond. The medium-strength hands are the most over-played category in the game.</p>
@@ -1133,7 +1130,65 @@ s12:[{q:"Two board buckets for defending 3-bets OOP?",o:["T-high+ → tight (fol
 
 Object.keys(F).forEach(sys=>{const g=document.getElementById('flash-'+sys);if(!g)return;F[sys].forEach(f=>{const e=document.createElement('div');e.className='flip';e.innerHTML=`<div class="flip-inner"><div class="face"><div class="q">${f[0]}</div><div class="hint">tap to reveal</div></div><div class="face back"><div class="a">${f[1]}</div></div></div>`;e.addEventListener('click',()=>e.classList.toggle('flipped'));g.appendChild(e);});});
 Object.keys(Q).forEach(sys=>{const h=document.getElementById('quiz-'+sys);const s=document.getElementById('score-'+sys);const b=document.getElementById('prog-'+sys);if(!h)return;const items=Q[sys];let idx=0,score=0;function build(){if(idx>=items.length)return finish();const it=items[idx];const c=document.createElement('div');c.className='quiz-card';c.innerHTML=`<div class="quiz-q">Q${idx+1}/${items.length}. ${it.q}</div><div class="choices">${it.o.map((o,i)=>`<button class="btn" data-i="${i}">${o}</button>`).join('')}</div><div class="explanation"></div>`;h.innerHTML='';h.appendChild(c);const ex=c.querySelector('.explanation');c.querySelectorAll('.btn').forEach(btn=>{btn.addEventListener('click',()=>{if(c.querySelector('.btn.correct'))return;const p=+btn.dataset.i;if(p===it.a){btn.classList.add('correct');score++;}else{btn.classList.add('wrong');c.querySelector(`.btn[data-i="${it.a}"]`).classList.add('correct');}c.querySelectorAll('.btn').forEach(x=>x.disabled=true);ex.innerHTML=`<strong>${p===it.a?'Correct.':'Not quite.'}</strong> ${it.why}`;ex.classList.add('show');up();setTimeout(()=>{idx++;build();},1400);});});up();}function up(){s.textContent=`Score ${score} / ${items.length}`;b.style.width=(idx/items.length*100)+'%';}function finish(){h.innerHTML=`<div class="quiz-card" style="text-align:center"><h3 style="border:0;padding:0">Done — ${score} / ${items.length}</h3><p class="muted">${score===items.length?'Clean run.':score>=items.length*0.7?'Solid. Review the flashcards.':'Re-read this system and retry.'}</p><button class="btn" id="ret-${sys}">Retake</button></div>`;b.style.width='100%';up();document.getElementById('ret-'+sys).addEventListener('click',()=>{idx=0;score=0;build();});}window['__start_'+sys]=build;});
-window.addEventListener('load',()=>{if(window['__start_s1'])window['__start_s1']();});
+window.addEventListener('load',()=>{
+  if(window['__start_s1'])window['__start_s1']();
+
+  /* ---- Flow hover path highlighting ---- */
+  document.querySelectorAll('.flow').forEach(flow=>{
+    const nodes=flow.querySelectorAll('.node');
+    const conns=flow.querySelectorAll('.conn');
+    // Build path map: for each terminal node, which nodes+conns lead to it
+    function getPathTo(node){
+      const path=new Set([node]);
+      // walk up the DOM: each preceding sibling that's a node or conn
+      let el=node;
+      while(el && el!==flow){
+        el=el.previousElementSibling;
+        if(!el)break;
+        // go up to parent if at start of a col
+        if(!el.previousElementSibling && el.parentElement!==flow && el.parentElement.classList.contains('col')){
+          el=el.parentElement;
+          continue;
+        }
+        if(el.classList.contains('node'))path.add(el);
+        if(el.classList.contains('conn'))path.add(el);
+      }
+      return path;
+    }
+    nodes.forEach(node=>{
+      // Only attach to terminal/leaf nodes (yes/no/action nodes)
+      if(node.classList.contains('yes')||node.classList.contains('no')){
+        node.style.cursor='pointer';
+        node.addEventListener('mouseenter',()=>{
+          const path=getPathTo(node);
+          flow.classList.add('highlight');
+          flow.querySelectorAll('.node,.conn').forEach(el=>{
+            if(path.has(el))el.classList.add('hl');
+            else el.classList.remove('hl');
+          });
+        });
+        node.addEventListener('mouseleave',()=>{
+          flow.classList.remove('highlight');
+          flow.querySelectorAll('.hl').forEach(el=>el.classList.remove('hl'));
+        });
+      }
+    });
+  });
+
+  /* ---- Flow scroll entrance ---- */
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        // stagger child animations
+        const items=e.target.querySelectorAll('.node,.conn');
+        items.forEach((item,i)=>{item.style.animationDelay=(i*0.04)+'s';});
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.15});
+  document.querySelectorAll('.flow').forEach(f=>io.observe(f));
+});
 
 </script>
 </body>

@@ -35,34 +35,31 @@
   <h2>Decision Flow</h2>
   <div class="flow">
     <div class="node q">You c-bet, villain check-raises.<br>Calculate MDF: Risk / (Pot + Risk)</div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q">Organize around highest unpaired card.<br>Where is your hand?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Two overcards</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Two overcards</span></div>
         <div class="node yes">Pure call</div>
       </div>
       <div class="col">
-        <div class="edge">One over, one under</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">One over, one under</span></div>
         <div class="node q">Draws? (BDFD, 3-straight, BD straight)</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Call (defend priority)</div></div>
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">Fold candidate</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Call (defend priority)</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Fold candidate</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Double undercards</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Double undercards</span></div>
         <div class="node q">Any redeeming equity?<br><span class="small">ace-high · BDFD · 3-straight</span></div>
         <div class="branch">
-          <div class="col"><div class="edge">YES (high in priority)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
-          <div class="col"><div class="edge">NO (naked, worst hands)</div><div class="arrow">↓</div><div class="node no">Fold</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES (high in priority)</span></div><div class="node yes">Call</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO (naked, worst hands)</span></div><div class="node no">Fold</div></div>
         </div>
       </div>
     </div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q" style="margin-top:14px">Remember: actual fold% &lt; MDF%<br><span class="small">villain's bluffs have real equity → defend MORE</span></div>
   </div>
 </section>

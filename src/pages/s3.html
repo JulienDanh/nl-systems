@@ -41,36 +41,33 @@
   <h2>Decision Flow</h2>
   <div class="flow">
     <div class="node q">Identify key card<br><span class="small">ignore ace & deuce; use the others</span></div>
-    <div class="arrow">↓</div>
+    <div class="conn cont"></div>
     <div class="node q">Classify your hand around key card</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Double overs</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Double overs</span></div>
         <div class="node q">Key card high (8+) or low (5-)?</div>
         <div class="branch">
-          <div class="col"><div class="edge">High</div><div class="arrow">↓</div><div class="node yes">Rare → defend</div></div>
-          <div class="col"><div class="edge">Low</div><div class="arrow">↓</div><div class="node no">May fold<br>(plenty worse below)</div></div>
+          <div class="col"><div class="conn cont"><span class="el">High</span></div><div class="node yes">Rare → defend</div></div>
+          <div class="col"><div class="conn cont"><span class="el">Low</span></div><div class="node no">May fold<br>(plenty worse below)</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Over-under</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Over-under</span></div>
         <div class="node no">Worst hands live here</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"></div>
         <div class="node q">BDFD or 3-straight?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Defend</div></div>
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">Fold</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Defend</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Fold</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">Double unders</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Double unders</span></div>
         <div class="node q">Gut shot / 3-straight?</div>
         <div class="branch">
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Pure call</div></div>
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">Fold<br>(unless BDFD rescues)</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Pure call</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Fold<br>(unless BDFD rescues)</div></div>
         </div>
       </div>
     </div>

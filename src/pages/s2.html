@@ -24,26 +24,23 @@
     <div class="node q">What's the flop?</div>
     <div class="branch">
       <div class="col">
-        <div class="edge">Ace-high</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">Ace-high</span></div>
         <div class="node q">Risk factor?<br><span class="small">deep · monotone · paired</span></div>
         <div class="branch">
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node yes">C-bet 100%</div></div>
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">T–K high + 2 or 3</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">T–K high + 2 or 3</span></div>
         <div class="node q">Risk factor?<br><span class="small">two low cards · monotone</span></div>
         <div class="branch">
-          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node yes">C-bet 100%</div></div>
-          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
+          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
+          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
         </div>
       </div>
       <div class="col">
-        <div class="edge">9-high & below</div>
-        <div class="arrow">↓</div>
+        <div class="conn cont"><span class="el">9-high & below</span></div>
         <div class="node no">Always mix (~60/40)<br><strong>Bet:</strong> strong + weak (selective)<br><strong>Check:</strong> medium</div>
       </div>
     </div>
