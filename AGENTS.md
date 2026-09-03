@@ -1,6 +1,6 @@
 # AGENTS.md — Building Learning Content from Source Transcripts
 
-This repo contains poker training transcripts (`transcripts/*.txt`) converted into
+This repo contains poker training transcripts (`transcripts/simple_system/*.txt`) converted into
 a single-file interactive HTML study guide (`systems.html`). Follow these principles
 when extending or revising that content.
 
