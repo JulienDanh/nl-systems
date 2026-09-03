@@ -24,27 +24,44 @@ sometimes garbled. Treat them as raw data, not polished prose.
 
 ## Content structure (per system)
 
-Every system page should follow the same template. Consistency makes the study guide
-navigable; variety makes it harder to learn.
+Every system page follows the same template. Consistency makes the study guide
+navigable; variety makes it harder to learn. The page is ordered so the visual
+summary comes first, then the detail, then the practice.
 
-1. **Scenario** — one sentence: who opened, who called, what decision we're making.
-2. **Core rules / buckets** — the primary decision framework, as a table. This is the
-   thing to memorize. If the system splits boards or hands into categories, those
-   categories go here.
-3. **Risk factors / exceptions** — what overrides the default rule, as a table. Always
-   separate "primary" from "secondary" if the source does.
-4. **Decision flow** — a visual flowchart (HTML/CSS nodes) when the decision tree has
-   branches. Skip it if the rule is a simple table lookup.
-5. **Sizing** — a short paragraph or table. Include the default and the reasoning
-   ("shorter stacks amplify the overpair asymmetry → bet more").
-6. **Hand examples** — 4-7 real examples from the transcript. Each shows the board,
-   the system's recommendation, and the solver's verdict. Tag each with the decision
-   type (default / risk / fold / call / etc.) using colored pills.
-7. **Flashcards** — 8-12 Q&A pairs for active recall. Front: the question. Back: the
-   answer, one sentence. These test the *rules*, not the anecdotes.
-8. **Quiz** — 5-6 multiple-choice questions applying the system to new spots. Each
-   has a one-sentence explanation linking back to the rule. The quiz should require
-   *applying* the system, not reciting it.
+1. **Title section** — system name, one-sentence scenario (who opened, who called,
+   what decision we're making), and a short intro paragraph.
+2. **Decision Matrix** — a color-coded grid at the top. Rows = categories (flop
+   types, hand types, stack depths). Columns = conditions (default / with risk
+   factor, or with draws / without). Cells are color-coded: green = do it,
+   orange = mix/caution, red = fold/don't. Each cell has a bold action label
+   and a short sub. This is the visual summary the student sees first — find
+   your row, scan across, know the action. Do NOT repeat the matrix content in
+   callouts or prose below; it lives here once.
+3. **Core rules / buckets** — the primary decision framework as tables. This is
+   the canonical source for the rules. If the matrix says "see risk factors
+   below," this is where the detail lives.
+4. **Risk factors / exceptions** — what overrides the default rule, as a table.
+   Always separate "primary" from "secondary" if the source does.
+5. **Sizing** — a short paragraph or table. Include the default and the
+   reasoning.
+6. **Hand examples** — 4-7 real examples from the transcript. Each shows the
+   board, the system's recommendation, and the solver's verdict. Tag each with
+   the decision type (default / risk / fold / call) using colored pills.
+7. **Flashcards** — 8-12 Q&A pairs for active recall. Front: the question. Back:
+   the answer, one sentence. These test the *rules*, not the anecdotes.
+8. **Quiz** — 5-6 multiple-choice questions applying the system to new spots.
+   Each has a one-sentence explanation linking back to the rule. The quiz
+   requires *applying* the system, not reciting it.
+
+### Anti-duplication rules
+
+- **Each rule lives in exactly one place.** The canonical section (table, list,
+  or opening callout) owns the full statement. The matrix shows the decision;
+  the detail lives in the rules section. Never copy-paste a table row into a
+  matrix cell — use a short pointer like "See risk factors below" instead.
+- **No closing callouts under the matrix.** Do not add a callout after the
+  decision matrix that restates the opening thesis. The thesis is already
+  stated in the title section or the core rules. The matrix ends clean.
 
 ## Writing for learning
 
@@ -79,14 +96,19 @@ navigable; variety makes it harder to learn.
   `.tag.call` (blue), `.tag.fold` (red) for decision labels. `.callout` with
   `.warn` / `.bad` / `.good` variants for highlighted boxes. `.ex-card` for hand
   examples. `.board` for notated boards.
+- **Decision Matrix component.** `.dmatrix` grid with `.dm-cell.green` / `.orange`
+  / `.red` for colored cells. `.dm-action` for the bold action label. `.dm-sub`
+  for the short sub. `.dm-label` for row labels. `.dmatrix-head` for column
+  headers. Hover glow on each cell. This is the visual summary at the top of
+  every system page.
 - **Per-system IDs.** Flashcard grid `flash-sN`, quiz host `quiz-sN`, progress bar
-  `prog-sN`, score `score-sN`. The JS build function uses `window['__start_sN']` so
-  quizzes lazy-init on first page visit.
-- **Sidebar nav.** One entry per system + primer + conclusion. Active state toggles
-  via `.nav-item.active`. Mobile collapses to a hamburger menu.
-- **Tag hand examples by decision type.** Each `.ex-card` starts with a colored tag
-  so the student can scan: green = default/bet, orange = risk factor, red = fold,
-  blue = call/defend.
+  `prog-sN`, score `score-sN`. The JS build function uses `window['__start_sN']`
+  so quizzes lazy-init on first page visit.
+- **Sidebar nav.** One entry per system + primer + conclusion. Active state
+  toggles via `.nav-item.active`. Mobile collapses to a hamburger menu.
+- **Tag hand examples by decision type.** Each `.ex-card` starts with a colored
+  tag so the student can scan: green = default/bet, orange = risk factor, red =
+  fold, blue = call/defend.
 
 ## What to avoid
 
