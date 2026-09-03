@@ -38,40 +38,30 @@
   <div class="callout">SB has a folding range; BB does not. 2x/3x favor BB. BB checking = capped (no AK/AQ/overpairs). SB has advantage on Broadway boards; BB on low boards.</div>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">Identify key card<br><span class="small">ignore ace & deuce; use the others</span></div>
-    <div class="conn cont"></div>
-    <div class="node q">Classify your hand around key card</div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn cont"><span class="el">Double overs</span></div>
-        <div class="node q">Key card high (8+) or low (5-)?</div>
-        <div class="branch">
-          <div class="col"><div class="conn cont"><span class="el">High</span></div><div class="node yes">Rare → defend</div></div>
-          <div class="col"><div class="conn cont"><span class="el">Low</span></div><div class="node no">May fold<br>(plenty worse below)</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">Over-under</span></div>
-        <div class="node no">Worst hands live here</div>
-        <div class="conn cont"></div>
-        <div class="node q">BDFD or 3-straight?</div>
-        <div class="branch">
-          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Defend</div></div>
-          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Fold</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">Double unders</span></div>
-        <div class="node q">Gut shot / 3-straight?</div>
-        <div class="branch">
-          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Pure call</div></div>
-          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Fold<br>(unless BDFD rescues)</div></div>
-        </div>
-      </div>
-    </div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Find your hand type (row) x draws (column). Green = defend, red = fold.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">No draws</div>
+    <div class="dmatrix-head">BDFD or 3-straight</div>
+    <div class="dmatrix-head">Gut shot</div>
+
+    <div class="dm-label">Double overs <small>(both above key card)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Depends on key card height</div><div class="dm-sub">High key card (8+): rare → defend. Low key card (5-): may fold (plenty worse below).</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">Draws make double-overs playable regardless.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div></div>
+
+    <div class="dm-label">Over-under <small>(worst hands live here)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Worst hands in range. No equity to fall back on.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">BDFD or 3-straight rescues the worst category.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">Gut shot = direct equity.</div></div>
+
+    <div class="dm-label">Double unders <small>(both below key card)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Unless BDFD rescues the very worst hands.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">BDFD can rescue, unless you're the absolute worst hand.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Gut shots (43, 54, 53) are pure plays.</div></div>
   </div>
+  <div class="callout bad"><strong>Identify the worst hand first.</strong> Even with BDFD, the stone-cold worst hand on the board folds. 42 with a spade on K77 still folds.</div>
 </section>
 
 <section>

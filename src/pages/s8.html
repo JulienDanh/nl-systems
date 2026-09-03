@@ -20,37 +20,26 @@
   <div class="callout bad">Reopening action risks being check-raised off equity. Small bets don't justify that risk. Fold% rises slower than bet size → bigger bets profit more.</div>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">You're IP. You want to bet. How strong?</div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn cont"><span class="el">Strong value</span></div>
-        <div class="node q">Villain's nut ratio?</div>
-        <div class="branch">
-          <div class="col"><div class="conn cont"><span class="el">Low (capped)</span></div><div class="node yes">Overbet / pot<br>(geometric to get stacks in)</div></div>
-          <div class="col"><div class="conn cont"><span class="el">High (nuts possible)</span></div><div class="node yes">~70% pot<br>(large, not overbet)</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">Thin value</span></div>
-        <div class="node q">Bet small (&lt;50%)?</div>
-        <div class="branch">
-          <div class="col"><div class="conn cont"><span class="el">Almost never correct</span></div><div class="node no">CHECK<br>(don't bet thin hands small)</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">Medium-strong (merge)</span></div>
-        <div class="node q">Folds better AND called by worse?</div>
-        <div class="branch">
-          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Bet pot (merge)<br>e.g. pocket Queens</div></div>
-          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">Check</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="conn cont"></div>
-    <div class="node q" style="margin-top:14px">Risk: reopening action = being CR'd off equity.<br><span class="small">Small bets don't justify that risk → bet bigger</span></div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Hand strength (row) x villain nut ratio (column). Green = bet big, orange = check/merge, red = check.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">Villain capped (low nut ratio)</div>
+    <div class="dmatrix-head">Villain has nuts possible</div>
+
+    <div class="dm-label">Strong value</div>
+    <div class="dm-cell green"><div class="dm-action green">Overbet / pot</div><div class="dm-sub">Geometric to get stacks in. Fold% rises slower than bet size.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">~70% pot</div><div class="dm-sub">Large but not overbet. Nuts frequency constrains sizing.</div></div>
+
+    <div class="dm-label">Thin value</div>
+    <div class="dm-cell red"><div class="dm-action red">CHECK</div><div class="dm-sub">Don't bet thin hands small. &lt;50% pot is almost never correct IP.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">CHECK</div><div class="dm-sub">Small bets don't justify the CR risk.</div></div>
+
+    <div class="dm-label">Medium-strong <small>(merge candidate)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Bet pot (merge)</div><div class="dm-sub">If: folds better AND called by worse. e.g. pocket Queens.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Check</div><div class="dm-sub">Can't merge when villain has nuts.</div></div>
   </div>
+  <div class="callout bad"><strong>Risk: reopening action = being CR'd off equity.</strong> Small bets don't justify that risk &rarr; bet bigger. Geometric: ~pot on both streets to get stacks in.</div>
 </section>
 
 <section>

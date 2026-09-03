@@ -27,32 +27,25 @@
   <ul><li><strong>River cards that reintroduce strength:</strong> fills straights/flushes → re-uncaps villain → smaller sizing.</li><li><strong>Multi-way:</strong> IP checking back flop in multi-way = extremely capped (no sets, no TPTK). Largely ignore them.</li><li><strong>Donk bets:</strong> strip from solver — most players miss them in metagame.</li></ul>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">River. You have a medium-strong hand. Villain's range?</div>
-    <div class="conn cont"></div>
-    <div class="node q">Inflection points weakened villain?<br><span class="small">checked turn · no raising · small bets</span></div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn yes"><span class="el">YES — villain capped</span></div>
-        <div class="node q">Can you check-raise?</div>
-        <div class="branch">
-          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">BET for value<br>don't let IP polarize by checking</div></div>
-          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Check-raise</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn no"><span class="el">NO — villain strong</span></div>
-        <div class="node q">Sizing?</div>
-        <div class="branch">
-          <div class="col"><div class="conn cont"><span class="el">High nut ratio</span></div><div class="node yes">Bet small<br>(nuts frequency constrains)</div></div>
-          <div class="col"><div class="conn cont"><span class="el">Short SPR (&lt;2x pot)</span></div><div class="node yes">Prefer jamming</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="conn cont"></div>
-    <div class="node no" style="margin-top:14px">WARNING: checking converts strong hands into bluff catchers<br><span class="small">IP auto-polarizes — bets hands that beat you, checks hands you beat</span></div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Villain's range (row) x your options (column). Green = bet, orange = sizing-dependent.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">Can't CR</div>
+    <div class="dmatrix-head">Can CR</div>
+    <div class="dmatrix-head">Short SPR (&lt;2x pot)</div>
+
+    <div class="dm-label">Villain capped <small>(checked turn, no raising)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">BET for value</div><div class="dm-sub">Don't let IP polarize by checking. Your medium hand = relative nuts.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">If CR available, use it.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Prefer jamming</div><div class="dm-sub">Checking loses optionality.</div></div>
+
+    <div class="dm-label">Villain strong <small>(high nut ratio)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Bet small</div><div class="dm-sub">Block bet 25-33%. Nuts frequency constrains sizing.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Bet small / mix</div><div class="dm-sub">CR competitive with optionality.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Prefer jamming</div><div class="dm-sub">Get value now before villain improves.</div></div>
   </div>
+  <div class="callout bad"><strong>Checking converts strong hands into bluff catchers.</strong> IP auto-polarizes — bets hands that beat you, checks hands you beat. You lose value against the entire medium-strength region.</div>
 </section>
 
 <section>

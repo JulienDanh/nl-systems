@@ -25,34 +25,26 @@
   <div class="callout good"><strong>Merge example (ATo on Q73→J):</strong> Barreling ATo folds Q-x/K-x (better) and gets called by J-T, J-4s, 10x draws (worse). Merge = thin value + fold equity. Not all medium hands can do this.</div>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">You c-bet flop, got called. Turn card.</div>
-    <div class="conn cont"></div>
-    <div class="node q">How strong is your hand?</div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn cont"><span class="el">Very strong (nuts, sets)</span></div>
-        <div class="node yes">BET (value)<br>pot-ish or overbet</div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">Medium strength</span></div>
-        <div class="node q">Strong enough to fold better<br>AND get called by worse?</div>
-        <div class="branch">
-          <div class="col"><div class="conn yes"><span class="el">YES (merge)</span></div><div class="node yes">BET (merge)<br>e.g. ATo on Q73→J</div></div>
-          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">CHECK<br>keep as bluff catcher</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">Weak / trash</span></div>
-        <div class="node q">Enough value bets to carry bluffs?</div>
-        <div class="branch">
-          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">BET (selective bluff)<br>not all trash — only some</div></div>
-          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">CHECK</div></div>
-        </div>
-      </div>
-    </div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Find your hand tier (row) x qualifier (column). The pyramid: bet top, bet bottom, check middle.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">Default action</div>
+    <div class="dmatrix-head">Exception</div>
+
+    <div class="dm-label">Very strong <small>(nuts, sets)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">BET (value)</div><div class="dm-sub">Pot-ish or overbet. Get called by worse.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Always bet</div><div class="dm-sub">No exception.</div></div>
+
+    <div class="dm-label">Medium strength <small>(loses to calls above, beats bluffs)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">CHECK</div><div class="dm-sub">Keep as bluff catcher. Barreling gets value-owned.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">BET (merge)</div><div class="dm-sub">Only if: folds better AND gets called by worse. e.g. ATo on Q73&rarr;J.</div></div>
+
+    <div class="dm-label">Weak / trash</div>
+    <div class="dm-cell red"><div class="dm-action red">CHECK</div><div class="dm-sub">If not enough value bets to carry bluffs.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">BET (selective bluff)</div><div class="dm-sub">Only if enough value bets exist. Not all trash — only some.</div></div>
   </div>
+  <div class="callout bad"><strong>Don't barrel medium-strength hands.</strong> They lose to hands that call and only beat bluffs. The merge exception is rare — the hand must be strong enough to fold better <em>and</em> get called by worse.</div>
 </section>
 
 <section>

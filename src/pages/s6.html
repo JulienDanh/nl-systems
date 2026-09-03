@@ -31,39 +31,25 @@
   </table>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">Stack depth?</div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn cont"><span class="el">> 35bb</span></div>
-        <div class="node q">What kind of hand?</div>
-        <div class="branch">
-          <div class="col"><div class="conn cont"><span class="el">Nuts (sets, two pair)</span></div><div class="node yes">Check-raise</div></div>
-          <div class="col"><div class="conn cont"><span class="el">Top pair, great kicker</span></div><div class="node yes">Mix CR</div></div>
-          <div class="col"><div class="conn cont"><span class="el">Top pair, weak kicker</span></div><div class="node no">Check-call</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">≤ 35bb</span></div>
-        <div class="node q">What kind of hand?</div>
-        <div class="branch">
-          <div class="col">
-            <div class="conn cont"><span class="el">Top pair</span></div>
-            <div class="node q">Backdoor flush draw?</div>
-            <div class="branch">
-              <div class="col"><div class="conn no"><span class="el">NO (offsuit)</span></div><div class="node yes">Check-raise</div></div>
-              <div class="col"><div class="conn yes"><span class="el">YES (suited)</span></div><div class="node no">Check-call<br>(realize flush draw)</div></div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="conn cont"><span class="el">Two pair / sets</span></div>
-            <div class="node no">Trap (check-call)<br>SPR short enough to shove river</div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Stack depth (row) x hand type (column). Green = check-raise, orange = mix/call, red = trap.</p>
+  <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">Top pair (offsuit)</div>
+    <div class="dmatrix-head">Top pair (suited / BDFD)</div>
+    <div class="dmatrix-head">Two pair / sets</div>
+
+    <div class="dm-label">&gt; 35bb <small>(deeper)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix CR / check-call</div><div class="dm-sub">Great kicker (KQ, QJ): mix CR. Weak kicker: check-call.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Check-call</div><div class="dm-sub">BDFD prefers call to realize flush draw.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">Nuts-oriented CR range.</div></div>
+
+    <div class="dm-label">&le; 35bb <small>(short, aggressive)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">Pure CR. Shorter = more CR (34bb &lt; 24bb &lt; 14bb).</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Check-call</div><div class="dm-sub">Realize the flush draw. CR gives up flush equity.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Trap (check-call)</div><div class="dm-sub">SPR short enough to shove river without raising flop.</div></div>
   </div>
+  <div class="callout">CR sizing: small (~3x the c-bet). Short stacks = 2-street game. Kicker taper: KQ/QJ/QT pure CR &rarr; Q9 heavy &rarr; Q8 medium &rarr; Q2 pure call.</div>
 </section>
 
 <section>
