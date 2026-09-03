@@ -6,20 +6,6 @@
   <ul><li>IP checks → range uncaps on next card (turn improves hands).</li><li>OOP checks → IP punishes immediately.</li><li>IP can polarize more → <strong>IP bets larger on average</strong>.</li></ul>
 </section>
 <section>
-  <h2>Sizing heuristic</h2>
-  <table>
-    <tr><th>Situation</th><th>Sizing</th></tr>
-    <tr><td>Villain capped (low nut ratio)</td><td><span class="tag default">Overbet / pot</span> (geometric)</td></tr>
-    <tr><td>Both have nuts possible</td><td>~70% pot (large, not overbet)</td></tr>
-    <tr><td>Flush/straight fills (nut ratio rises)</td><td>Medium-large reasonable</td></tr>
-    <tr><td>Thin value hand</td><td><span class="tag risk">Check</span> (don't bet thin small)</td></tr>
-    <tr><td>&lt; 50% pot IP</td><td><span class="tag fold">Almost NEVER correct</span></td></tr>
-  </table>
-  <h3>Geometric betting</h3>
-  <p>To get stack in over 2 streets: ~pot on both (equal fractions). E.g. 50bb: ~11bb turn → ~34bb river shove.</p>
-  <div class="callout bad">Reopening action risks being check-raised off equity. Small bets don't justify that risk. Fold% rises slower than bet size → bigger bets profit more.</div>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">Hand strength (row) x villain nut ratio (column). Green = bet big, orange = check/merge, red = check.</p>
   <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
@@ -40,6 +26,21 @@
     <div class="dm-cell red"><div class="dm-action red">Check</div><div class="dm-sub">Can't merge when villain has nuts.</div></div>
   </div>
 </section>
+<section>
+  <h2>Sizing heuristic</h2>
+  <table>
+    <tr><th>Situation</th><th>Sizing</th></tr>
+    <tr><td>Villain capped (low nut ratio)</td><td><span class="tag default">Overbet / pot</span> (geometric)</td></tr>
+    <tr><td>Both have nuts possible</td><td>~70% pot (large, not overbet)</td></tr>
+    <tr><td>Flush/straight fills (nut ratio rises)</td><td>Medium-large reasonable</td></tr>
+    <tr><td>Thin value hand</td><td><span class="tag risk">Check</span> (don't bet thin small)</td></tr>
+    <tr><td>&lt; 50% pot IP</td><td><span class="tag fold">Almost NEVER correct</span></td></tr>
+  </table>
+  <h3>Geometric betting</h3>
+  <p>To get stack in over 2 streets: ~pot on both (equal fractions). E.g. 50bb: ~11bb turn → ~34bb river shove.</p>
+  <div class="callout bad">Reopening action risks being check-raised off equity. Small bets don't justify that risk. Fold% rises slower than bet size → bigger bets profit more.</div>
+</section>
+
 
 <section>
   <h2>Risk Factors</h2>

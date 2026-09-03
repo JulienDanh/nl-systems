@@ -16,20 +16,6 @@
   </table>
 </section>
 <section>
-  <h2>Three inputs for wide defending</h2>
-  <div class="callout"><strong>Weak own range + Weak opponent range + Small bet → defend very wide.</strong></div>
-  <h3>Check-raise criteria (properties)</h3>
-  <ul><li>Direct equity vs opponent's top pair (gut shot, overcard)</li><li>Backdoor straight draw potential</li><li>Backdoor flush draw (3-to-flush)</li><li>Opponent missed the board frequently</li><li>Opponent bet small</li><li>High card of suit &gt; low card (blocks linear RFI more effectively)</li></ul>
-  <h3>Risk factors</h3>
-  <table>
-    <tr><th>Factor</th><th>Effect</th></tr>
-    <tr><td><strong>Bet sizing</strong></td><td>Scale up → fold more pairs. Q-J/K-J without ♦: call vs 30% → fold vs 83%</td></tr>
-    <tr><td><strong>Rainbow vs two-tone</strong></td><td>Rainbow = messier (fewer BDFDs). Two-tone cleaner (flush draws supplement).</td></tr>
-    <tr><td><strong>Blind vs blind</strong></td><td>Ranges too wide — never fold pairs (even pocket 4s with BDFD)</td></tr>
-    <tr><td><strong>K8 vs half-pot</strong></td><td>Solver = mix. K7 close, K6 pure fold.</td></tr>
-  </table>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">Hand type (row) x draws/conditions (column). Green = call, red = fold, orange = mix.</p>
   <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
@@ -54,6 +40,21 @@
     <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">No BDFD, no 3-straight = naked high card.</div></div>
   </div>
 </section>
+<section>
+  <h2>Three inputs for wide defending</h2>
+  <div class="callout"><strong>Weak own range + Weak opponent range + Small bet → defend very wide.</strong></div>
+  <h3>Check-raise criteria (properties)</h3>
+  <ul><li>Direct equity vs opponent's top pair (gut shot, overcard)</li><li>Backdoor straight draw potential</li><li>Backdoor flush draw (3-to-flush)</li><li>Opponent missed the board frequently</li><li>Opponent bet small</li><li>High card of suit &gt; low card (blocks linear RFI more effectively)</li></ul>
+  <h3>Risk factors</h3>
+  <table>
+    <tr><th>Factor</th><th>Effect</th></tr>
+    <tr><td><strong>Bet sizing</strong></td><td>Scale up → fold more pairs. Q-J/K-J without ♦: call vs 30% → fold vs 83%</td></tr>
+    <tr><td><strong>Rainbow vs two-tone</strong></td><td>Rainbow = messier (fewer BDFDs). Two-tone cleaner (flush draws supplement).</td></tr>
+    <tr><td><strong>Blind vs blind</strong></td><td>Ranges too wide — never fold pairs (even pocket 4s with BDFD)</td></tr>
+    <tr><td><strong>K8 vs half-pot</strong></td><td>Solver = mix. K7 close, K6 pure fold.</td></tr>
+  </table>
+</section>
+
 
 <section>
   <h2>Hand Examples</h2>

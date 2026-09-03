@@ -7,26 +7,6 @@
   <div class="callout good">When villain's range weakens, your medium-strength hands become the <em>relative nuts</em> → bet for value.</div>
 </section>
 <section>
-  <h2>Decision framework</h2>
-  <table>
-    <tr><th>Situation</th><th>Action</th><th>Sizing</th></tr>
-    <tr><td>Can't CR but called by worse</td><td><span class="tag default">Bet</span></td><td>Don't let opponent polarize by checking</td></tr>
-    <tr><td>Opponent checked turn, medium hand</td><td><span class="tag default">Bet (block)</span></td><td>Small (25–33%) forces them to defend 75%+</td></tr>
-    <tr><td>Opponent capped (no nuts)</td><td><span class="tag default">Bet large / overbet</span></td><td>Large vs capped ranges</td></tr>
-    <tr><td>Opponent has high nut ratio</td><td>Bet small</td><td>Nuts frequency constrains sizing</td></tr>
-    <tr><td>Short SPR (&lt;2x pot)</td><td><span class="tag default">Prefer jamming</span></td><td>Checking loses optionality</td></tr>
-    <tr><td>Deep SPR</td><td>Checking competitive</td><td>Check-raise optionality adds value</td></tr>
-  </table>
-  <h3>Geometric sizing</h3>
-  <p>Bet similar fractions each street (pot-pot-pot) to get stacks in with strong hands.</p>
-</section>
-<section>
-  <h2>Key principles</h2>
-  <div class="callout bad"><strong>Checking converts strong hands into bluff catchers.</strong> IP auto-polarizes — bets hands that beat you, checks hands you beat. You lose value against the entire medium-strength region.</div>
-  <h3>Risk factors</h3>
-  <ul><li><strong>River cards that reintroduce strength:</strong> fills straights/flushes → re-uncaps villain → smaller sizing.</li><li><strong>Multi-way:</strong> IP checking back flop in multi-way = extremely capped (no sets, no TPTK). Largely ignore them.</li><li><strong>Donk bets:</strong> strip from solver — most players miss them in metagame.</li></ul>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">Villain's range (row) x your options (column). Green = bet, orange = sizing-dependent.</p>
   <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
@@ -46,6 +26,27 @@
     <div class="dm-cell green"><div class="dm-action green">Prefer jamming</div><div class="dm-sub">Get value now before villain improves.</div></div>
   </div>
 </section>
+<section>
+  <h2>Decision framework</h2>
+  <table>
+    <tr><th>Situation</th><th>Action</th><th>Sizing</th></tr>
+    <tr><td>Can't CR but called by worse</td><td><span class="tag default">Bet</span></td><td>Don't let opponent polarize by checking</td></tr>
+    <tr><td>Opponent checked turn, medium hand</td><td><span class="tag default">Bet (block)</span></td><td>Small (25–33%) forces them to defend 75%+</td></tr>
+    <tr><td>Opponent capped (no nuts)</td><td><span class="tag default">Bet large / overbet</span></td><td>Large vs capped ranges</td></tr>
+    <tr><td>Opponent has high nut ratio</td><td>Bet small</td><td>Nuts frequency constrains sizing</td></tr>
+    <tr><td>Short SPR (&lt;2x pot)</td><td><span class="tag default">Prefer jamming</span></td><td>Checking loses optionality</td></tr>
+    <tr><td>Deep SPR</td><td>Checking competitive</td><td>Check-raise optionality adds value</td></tr>
+  </table>
+  <h3>Geometric sizing</h3>
+  <p>Bet similar fractions each street (pot-pot-pot) to get stacks in with strong hands.</p>
+</section>
+<section>
+  <h2>Key principles</h2>
+  <div class="callout bad"><strong>Checking converts strong hands into bluff catchers.</strong> IP auto-polarizes — bets hands that beat you, checks hands you beat. You lose value against the entire medium-strength region.</div>
+  <h3>Risk factors</h3>
+  <ul><li><strong>River cards that reintroduce strength:</strong> fills straights/flushes → re-uncaps villain → smaller sizing.</li><li><strong>Multi-way:</strong> IP checking back flop in multi-way = extremely capped (no sets, no TPTK). Largely ignore them.</li><li><strong>Donk bets:</strong> strip from solver — most players miss them in metagame.</li></ul>
+</section>
+
 
 <section>
   <h2>Hand Examples</h2>

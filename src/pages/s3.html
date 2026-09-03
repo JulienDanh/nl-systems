@@ -5,6 +5,31 @@
   <div class="callout good"><strong>Why BB matters:</strong> Skilled player goes from −112 bb/100 (walk-away) to −20 — 92 points of opportunity. UTG only has 27. BB skill is <em>definitively</em> most important.</div>
 </section>
 <section>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Find your hand type (row) x draws (column). Green = defend, red = fold.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">No draws</div>
+    <div class="dmatrix-head">BDFD or 3-straight</div>
+    <div class="dmatrix-head">Gut shot</div>
+
+    <div class="dm-label">Double overs <small>(both above key card)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Depends on key card height</div><div class="dm-sub">See key-card height heuristic below.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">Draws make double-overs playable regardless.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div></div>
+
+    <div class="dm-label">Over-under <small>(worst hands live here)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Worst hands in range. No equity to fall back on.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">BDFD or 3-straight rescues the worst category.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">Gut shot = direct equity.</div></div>
+
+    <div class="dm-label">Double unders <small>(both below key card)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Unless BDFD rescues the very worst hands.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">BDFD can rescue, unless you're the absolute worst hand.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Gut shots (43, 54, 53) are pure plays.</div></div>
+  </div>
+</section>
+<section>
   <h2>The System</h2>
   <h3>Step 1 — Fold target</h3>
   <p>SB bets 1bb into ~3.7bb. Risk/reward = 1/4 ≈ <strong>25% fold</strong>. Defend ~75%. Focus on the 25% you fold.</p>
@@ -37,31 +62,7 @@
   <h3>Preflop asymmetry</h3>
   <div class="callout">SB has a folding range; BB does not. 2x/3x favor BB. BB checking = capped (no AK/AQ/overpairs). SB has advantage on Broadway boards; BB on low boards.</div>
 </section>
-<section>
-  <h2>Decision Matrix</h2>
-  <p class="muted">Find your hand type (row) x draws (column). Green = defend, red = fold.</p>
-  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
-    <div></div>
-    <div class="dmatrix-head">No draws</div>
-    <div class="dmatrix-head">BDFD or 3-straight</div>
-    <div class="dmatrix-head">Gut shot</div>
 
-    <div class="dm-label">Double overs <small>(both above key card)</small></div>
-    <div class="dm-cell orange"><div class="dm-action orange">Depends on key card height</div><div class="dm-sub">See key-card height heuristic below.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">Draws make double-overs playable regardless.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Defend</div></div>
-
-    <div class="dm-label">Over-under <small>(worst hands live here)</small></div>
-    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Worst hands in range. No equity to fall back on.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">BDFD or 3-straight rescues the worst category.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">Gut shot = direct equity.</div></div>
-
-    <div class="dm-label">Double unders <small>(both below key card)</small></div>
-    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Unless BDFD rescues the very worst hands.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">BDFD can rescue, unless you're the absolute worst hand.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Gut shots (43, 54, 53) are pure plays.</div></div>
-  </div>
-</section>
 
 <section>
   <h2>Hand Examples</h2>

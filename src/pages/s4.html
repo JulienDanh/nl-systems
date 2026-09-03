@@ -9,18 +9,6 @@
   <p>Bluff with combos that <strong>block opponent's calls/raises</strong> and <strong>unblock their folds</strong>, while checking opportunity cost. Very difficult to manage all three — System 1 is default.</p>
 </section>
 <section>
-  <h2>When to use which</h2>
-  <table>
-    <tr><th>Situation</th><th>System</th><th>Why</th></tr>
-    <tr><td>Board 3-flushes</td><td><strong>System 2</strong> (easy)</td><td>One-club bias obvious — blocks flushes + hero calls</td></tr>
-    <tr><td>Wide ranges, no obvious suit blanked</td><td><strong>System 1</strong></td><td>Too hard to identify blocking effects</td></tr>
-    <tr><td>Three Broadway, EP open</td><td><strong>System 1</strong></td><td>No offsuit air (linear range) — suited bluffs scarce, bluff them</td></tr>
-    <tr><td>Opponent called flop with specific suits</td><td><strong>System 2</strong> (avoid those)</td><td>Block how they fold, unblock how they call</td></tr>
-  </table>
-  <h3>Key blocking patterns</h3>
-  <ul><li><strong>3-flush river:</strong> bluff with one card of the flush suit. Blocks flushes AND hero calls.</li><li><strong>Two-tone flop called:</strong> opponent called with 2 suits. Bluff avoiding those; prefer others.</li><li><strong>High card vs low card of suit:</strong> high card heart is <em>worse</em> (blocks more folds). Low card heart less damaging.</li><li><strong>Busted straight + busted flush draw:</strong> <em>terrible</em> bluff — blocks both folding regions.</li></ul>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">Board texture (row) x which system to use (column). Green = bluff, red = don't. First: do you have a value bet? If no, no bluffs needed.</p>
   <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
@@ -45,6 +33,19 @@
     <div class="dm-cell red"><div class="dm-action red">Terrible bluff</div><div class="dm-sub">Same — blocks both. Don't bluff with QJ♥.</div></div>
   </div>
 </section>
+<section>
+  <h2>When to use which</h2>
+  <table>
+    <tr><th>Situation</th><th>System</th><th>Why</th></tr>
+    <tr><td>Board 3-flushes</td><td><strong>System 2</strong> (easy)</td><td>One-club bias obvious — blocks flushes + hero calls</td></tr>
+    <tr><td>Wide ranges, no obvious suit blanked</td><td><strong>System 1</strong></td><td>Too hard to identify blocking effects</td></tr>
+    <tr><td>Three Broadway, EP open</td><td><strong>System 1</strong></td><td>No offsuit air (linear range) — suited bluffs scarce, bluff them</td></tr>
+    <tr><td>Opponent called flop with specific suits</td><td><strong>System 2</strong> (avoid those)</td><td>Block how they fold, unblock how they call</td></tr>
+  </table>
+  <h3>Key blocking patterns</h3>
+  <ul><li><strong>3-flush river:</strong> bluff with one card of the flush suit. Blocks flushes AND hero calls.</li><li><strong>Two-tone flop called:</strong> opponent called with 2 suits. Bluff avoiding those; prefer others.</li><li><strong>High card vs low card of suit:</strong> high card heart is <em>worse</em> (blocks more folds). Low card heart less damaging.</li><li><strong>Busted straight + busted flush draw:</strong> <em>terrible</em> bluff — blocks both folding regions.</li></ul>
+</section>
+
 
 <section>
   <h2>The realism constraint</h2>

@@ -7,6 +7,26 @@
   <p><strong>Top pair = CR</strong>; <strong>two pair/sets = trap (check-call)</strong> at short stacks. SPR short enough to shove river without raising.</p>
 </section>
 <section>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Stack depth (row) x hand type (column). Green = check-raise, orange = mix/call, red = trap.</p>
+  <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">Top pair (offsuit)</div>
+    <div class="dmatrix-head">Top pair (suited / BDFD)</div>
+    <div class="dmatrix-head">Two pair / sets</div>
+
+    <div class="dm-label">&gt; 35bb <small>(deeper)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix CR / check-call</div><div class="dm-sub">Great kicker (KQ, QJ): mix CR. Weak kicker: check-call.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Check-call</div><div class="dm-sub">BDFD prefers call to realize flush draw.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">Nuts-oriented CR range.</div></div>
+
+    <div class="dm-label">&le; 35bb <small>(short, aggressive)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">Pure CR. Shorter = more CR (34bb &lt; 24bb &lt; 14bb).</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Check-call</div><div class="dm-sub">Realize the flush draw. CR gives up flush equity.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Trap (check-call)</div><div class="dm-sub">SPR short enough to shove river without raising flop.</div></div>
+  </div>
+</section>
+<section>
   <h2>CR hierarchy (high boards)</h2>
   <p>On Q-high (Q73), kicker determines CR frequency:</p>
   <table>
@@ -30,26 +50,7 @@
     <tr><td><strong>Deeper stacks</strong></td><td>Less CR with thin top pair</td></tr>
   </table>
 </section>
-<section>
-  <h2>Decision Matrix</h2>
-  <p class="muted">Stack depth (row) x hand type (column). Green = check-raise, orange = mix/call, red = trap.</p>
-  <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr 1fr">
-    <div></div>
-    <div class="dmatrix-head">Top pair (offsuit)</div>
-    <div class="dmatrix-head">Top pair (suited / BDFD)</div>
-    <div class="dmatrix-head">Two pair / sets</div>
 
-    <div class="dm-label">&gt; 35bb <small>(deeper)</small></div>
-    <div class="dm-cell orange"><div class="dm-action orange">Mix CR / check-call</div><div class="dm-sub">Great kicker (KQ, QJ): mix CR. Weak kicker: check-call.</div></div>
-    <div class="dm-cell orange"><div class="dm-action orange">Check-call</div><div class="dm-sub">BDFD prefers call to realize flush draw.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">Nuts-oriented CR range.</div></div>
-
-    <div class="dm-label">&le; 35bb <small>(short, aggressive)</small></div>
-    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">Pure CR. Shorter = more CR (34bb &lt; 24bb &lt; 14bb).</div></div>
-    <div class="dm-cell red"><div class="dm-action red">Check-call</div><div class="dm-sub">Realize the flush draw. CR gives up flush equity.</div></div>
-    <div class="dm-cell red"><div class="dm-action red">Trap (check-call)</div><div class="dm-sub">SPR short enough to shove river without raising flop.</div></div>
-  </div>
-</section>
 
 <section>
   <h2>Sizing</h2>

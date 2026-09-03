@@ -12,18 +12,6 @@
   <div class="callout">Value range <em>wide</em> → focus on #2 (unblock bluffs). <em>Narrow</em> → focus on #3 (block value).</div>
 </section>
 <section>
-  <h2>Core principle</h2>
-  <div class="callout"><strong>Opponent's required bluff frequency = your pot odds.</strong> Need 25% → they must bluff 25% of betting range. If balanced → worst callable = worth 0. But <em>better</em> bluff catchers (block value / unblock bluffs) = worth significant EV.</div>
-  <h3>Good vs bad bluff catchers</h3>
-  <table>
-    <tr><th>Attribute</th><th>Good</th><th>Bad</th></tr>
-    <tr><td>Blocks value</td><td>✅ King (blocks KK, KQ)</td><td>❌ 8/9 (blocks nothing valuable)</td></tr>
-    <tr><td>Unblocks bluffs</td><td>✅ 4, 3, deuce</td><td>❌ 8, 9, T (blocks offsuit opens)</td></tr>
-    <tr><td>Card vs open threshold</td><td>Below BTN open (4, 3, 2)</td><td>Above BTN open (8, 9, T)</td></tr>
-  </table>
-  <div class="callout warn"><strong>Preflop awareness:</strong> BTN opens suited 5+ and offsuit 8+. 4-x/3-x <em>unblock</em> bluffs (not opened); 8-x/9-x <em>block</em> bluffs (opened).</div>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">Value range width (row) x your hand's blocker (column). Green = call, red = fold. First: can you identify their bluffs?</p>
   <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
@@ -43,6 +31,19 @@
     <div class="dm-cell red" style="grid-column:span 2"><div class="dm-action red">Fold — even if MDF says call</div><div class="dm-sub">If you can't identify where bluffs come from, MDF is irrelevant. Opponent won't convert Ax to bluff.</div></div>
   </div>
 </section>
+<section>
+  <h2>Core principle</h2>
+  <div class="callout"><strong>Opponent's required bluff frequency = your pot odds.</strong> Need 25% → they must bluff 25% of betting range. If balanced → worst callable = worth 0. But <em>better</em> bluff catchers (block value / unblock bluffs) = worth significant EV.</div>
+  <h3>Good vs bad bluff catchers</h3>
+  <table>
+    <tr><th>Attribute</th><th>Good</th><th>Bad</th></tr>
+    <tr><td>Blocks value</td><td>✅ King (blocks KK, KQ)</td><td>❌ 8/9 (blocks nothing valuable)</td></tr>
+    <tr><td>Unblocks bluffs</td><td>✅ 4, 3, deuce</td><td>❌ 8, 9, T (blocks offsuit opens)</td></tr>
+    <tr><td>Card vs open threshold</td><td>Below BTN open (4, 3, 2)</td><td>Above BTN open (8, 9, T)</td></tr>
+  </table>
+  <div class="callout warn"><strong>Preflop awareness:</strong> BTN opens suited 5+ and offsuit 8+. 4-x/3-x <em>unblock</em> bluffs (not opened); 8-x/9-x <em>block</em> bluffs (opened).</div>
+</section>
+
 
 <section>
   <h2>Exceptions</h2>

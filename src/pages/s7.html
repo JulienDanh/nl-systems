@@ -7,6 +7,27 @@
   <p>Example: raise to 4 into pot of 10.56 → 38% MDF → actual ~18–25% fold.</p>
 </section>
 <section>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Organize around highest unpaired card. Find your hand position (row) x draws (column). MDF says defend more than you think.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">No draws</div>
+    <div class="dmatrix-head">With draws (BDFD, 3-straight, BD straight)</div>
+
+    <div class="dm-label">Two overcards <small>(to key card)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Ace-high first in defend priority.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Draws make it even stronger.</div></div>
+
+    <div class="dm-label">One over, one under</div>
+    <div class="dm-cell red"><div class="dm-action red">Fold candidate</div><div class="dm-sub">No redeeming equity.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Call</div><div class="dm-sub">See defend priority below.</div></div>
+
+    <div class="dm-label">Double undercards <small>(worst hands)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Naked, no equity. These are the folds.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Call</div><div class="dm-sub">High in defend priority: ace-high, BDFD, 3-straight.</div></div>
+  </div>
+</section>
+<section>
   <h2>Defending framework</h2>
   <p>Defend <em>most</em> of range (65–80%+). Focus on the small <strong>folding range</strong> (worst hands).</p>
   <h3>Organize around the highest unpaired card</h3>
@@ -31,27 +52,7 @@
     <tr><td><strong>HUD exploit risk</strong></td><td>If fold-to-CR too high, regulars exploit you</td></tr>
   </table>
 </section>
-<section>
-  <h2>Decision Matrix</h2>
-  <p class="muted">Organize around highest unpaired card. Find your hand position (row) x draws (column). MDF says defend more than you think.</p>
-  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
-    <div></div>
-    <div class="dmatrix-head">No draws</div>
-    <div class="dmatrix-head">With draws (BDFD, 3-straight, BD straight)</div>
 
-    <div class="dm-label">Two overcards <small>(to key card)</small></div>
-    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Ace-high first in defend priority.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Draws make it even stronger.</div></div>
-
-    <div class="dm-label">One over, one under</div>
-    <div class="dm-cell red"><div class="dm-action red">Fold candidate</div><div class="dm-sub">No redeeming equity.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Call</div><div class="dm-sub">See defend priority below.</div></div>
-
-    <div class="dm-label">Double undercards <small>(worst hands)</small></div>
-    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Naked, no equity. These are the folds.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Call</div><div class="dm-sub">High in defend priority: ace-high, BDFD, 3-straight.</div></div>
-  </div>
-</section>
 
 <section>
   <h2>Hand Examples</h2>

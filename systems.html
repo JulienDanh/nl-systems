@@ -207,6 +207,7 @@
     <div class="dm-cell orange"><div class="dm-action orange">Mix</div><div class="dm-sub">&nbsp;</div></div>
   </div>
 </section>
+
 <section>
   <h2>Risk Factors (override "c-bet 100%")</h2>
   <h3>1. Straights possible <span class="tag risk">primary</span></h3>
@@ -261,13 +262,6 @@
   <div class="callout">BTN range is wider (offsuit 8s+), so it misses low boards harder. When BTN doesn't interact, build a checking strategy — bet top, bet bottom, check middle.</div>
 </section>
 <section>
-  <h2>Risk Factors</h2>
-  <h3>Ace-high boards</h3>
-  <ul><li><strong>Stack depth:</strong> deeper → more checking. Shallow → bet 100%.</li><li><strong>Monotone:</strong> substantially more checking.</li><li><strong>Paired:</strong> more checking (AJJ → check KK/QQ/medium; bet Jx + trash).</li></ul>
-  <h3>T–K high boards (with deuce/3)</h3>
-  <ul><li><strong>Two low cards:</strong> biggest risk factor (K63, K35 — the <em>second</em> low card). K92, KT3 are fine.</li><li><strong>Monotone:</strong> substantially more checking.</li><li><strong>Paired:</strong> less concerning here. <strong>Stack depth:</strong> noisier.</li></ul>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">Scan your flop type across one row. Green = c-bet 100%. Orange = mix (bet top + bottom, check middle).</p>
   <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr">
@@ -288,6 +282,14 @@
     <div class="dm-cell orange"><div class="dm-action orange">Mix</div><div class="dm-sub">&nbsp;</div></div>
   </div>
 </section>
+<section>
+  <h2>Risk Factors</h2>
+  <h3>Ace-high boards</h3>
+  <ul><li><strong>Stack depth:</strong> deeper → more checking. Shallow → bet 100%.</li><li><strong>Monotone:</strong> substantially more checking.</li><li><strong>Paired:</strong> more checking (AJJ → check KK/QQ/medium; bet Jx + trash).</li></ul>
+  <h3>T–K high boards (with deuce/3)</h3>
+  <ul><li><strong>Two low cards:</strong> biggest risk factor (K63, K35 — the <em>second</em> low card). K92, KT3 are fine.</li><li><strong>Monotone:</strong> substantially more checking.</li><li><strong>Paired:</strong> less concerning here. <strong>Stack depth:</strong> noisier.</li></ul>
+</section>
+
 
 <section>
   <h2>The Pyramid (when you must check)</h2>
@@ -315,6 +317,31 @@
   <h2>System 3 — BB vs SB Limp Stab · Defending Flops</h2>
   <p>SB limps, BB checks, SB stabs. We defend from BB. Highest-impact scenario — BB win rate determines winner/loser.</p>
   <div class="callout good"><strong>Why BB matters:</strong> Skilled player goes from −112 bb/100 (walk-away) to −20 — 92 points of opportunity. UTG only has 27. BB skill is <em>definitively</em> most important.</div>
+</section>
+<section>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Find your hand type (row) x draws (column). Green = defend, red = fold.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">No draws</div>
+    <div class="dmatrix-head">BDFD or 3-straight</div>
+    <div class="dmatrix-head">Gut shot</div>
+
+    <div class="dm-label">Double overs <small>(both above key card)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Depends on key card height</div><div class="dm-sub">See key-card height heuristic below.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">Draws make double-overs playable regardless.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div></div>
+
+    <div class="dm-label">Over-under <small>(worst hands live here)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Worst hands in range. No equity to fall back on.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">BDFD or 3-straight rescues the worst category.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">Gut shot = direct equity.</div></div>
+
+    <div class="dm-label">Double unders <small>(both below key card)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Unless BDFD rescues the very worst hands.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">BDFD can rescue, unless you're the absolute worst hand.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Gut shots (43, 54, 53) are pure plays.</div></div>
+  </div>
 </section>
 <section>
   <h2>The System</h2>
@@ -349,31 +376,7 @@
   <h3>Preflop asymmetry</h3>
   <div class="callout">SB has a folding range; BB does not. 2x/3x favor BB. BB checking = capped (no AK/AQ/overpairs). SB has advantage on Broadway boards; BB on low boards.</div>
 </section>
-<section>
-  <h2>Decision Matrix</h2>
-  <p class="muted">Find your hand type (row) x draws (column). Green = defend, red = fold.</p>
-  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
-    <div></div>
-    <div class="dmatrix-head">No draws</div>
-    <div class="dmatrix-head">BDFD or 3-straight</div>
-    <div class="dmatrix-head">Gut shot</div>
 
-    <div class="dm-label">Double overs <small>(both above key card)</small></div>
-    <div class="dm-cell orange"><div class="dm-action orange">Depends on key card height</div><div class="dm-sub">See key-card height heuristic below.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">Draws make double-overs playable regardless.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Defend</div></div>
-
-    <div class="dm-label">Over-under <small>(worst hands live here)</small></div>
-    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Worst hands in range. No equity to fall back on.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">BDFD or 3-straight rescues the worst category.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">Gut shot = direct equity.</div></div>
-
-    <div class="dm-label">Double unders <small>(both below key card)</small></div>
-    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Unless BDFD rescues the very worst hands.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Defend</div><div class="dm-sub">BDFD can rescue, unless you're the absolute worst hand.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Gut shots (43, 54, 53) are pure plays.</div></div>
-  </div>
-</section>
 
 <section>
   <h2>Hand Examples</h2>
@@ -396,18 +399,6 @@
   <div class="callout">Low cards have good blocking effects vs linear ranges (deuce blocks few value, unblocks folds — opponents folded 2x preflop).</div>
   <h3>System 2 — Blocking effects</h3>
   <p>Bluff with combos that <strong>block opponent's calls/raises</strong> and <strong>unblock their folds</strong>, while checking opportunity cost. Very difficult to manage all three — System 1 is default.</p>
-</section>
-<section>
-  <h2>When to use which</h2>
-  <table>
-    <tr><th>Situation</th><th>System</th><th>Why</th></tr>
-    <tr><td>Board 3-flushes</td><td><strong>System 2</strong> (easy)</td><td>One-club bias obvious — blocks flushes + hero calls</td></tr>
-    <tr><td>Wide ranges, no obvious suit blanked</td><td><strong>System 1</strong></td><td>Too hard to identify blocking effects</td></tr>
-    <tr><td>Three Broadway, EP open</td><td><strong>System 1</strong></td><td>No offsuit air (linear range) — suited bluffs scarce, bluff them</td></tr>
-    <tr><td>Opponent called flop with specific suits</td><td><strong>System 2</strong> (avoid those)</td><td>Block how they fold, unblock how they call</td></tr>
-  </table>
-  <h3>Key blocking patterns</h3>
-  <ul><li><strong>3-flush river:</strong> bluff with one card of the flush suit. Blocks flushes AND hero calls.</li><li><strong>Two-tone flop called:</strong> opponent called with 2 suits. Bluff avoiding those; prefer others.</li><li><strong>High card vs low card of suit:</strong> high card heart is <em>worse</em> (blocks more folds). Low card heart less damaging.</li><li><strong>Busted straight + busted flush draw:</strong> <em>terrible</em> bluff — blocks both folding regions.</li></ul>
 </section>
 <section>
   <h2>Decision Matrix</h2>
@@ -434,6 +425,19 @@
     <div class="dm-cell red"><div class="dm-action red">Terrible bluff</div><div class="dm-sub">Same — blocks both. Don't bluff with QJ♥.</div></div>
   </div>
 </section>
+<section>
+  <h2>When to use which</h2>
+  <table>
+    <tr><th>Situation</th><th>System</th><th>Why</th></tr>
+    <tr><td>Board 3-flushes</td><td><strong>System 2</strong> (easy)</td><td>One-club bias obvious — blocks flushes + hero calls</td></tr>
+    <tr><td>Wide ranges, no obvious suit blanked</td><td><strong>System 1</strong></td><td>Too hard to identify blocking effects</td></tr>
+    <tr><td>Three Broadway, EP open</td><td><strong>System 1</strong></td><td>No offsuit air (linear range) — suited bluffs scarce, bluff them</td></tr>
+    <tr><td>Opponent called flop with specific suits</td><td><strong>System 2</strong> (avoid those)</td><td>Block how they fold, unblock how they call</td></tr>
+  </table>
+  <h3>Key blocking patterns</h3>
+  <ul><li><strong>3-flush river:</strong> bluff with one card of the flush suit. Blocks flushes AND hero calls.</li><li><strong>Two-tone flop called:</strong> opponent called with 2 suits. Bluff avoiding those; prefer others.</li><li><strong>High card vs low card of suit:</strong> high card heart is <em>worse</em> (blocks more folds). Low card heart less damaging.</li><li><strong>Busted straight + busted flush draw:</strong> <em>terrible</em> bluff — blocks both folding regions.</li></ul>
+</section>
+
 
 <section>
   <h2>The realism constraint</h2>
@@ -468,18 +472,6 @@
   <div class="callout bad"><strong>Don't barrel medium-strength hands.</strong> They lose to hands that call and only beat bluffs. Check keeps them as bluff catchers. Barreling gets value-owned.</div>
 </section>
 <section>
-  <h2>Risk Factors & Exceptions</h2>
-  <table>
-    <tr><th>Factor</th><th>Effect</th></tr>
-    <tr><td><strong>Deep (80bb+)</strong></td><td>Opponent calls more top pair → more callers above medium</td></tr>
-    <tr><td><strong>Short (25bb)</strong></td><td>Opponent CRs top pair instead of calling → fewer calls above</td></tr>
-    <tr><td><strong>Turn improves your range (A/K)</strong></td><td>May justify barreling medium (range advantage)</td></tr>
-    <tr><td><strong>EP open (range bet flop)</strong></td><td>Less need to polarize; range advantage vs BB</td></tr>
-    <tr><td><strong>Merge play (exception)</strong></td><td>Strong-enough medium can bet if folds better AND called by worse</td></tr>
-  </table>
-  <div class="callout good"><strong>Merge example (ATo on Q73→J):</strong> Barreling ATo folds Q-x/K-x (better) and gets called by J-T, J-4s, 10x draws (worse). Merge = thin value + fold equity. Not all medium hands can do this.</div>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">Find your hand tier (row) x qualifier (column). The pyramid: bet top, bet bottom, check middle.</p>
   <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
@@ -500,6 +492,19 @@
     <div class="dm-cell green"><div class="dm-action green">BET (selective bluff)</div><div class="dm-sub">Only if enough value bets exist. Not all trash — only some.</div></div>
   </div>
 </section>
+<section>
+  <h2>Risk Factors & Exceptions</h2>
+  <table>
+    <tr><th>Factor</th><th>Effect</th></tr>
+    <tr><td><strong>Deep (80bb+)</strong></td><td>Opponent calls more top pair → more callers above medium</td></tr>
+    <tr><td><strong>Short (25bb)</strong></td><td>Opponent CRs top pair instead of calling → fewer calls above</td></tr>
+    <tr><td><strong>Turn improves your range (A/K)</strong></td><td>May justify barreling medium (range advantage)</td></tr>
+    <tr><td><strong>EP open (range bet flop)</strong></td><td>Less need to polarize; range advantage vs BB</td></tr>
+    <tr><td><strong>Merge play (exception)</strong></td><td>Strong-enough medium can bet if folds better AND called by worse</td></tr>
+  </table>
+  <div class="callout good"><strong>Merge example (ATo on Q73→J):</strong> Barreling ATo folds Q-x/K-x (better) and gets called by J-T, J-4s, 10x draws (worse). Merge = thin value + fold equity. Not all medium hands can do this.</div>
+</section>
+
 
 <section>
   <h2>Sizing</h2>
@@ -525,6 +530,26 @@
   <p><strong>Top pair = CR</strong>; <strong>two pair/sets = trap (check-call)</strong> at short stacks. SPR short enough to shove river without raising.</p>
 </section>
 <section>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Stack depth (row) x hand type (column). Green = check-raise, orange = mix/call, red = trap.</p>
+  <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">Top pair (offsuit)</div>
+    <div class="dmatrix-head">Top pair (suited / BDFD)</div>
+    <div class="dmatrix-head">Two pair / sets</div>
+
+    <div class="dm-label">&gt; 35bb <small>(deeper)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix CR / check-call</div><div class="dm-sub">Great kicker (KQ, QJ): mix CR. Weak kicker: check-call.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Check-call</div><div class="dm-sub">BDFD prefers call to realize flush draw.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">Nuts-oriented CR range.</div></div>
+
+    <div class="dm-label">&le; 35bb <small>(short, aggressive)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">Pure CR. Shorter = more CR (34bb &lt; 24bb &lt; 14bb).</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Check-call</div><div class="dm-sub">Realize the flush draw. CR gives up flush equity.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Trap (check-call)</div><div class="dm-sub">SPR short enough to shove river without raising flop.</div></div>
+  </div>
+</section>
+<section>
   <h2>CR hierarchy (high boards)</h2>
   <p>On Q-high (Q73), kicker determines CR frequency:</p>
   <table>
@@ -548,26 +573,7 @@
     <tr><td><strong>Deeper stacks</strong></td><td>Less CR with thin top pair</td></tr>
   </table>
 </section>
-<section>
-  <h2>Decision Matrix</h2>
-  <p class="muted">Stack depth (row) x hand type (column). Green = check-raise, orange = mix/call, red = trap.</p>
-  <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr 1fr">
-    <div></div>
-    <div class="dmatrix-head">Top pair (offsuit)</div>
-    <div class="dmatrix-head">Top pair (suited / BDFD)</div>
-    <div class="dmatrix-head">Two pair / sets</div>
 
-    <div class="dm-label">&gt; 35bb <small>(deeper)</small></div>
-    <div class="dm-cell orange"><div class="dm-action orange">Mix CR / check-call</div><div class="dm-sub">Great kicker (KQ, QJ): mix CR. Weak kicker: check-call.</div></div>
-    <div class="dm-cell orange"><div class="dm-action orange">Check-call</div><div class="dm-sub">BDFD prefers call to realize flush draw.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">Nuts-oriented CR range.</div></div>
-
-    <div class="dm-label">&le; 35bb <small>(short, aggressive)</small></div>
-    <div class="dm-cell green"><div class="dm-action green">Check-raise</div><div class="dm-sub">Pure CR. Shorter = more CR (34bb &lt; 24bb &lt; 14bb).</div></div>
-    <div class="dm-cell red"><div class="dm-action red">Check-call</div><div class="dm-sub">Realize the flush draw. CR gives up flush equity.</div></div>
-    <div class="dm-cell red"><div class="dm-action red">Trap (check-call)</div><div class="dm-sub">SPR short enough to shove river without raising flop.</div></div>
-  </div>
-</section>
 
 <section>
   <h2>Sizing</h2>
@@ -591,6 +597,27 @@
   <h3>MDF calculation</h3>
   <div class="callout"><strong>Fold% = Risk / (Pot + Risk)</strong> — makes zero-equity bluffs indifferent. But villain's bluffs have <em>real equity</em> → <strong>actual fold% is LOWER</strong>. Defend more than MDF.</div>
   <p>Example: raise to 4 into pot of 10.56 → 38% MDF → actual ~18–25% fold.</p>
+</section>
+<section>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Organize around highest unpaired card. Find your hand position (row) x draws (column). MDF says defend more than you think.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">No draws</div>
+    <div class="dmatrix-head">With draws (BDFD, 3-straight, BD straight)</div>
+
+    <div class="dm-label">Two overcards <small>(to key card)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Ace-high first in defend priority.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Draws make it even stronger.</div></div>
+
+    <div class="dm-label">One over, one under</div>
+    <div class="dm-cell red"><div class="dm-action red">Fold candidate</div><div class="dm-sub">No redeeming equity.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Call</div><div class="dm-sub">See defend priority below.</div></div>
+
+    <div class="dm-label">Double undercards <small>(worst hands)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Naked, no equity. These are the folds.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Call</div><div class="dm-sub">High in defend priority: ace-high, BDFD, 3-straight.</div></div>
+  </div>
 </section>
 <section>
   <h2>Defending framework</h2>
@@ -617,27 +644,7 @@
     <tr><td><strong>HUD exploit risk</strong></td><td>If fold-to-CR too high, regulars exploit you</td></tr>
   </table>
 </section>
-<section>
-  <h2>Decision Matrix</h2>
-  <p class="muted">Organize around highest unpaired card. Find your hand position (row) x draws (column). MDF says defend more than you think.</p>
-  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
-    <div></div>
-    <div class="dmatrix-head">No draws</div>
-    <div class="dmatrix-head">With draws (BDFD, 3-straight, BD straight)</div>
 
-    <div class="dm-label">Two overcards <small>(to key card)</small></div>
-    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Ace-high first in defend priority.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">Draws make it even stronger.</div></div>
-
-    <div class="dm-label">One over, one under</div>
-    <div class="dm-cell red"><div class="dm-action red">Fold candidate</div><div class="dm-sub">No redeeming equity.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Call</div><div class="dm-sub">See defend priority below.</div></div>
-
-    <div class="dm-label">Double undercards <small>(worst hands)</small></div>
-    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Naked, no equity. These are the folds.</div></div>
-    <div class="dm-cell green"><div class="dm-action green">Call</div><div class="dm-sub">High in defend priority: ace-high, BDFD, 3-straight.</div></div>
-  </div>
-</section>
 
 <section>
   <h2>Hand Examples</h2>
@@ -655,20 +662,6 @@
   <p>Sizing decisions for IP player on turn/river. Core mistake: betting <em>too small</em>.</p>
   <h3>IP advantage</h3>
   <ul><li>IP checks → range uncaps on next card (turn improves hands).</li><li>OOP checks → IP punishes immediately.</li><li>IP can polarize more → <strong>IP bets larger on average</strong>.</li></ul>
-</section>
-<section>
-  <h2>Sizing heuristic</h2>
-  <table>
-    <tr><th>Situation</th><th>Sizing</th></tr>
-    <tr><td>Villain capped (low nut ratio)</td><td><span class="tag default">Overbet / pot</span> (geometric)</td></tr>
-    <tr><td>Both have nuts possible</td><td>~70% pot (large, not overbet)</td></tr>
-    <tr><td>Flush/straight fills (nut ratio rises)</td><td>Medium-large reasonable</td></tr>
-    <tr><td>Thin value hand</td><td><span class="tag risk">Check</span> (don't bet thin small)</td></tr>
-    <tr><td>&lt; 50% pot IP</td><td><span class="tag fold">Almost NEVER correct</span></td></tr>
-  </table>
-  <h3>Geometric betting</h3>
-  <p>To get stack in over 2 streets: ~pot on both (equal fractions). E.g. 50bb: ~11bb turn → ~34bb river shove.</p>
-  <div class="callout bad">Reopening action risks being check-raised off equity. Small bets don't justify that risk. Fold% rises slower than bet size → bigger bets profit more.</div>
 </section>
 <section>
   <h2>Decision Matrix</h2>
@@ -691,6 +684,21 @@
     <div class="dm-cell red"><div class="dm-action red">Check</div><div class="dm-sub">Can't merge when villain has nuts.</div></div>
   </div>
 </section>
+<section>
+  <h2>Sizing heuristic</h2>
+  <table>
+    <tr><th>Situation</th><th>Sizing</th></tr>
+    <tr><td>Villain capped (low nut ratio)</td><td><span class="tag default">Overbet / pot</span> (geometric)</td></tr>
+    <tr><td>Both have nuts possible</td><td>~70% pot (large, not overbet)</td></tr>
+    <tr><td>Flush/straight fills (nut ratio rises)</td><td>Medium-large reasonable</td></tr>
+    <tr><td>Thin value hand</td><td><span class="tag risk">Check</span> (don't bet thin small)</td></tr>
+    <tr><td>&lt; 50% pot IP</td><td><span class="tag fold">Almost NEVER correct</span></td></tr>
+  </table>
+  <h3>Geometric betting</h3>
+  <p>To get stack in over 2 streets: ~pot on both (equal fractions). E.g. 50bb: ~11bb turn → ~34bb river shove.</p>
+  <div class="callout bad">Reopening action risks being check-raised off equity. Small bets don't justify that risk. Fold% rises slower than bet size → bigger bets profit more.</div>
+</section>
+
 
 <section>
   <h2>Risk Factors</h2>
@@ -732,20 +740,6 @@
   </table>
 </section>
 <section>
-  <h2>Three inputs for wide defending</h2>
-  <div class="callout"><strong>Weak own range + Weak opponent range + Small bet → defend very wide.</strong></div>
-  <h3>Check-raise criteria (properties)</h3>
-  <ul><li>Direct equity vs opponent's top pair (gut shot, overcard)</li><li>Backdoor straight draw potential</li><li>Backdoor flush draw (3-to-flush)</li><li>Opponent missed the board frequently</li><li>Opponent bet small</li><li>High card of suit &gt; low card (blocks linear RFI more effectively)</li></ul>
-  <h3>Risk factors</h3>
-  <table>
-    <tr><th>Factor</th><th>Effect</th></tr>
-    <tr><td><strong>Bet sizing</strong></td><td>Scale up → fold more pairs. Q-J/K-J without ♦: call vs 30% → fold vs 83%</td></tr>
-    <tr><td><strong>Rainbow vs two-tone</strong></td><td>Rainbow = messier (fewer BDFDs). Two-tone cleaner (flush draws supplement).</td></tr>
-    <tr><td><strong>Blind vs blind</strong></td><td>Ranges too wide — never fold pairs (even pocket 4s with BDFD)</td></tr>
-    <tr><td><strong>K8 vs half-pot</strong></td><td>Solver = mix. K7 close, K6 pure fold.</td></tr>
-  </table>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">Hand type (row) x draws/conditions (column). Green = call, red = fold, orange = mix.</p>
   <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
@@ -770,6 +764,21 @@
     <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">No BDFD, no 3-straight = naked high card.</div></div>
   </div>
 </section>
+<section>
+  <h2>Three inputs for wide defending</h2>
+  <div class="callout"><strong>Weak own range + Weak opponent range + Small bet → defend very wide.</strong></div>
+  <h3>Check-raise criteria (properties)</h3>
+  <ul><li>Direct equity vs opponent's top pair (gut shot, overcard)</li><li>Backdoor straight draw potential</li><li>Backdoor flush draw (3-to-flush)</li><li>Opponent missed the board frequently</li><li>Opponent bet small</li><li>High card of suit &gt; low card (blocks linear RFI more effectively)</li></ul>
+  <h3>Risk factors</h3>
+  <table>
+    <tr><th>Factor</th><th>Effect</th></tr>
+    <tr><td><strong>Bet sizing</strong></td><td>Scale up → fold more pairs. Q-J/K-J without ♦: call vs 30% → fold vs 83%</td></tr>
+    <tr><td><strong>Rainbow vs two-tone</strong></td><td>Rainbow = messier (fewer BDFDs). Two-tone cleaner (flush draws supplement).</td></tr>
+    <tr><td><strong>Blind vs blind</strong></td><td>Ranges too wide — never fold pairs (even pocket 4s with BDFD)</td></tr>
+    <tr><td><strong>K8 vs half-pot</strong></td><td>Solver = mix. K7 close, K6 pure fold.</td></tr>
+  </table>
+</section>
+
 
 <section>
   <h2>Hand Examples</h2>
@@ -791,26 +800,6 @@
   <div class="callout good">When villain's range weakens, your medium-strength hands become the <em>relative nuts</em> → bet for value.</div>
 </section>
 <section>
-  <h2>Decision framework</h2>
-  <table>
-    <tr><th>Situation</th><th>Action</th><th>Sizing</th></tr>
-    <tr><td>Can't CR but called by worse</td><td><span class="tag default">Bet</span></td><td>Don't let opponent polarize by checking</td></tr>
-    <tr><td>Opponent checked turn, medium hand</td><td><span class="tag default">Bet (block)</span></td><td>Small (25–33%) forces them to defend 75%+</td></tr>
-    <tr><td>Opponent capped (no nuts)</td><td><span class="tag default">Bet large / overbet</span></td><td>Large vs capped ranges</td></tr>
-    <tr><td>Opponent has high nut ratio</td><td>Bet small</td><td>Nuts frequency constrains sizing</td></tr>
-    <tr><td>Short SPR (&lt;2x pot)</td><td><span class="tag default">Prefer jamming</span></td><td>Checking loses optionality</td></tr>
-    <tr><td>Deep SPR</td><td>Checking competitive</td><td>Check-raise optionality adds value</td></tr>
-  </table>
-  <h3>Geometric sizing</h3>
-  <p>Bet similar fractions each street (pot-pot-pot) to get stacks in with strong hands.</p>
-</section>
-<section>
-  <h2>Key principles</h2>
-  <div class="callout bad"><strong>Checking converts strong hands into bluff catchers.</strong> IP auto-polarizes — bets hands that beat you, checks hands you beat. You lose value against the entire medium-strength region.</div>
-  <h3>Risk factors</h3>
-  <ul><li><strong>River cards that reintroduce strength:</strong> fills straights/flushes → re-uncaps villain → smaller sizing.</li><li><strong>Multi-way:</strong> IP checking back flop in multi-way = extremely capped (no sets, no TPTK). Largely ignore them.</li><li><strong>Donk bets:</strong> strip from solver — most players miss them in metagame.</li></ul>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">Villain's range (row) x your options (column). Green = bet, orange = sizing-dependent.</p>
   <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
@@ -830,6 +819,27 @@
     <div class="dm-cell green"><div class="dm-action green">Prefer jamming</div><div class="dm-sub">Get value now before villain improves.</div></div>
   </div>
 </section>
+<section>
+  <h2>Decision framework</h2>
+  <table>
+    <tr><th>Situation</th><th>Action</th><th>Sizing</th></tr>
+    <tr><td>Can't CR but called by worse</td><td><span class="tag default">Bet</span></td><td>Don't let opponent polarize by checking</td></tr>
+    <tr><td>Opponent checked turn, medium hand</td><td><span class="tag default">Bet (block)</span></td><td>Small (25–33%) forces them to defend 75%+</td></tr>
+    <tr><td>Opponent capped (no nuts)</td><td><span class="tag default">Bet large / overbet</span></td><td>Large vs capped ranges</td></tr>
+    <tr><td>Opponent has high nut ratio</td><td>Bet small</td><td>Nuts frequency constrains sizing</td></tr>
+    <tr><td>Short SPR (&lt;2x pot)</td><td><span class="tag default">Prefer jamming</span></td><td>Checking loses optionality</td></tr>
+    <tr><td>Deep SPR</td><td>Checking competitive</td><td>Check-raise optionality adds value</td></tr>
+  </table>
+  <h3>Geometric sizing</h3>
+  <p>Bet similar fractions each street (pot-pot-pot) to get stacks in with strong hands.</p>
+</section>
+<section>
+  <h2>Key principles</h2>
+  <div class="callout bad"><strong>Checking converts strong hands into bluff catchers.</strong> IP auto-polarizes — bets hands that beat you, checks hands you beat. You lose value against the entire medium-strength region.</div>
+  <h3>Risk factors</h3>
+  <ul><li><strong>River cards that reintroduce strength:</strong> fills straights/flushes → re-uncaps villain → smaller sizing.</li><li><strong>Multi-way:</strong> IP checking back flop in multi-way = extremely capped (no sets, no TPTK). Largely ignore them.</li><li><strong>Donk bets:</strong> strip from solver — most players miss them in metagame.</li></ul>
+</section>
+
 
 <section>
   <h2>Hand Examples</h2>
@@ -856,18 +866,6 @@
   <div class="callout">Value range <em>wide</em> → focus on #2 (unblock bluffs). <em>Narrow</em> → focus on #3 (block value).</div>
 </section>
 <section>
-  <h2>Core principle</h2>
-  <div class="callout"><strong>Opponent's required bluff frequency = your pot odds.</strong> Need 25% → they must bluff 25% of betting range. If balanced → worst callable = worth 0. But <em>better</em> bluff catchers (block value / unblock bluffs) = worth significant EV.</div>
-  <h3>Good vs bad bluff catchers</h3>
-  <table>
-    <tr><th>Attribute</th><th>Good</th><th>Bad</th></tr>
-    <tr><td>Blocks value</td><td>✅ King (blocks KK, KQ)</td><td>❌ 8/9 (blocks nothing valuable)</td></tr>
-    <tr><td>Unblocks bluffs</td><td>✅ 4, 3, deuce</td><td>❌ 8, 9, T (blocks offsuit opens)</td></tr>
-    <tr><td>Card vs open threshold</td><td>Below BTN open (4, 3, 2)</td><td>Above BTN open (8, 9, T)</td></tr>
-  </table>
-  <div class="callout warn"><strong>Preflop awareness:</strong> BTN opens suited 5+ and offsuit 8+. 4-x/3-x <em>unblock</em> bluffs (not opened); 8-x/9-x <em>block</em> bluffs (opened).</div>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">Value range width (row) x your hand's blocker (column). Green = call, red = fold. First: can you identify their bluffs?</p>
   <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
@@ -887,6 +885,19 @@
     <div class="dm-cell red" style="grid-column:span 2"><div class="dm-action red">Fold — even if MDF says call</div><div class="dm-sub">If you can't identify where bluffs come from, MDF is irrelevant. Opponent won't convert Ax to bluff.</div></div>
   </div>
 </section>
+<section>
+  <h2>Core principle</h2>
+  <div class="callout"><strong>Opponent's required bluff frequency = your pot odds.</strong> Need 25% → they must bluff 25% of betting range. If balanced → worst callable = worth 0. But <em>better</em> bluff catchers (block value / unblock bluffs) = worth significant EV.</div>
+  <h3>Good vs bad bluff catchers</h3>
+  <table>
+    <tr><th>Attribute</th><th>Good</th><th>Bad</th></tr>
+    <tr><td>Blocks value</td><td>✅ King (blocks KK, KQ)</td><td>❌ 8/9 (blocks nothing valuable)</td></tr>
+    <tr><td>Unblocks bluffs</td><td>✅ 4, 3, deuce</td><td>❌ 8, 9, T (blocks offsuit opens)</td></tr>
+    <tr><td>Card vs open threshold</td><td>Below BTN open (4, 3, 2)</td><td>Above BTN open (8, 9, T)</td></tr>
+  </table>
+  <div class="callout warn"><strong>Preflop awareness:</strong> BTN opens suited 5+ and offsuit 8+. 4-x/3-x <em>unblock</em> bluffs (not opened); 8-x/9-x <em>block</em> bluffs (opened).</div>
+</section>
+
 
 <section>
   <h2>Exceptions</h2>
@@ -920,17 +931,6 @@
   <div class="callout bad"><strong>Key thesis:</strong> 3-bettor is ahead preflop. High boards favor them; low boards favor caller. <em>Fold far more than MDF on high boards; defend robustly on low.</em></div>
 </section>
 <section>
-  <h2>Risk factors (low boards)</h2>
-  <table>
-    <tr><th>Factor</th><th>Effect</th><th>Severity</th></tr>
-    <tr><td><strong>Paired</strong></td><td>Slightly elevated fold %</td><td>Minor</td></tr>
-    <tr><td><strong>Disconnected</strong></td><td>Elevated fold %</td><td><span class="tag risk">Significant</span> (want straights)</td></tr>
-    <tr><td><strong>Deuce present</strong></td><td>Favors 3-bettor (misses both → preflop stronger wins)</td><td>Moderate</td></tr>
-  </table>
-  <h3>Common mistakes</h3>
-  <ol><li><strong>Over-defending preflop range</strong> — must fold the bottom.</li><li><strong>Over-defending weak pairs/draws on A/K-high</strong> — pocket 7s/8s/9s, BDFDs are all folds.</li><li><strong>Over-folding high card hands on low boards</strong> — K-J with BDFD, A-T with 3-straight are calls.</li></ol>
-</section>
-<section>
   <h2>Decision Matrix</h2>
   <p class="muted">3-bettor is ahead preflop. Red = fold heavily. Green = defend. Orange = between.</p>
   <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr">
@@ -951,6 +951,18 @@
     <div class="dm-cell orange"><div class="dm-action orange">Elevated fold %</div><div class="dm-sub">Risk factors: <span class="tag risk">paired</span><span class="tag risk">disconnected</span><span class="tag risk">deuce</span></div></div>
   </div>
 </section>
+<section>
+  <h2>Risk factors (low boards)</h2>
+  <table>
+    <tr><th>Factor</th><th>Effect</th><th>Severity</th></tr>
+    <tr><td><strong>Paired</strong></td><td>Slightly elevated fold %</td><td>Minor</td></tr>
+    <tr><td><strong>Disconnected</strong></td><td>Elevated fold %</td><td><span class="tag risk">Significant</span> (want straights)</td></tr>
+    <tr><td><strong>Deuce present</strong></td><td>Favors 3-bettor (misses both → preflop stronger wins)</td><td>Moderate</td></tr>
+  </table>
+  <h3>Common mistakes</h3>
+  <ol><li><strong>Over-defending preflop range</strong> — must fold the bottom.</li><li><strong>Over-defending weak pairs/draws on A/K-high</strong> — pocket 7s/8s/9s, BDFDs are all folds.</li><li><strong>Over-folding high card hands on low boards</strong> — K-J with BDFD, A-T with 3-straight are calls.</li></ol>
+</section>
+
 
 <section>
   <h2>Sizing response</h2>
