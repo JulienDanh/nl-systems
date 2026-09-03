@@ -1,0 +1,74 @@
+<div class="page" id="page-s5">
+<section>
+  <h2>System 5 — Barreling Medium-Strength Hands in Error</h2>
+  <p>Turn barrels after flop c-bet is called. Core mistake: barreling medium-strength hands that should check.</p>
+  <h3>The Pyramid</h3>
+  <table>
+    <tr><th>Tier</th><th>Action</th><th>Why</th></tr>
+    <tr><td>Nuts / very strong</td><td>BET (value)</td><td>Get called by worse</td></tr>
+    <tr><td>Strong but not nuts</td><td>BET (thin value, selective)</td><td>Needs to be strong enough</td></tr>
+    <tr><td>Medium strength</td><td><span class="tag risk">CHECK</span></td><td>Loses to calls above, only beats bluffs</td></tr>
+    <tr><td>Weak / trash</td><td>BET (bluff, selective)</td><td>Low opportunity cost</td></tr>
+  </table>
+  <div class="callout bad"><strong>Don't barrel medium-strength hands.</strong> They lose to hands that call and only beat bluffs. Check keeps them as bluff catchers. Barreling gets value-owned.</div>
+</section>
+<section>
+  <h2>Risk Factors & Exceptions</h2>
+  <table>
+    <tr><th>Factor</th><th>Effect</th></tr>
+    <tr><td><strong>Deep (80bb+)</strong></td><td>Opponent calls more top pair → more callers above medium</td></tr>
+    <tr><td><strong>Short (25bb)</strong></td><td>Opponent CRs top pair instead of calling → fewer calls above</td></tr>
+    <tr><td><strong>Turn improves your range (A/K)</strong></td><td>May justify barreling medium (range advantage)</td></tr>
+    <tr><td><strong>EP open (range bet flop)</strong></td><td>Less need to polarize; range advantage vs BB</td></tr>
+    <tr><td><strong>Merge play (exception)</strong></td><td>Strong-enough medium can bet if folds better AND called by worse</td></tr>
+  </table>
+  <div class="callout good"><strong>Merge example (ATo on Q73→J):</strong> Barreling ATo folds Q-x/K-x (better) and gets called by J-T, J-4s, 10x draws (worse). Merge = thin value + fold equity. Not all medium hands can do this.</div>
+</section>
+<section>
+  <h2>Decision Flow</h2>
+  <div class="flow">
+    <div class="node q">You c-bet flop, got called. Turn card.</div>
+    <div class="arrow">↓</div>
+    <div class="node q">How strong is your hand?</div>
+    <div class="branch">
+      <div class="col">
+        <div class="edge">Very strong (nuts, sets)</div>
+        <div class="arrow">↓</div>
+        <div class="node yes">BET (value)<br>pot-ish or overbet</div>
+      </div>
+      <div class="col">
+        <div class="edge">Medium strength</div>
+        <div class="arrow">↓</div>
+        <div class="node q">Strong enough to fold better<br>AND get called by worse?</div>
+        <div class="branch">
+          <div class="col"><div class="edge">YES (merge)</div><div class="arrow">↓</div><div class="node yes">BET (merge)<br>e.g. ATo on Q73→J</div></div>
+          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">CHECK<br>keep as bluff catcher</div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="edge">Weak / trash</div>
+        <div class="arrow">↓</div>
+        <div class="node q">Enough value bets to carry bluffs?</div>
+        <div class="branch">
+          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">BET (selective bluff)<br>not all trash — only some</div></div>
+          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">CHECK</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Sizing</h2>
+  <p>Default turn: <strong>polarize</strong> — pot-ish or check. Solver often prefers ~116% overbet or check. Adding 60% allows thinner value (K8s) but doesn't rescue medium hands (99 still checks).</p>
+</section>
+<section>
+  <h2>Hand Examples</h2>
+  <div class="ex-card"><span class="tag risk">Medium → check</span><div class="ex-board">Q73 two-tone → J♥ · J9o</div><p><strong>System:</strong> J9 (no kicker) is medium — loses to KJ/JT floats. Check.</p><p><strong>Solver:</strong> Checks J9. AJ with A♦ is minimum jack to barrel.</p></div>
+  <div class="ex-card"><span class="tag risk">Medium → check</span><div class="ex-board">K72 two-tone → Q · 99</div><p><strong>System:</strong> Pocket 9s medium — opponent has many K-x calls. Check.</p><p><strong>Solver:</strong> 99 and 88 both check. 88 (open-ender) borderline. 99 pure check.</p></div>
+  <div class="ex-card"><span class="tag risk">Medium → check</span><div class="ex-board">Q75 rainbow → bad turn · JJ</div><p><strong>System:</strong> Bad card for range + medium strength → check.</p><p><strong>Solver:</strong> JJ mostly checks (56%, →72% if no donk). 88/99 can barrel (open-ender).</p></div>
+  <div class="ex-card"><span class="tag default">Merge → bet</span><div class="ex-board">Q73 → J♥ · ATo</div><p><strong>System:</strong> Merge — folds Q-x/K-x, called by J-T/J-4s/10x. Bet.</p><p><strong>Solver:</strong> Confirms. ATo folds out Q-x/K-x, called by dominated J-x and draws.</p></div>
+</section>
+<section><h2>Flashcards</h2><div class="cards-grid" id="flash-s5"></div></section>
+<section><h2>Quiz</h2><div class="progress"><div id="prog-s5"></div></div><div class="score" id="score-s5">0 / 0</div><div id="quiz-s5"></div></section>
+</div>

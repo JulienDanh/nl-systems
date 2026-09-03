@@ -1,0 +1,79 @@
+<div class="page" id="page-s8">
+<section>
+  <h2>System 8 — Bet Sizing In Position</h2>
+  <p>Sizing decisions for IP player on turn/river. Core mistake: betting <em>too small</em>.</p>
+  <h3>IP advantage</h3>
+  <ul><li>IP checks → range uncaps on next card (turn improves hands).</li><li>OOP checks → IP punishes immediately.</li><li>IP can polarize more → <strong>IP bets larger on average</strong>.</li></ul>
+</section>
+<section>
+  <h2>Sizing heuristic</h2>
+  <table>
+    <tr><th>Situation</th><th>Sizing</th></tr>
+    <tr><td>Villain capped (low nut ratio)</td><td><span class="tag default">Overbet / pot</span> (geometric)</td></tr>
+    <tr><td>Both have nuts possible</td><td>~70% pot (large, not overbet)</td></tr>
+    <tr><td>Flush/straight fills (nut ratio rises)</td><td>Medium-large reasonable</td></tr>
+    <tr><td>Thin value hand</td><td><span class="tag risk">Check</span> (don't bet thin small)</td></tr>
+    <tr><td>&lt; 50% pot IP</td><td><span class="tag fold">Almost NEVER correct</span></td></tr>
+  </table>
+  <h3>Geometric betting</h3>
+  <p>To get stack in over 2 streets: ~pot on both (equal fractions). E.g. 50bb: ~11bb turn → ~34bb river shove.</p>
+  <div class="callout bad">Reopening action risks being check-raised off equity. Small bets don't justify that risk. Fold% rises slower than bet size → bigger bets profit more.</div>
+</section>
+<section>
+  <h2>Decision Flow</h2>
+  <div class="flow">
+    <div class="node q">You're IP. You want to bet. How strong?</div>
+    <div class="branch">
+      <div class="col">
+        <div class="edge">Strong value</div>
+        <div class="arrow">↓</div>
+        <div class="node q">Villain's nut ratio?</div>
+        <div class="branch">
+          <div class="col"><div class="edge">Low (capped)</div><div class="arrow">↓</div><div class="node yes">Overbet / pot<br>(geometric to get stacks in)</div></div>
+          <div class="col"><div class="edge">High (nuts possible)</div><div class="arrow">↓</div><div class="node yes">~70% pot<br>(large, not overbet)</div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="edge">Thin value</div>
+        <div class="arrow">↓</div>
+        <div class="node q">Bet small (&lt;50%)?</div>
+        <div class="branch">
+          <div class="col"><div class="edge">Almost never correct</div><div class="arrow">↓</div><div class="node no">CHECK<br>(don't bet thin hands small)</div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="edge">Medium-strong (merge)</div>
+        <div class="arrow">↓</div>
+        <div class="node q">Folds better AND called by worse?</div>
+        <div class="branch">
+          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Bet pot (merge)<br>e.g. pocket Queens</div></div>
+          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">Check</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="node q" style="margin-top:14px">Risk: reopening action = being CR'd off equity.<br><span class="small">Small bets don't justify that risk → bet bigger</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Risk Factors</h2>
+  <table>
+    <tr><th>Factor</th><th>Effect</th></tr>
+    <tr><td><strong>Villain uncapped (can have nuts)</strong></td><td>Don't overbet — ~70% pot</td></tr>
+    <tr><td><strong>Paired boards / trips possible</strong></td><td>Caution — villain can have traps</td></tr>
+    <tr><td><strong>Quads risk</strong></td><td>~48 combos (similar to ~45 flush on 3-flush). Don't assume villain can't have quads.</td></tr>
+    <tr><td><strong>Turn check-back inflection</strong></td><td>If you checked turn, villain's river check = weakness → bet big</td></tr>
+    <tr><td><strong>Merge bets</strong></td><td>Pot with medium-strong (pocket Queens) folds better + called by worse</td></tr>
+  </table>
+</section>
+<section>
+  <h2>Hand Examples</h2>
+  <div class="ex-card"><span class="tag risk">River too small</span><div class="ex-board">QJx → J♦ → blank · QJ (Q♦) · 80bb</div><p><strong>System:</strong> Turn check (medium). River: check or bet pot. 40% is "disastrously thin" — loses ~160–200bb/100.</p><p><strong>Solver:</strong> No small bet exists. AJ with A♦ minimum river barrel (pure). Queens bets pot (merge). Quarter-pot never chosen.</p></div>
+  <div class="ex-card"><span class="tag default">Bet pot</span><div class="ex-board">Paired → turn check-back → river · pair of 8s · ~45bb</div><p><strong>System:</strong> Villain's check after your turn check-back = weakness. Your pair beats almost everything. Bet 6–8bb (~pot).</p><p><strong>Solver:</strong> No quarter-pot option. Minimum viable = half-pot (A8). Most strong hands bet larger.</p></div>
+  <div class="ex-card"><span class="tag risk">Overbet or check</span><div class="ex-board">KKx → K river (quads possible) · J10 · 50bb</div><p><strong>System:</strong> J-x can't value bet (splits all jacks, loses to Kx/quads). Check. Would bet Queens (merge) ~¾ pot.</p><p><strong>Solver:</strong> Overbet or check. Quarter-pot never chosen. Jx never bets.</p></div>
+  <div class="ex-card"><span class="tag default">Overbet (~pot)</span><div class="ex-board">J72 → Q turn · KQ / strong Q · 50bb</div><p><strong>System:</strong> Villain nut ratio very low (no straights/flushes, few sets). Geometric: ~11bb turn → ~34bb river shove.</p><p><strong>Solver:</strong> Both sizings ~pot. Never bets small. Checks Q-x without kicker; barrels KJ/AJ/strong Qx.</p></div>
+</section>
+<section><h2>Flashcards</h2><div class="cards-grid" id="flash-s8"></div></section>
+<section><h2>Quiz</h2><div class="progress"><div id="prog-s8"></div></div><div class="score" id="score-s8">0 / 0</div><div id="quiz-s8"></div></section>
+</div>

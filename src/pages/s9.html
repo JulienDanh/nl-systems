@@ -1,0 +1,77 @@
+<div class="page" id="page-s9">
+<section>
+  <h2>System 9 — Defending Flops (Calls and Raises)</h2>
+  <p>Defending the flop vs c-bet from BB (primarily BB vs RFI).</p>
+  <h3>Defend buckets</h3>
+  <table>
+    <tr><th>Hand type</th><th>Action</th></tr>
+    <tr><td>Weak/bottom pair + BDFD</td><td><span class="tag call">Call</span> (BDFD &gt; good kicker)</td></tr>
+    <tr><td>Bottom pair, no BDFD</td><td>Fold vs large; call vs small</td></tr>
+    <tr><td>Gut shot + BDFD ("super gut shot")</td><td><span class="tag call">Call</span> — turns combo draws on suit cards</td></tr>
+    <tr><td>Naked gut shot (double unders)</td><td><span class="tag fold">Fold</span></td></tr>
+    <tr><td>Gut shot with overcard</td><td>Call/mix</td></tr>
+    <tr><td>Double overs + BDFD</td><td><span class="tag call">Pure call</span> (vs small bet)</td></tr>
+    <tr><td>Ace-high + BDFD</td><td><span class="tag call">Pure call</span> (vs small bet)</td></tr>
+    <tr><td>3-straight + 3-flush (suited)</td><td>Call or check-raise</td></tr>
+  </table>
+</section>
+<section>
+  <h2>Three inputs for wide defending</h2>
+  <div class="callout"><strong>Weak own range + Weak opponent range + Small bet → defend very wide.</strong></div>
+  <h3>Check-raise criteria (properties)</h3>
+  <ul><li>Direct equity vs opponent's top pair (gut shot, overcard)</li><li>Backdoor straight draw potential</li><li>Backdoor flush draw (3-to-flush)</li><li>Opponent missed the board frequently</li><li>Opponent bet small</li><li>High card of suit &gt; low card (blocks linear RFI more effectively)</li></ul>
+  <h3>Risk factors</h3>
+  <table>
+    <tr><th>Factor</th><th>Effect</th></tr>
+    <tr><td><strong>Bet sizing</strong></td><td>Scale up → fold more pairs. Q-J/K-J without ♦: call vs 30% → fold vs 83%</td></tr>
+    <tr><td><strong>Rainbow vs two-tone</strong></td><td>Rainbow = messier (fewer BDFDs). Two-tone cleaner (flush draws supplement).</td></tr>
+    <tr><td><strong>Blind vs blind</strong></td><td>Ranges too wide — never fold pairs (even pocket 4s with BDFD)</td></tr>
+    <tr><td><strong>K8 vs half-pot</strong></td><td>Solver = mix. K7 close, K6 pure fold.</td></tr>
+  </table>
+</section>
+<section>
+  <h2>Decision Flow</h2>
+  <div class="flow">
+    <div class="node q">Villain c-bets. What's your hand type?</div>
+    <div class="branch">
+      <div class="col">
+        <div class="edge">Weak pair + BDFD</div>
+        <div class="arrow">↓</div>
+        <div class="node yes">Call (BDFD > kicker)</div>
+      </div>
+      <div class="col">
+        <div class="edge">Gut shot</div>
+        <div class="arrow">↓</div>
+        <div class="node q">Also has BDFD?</div>
+        <div class="branch">
+          <div class="col"><div class="edge">YES (super gut shot)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
+          <div class="col"><div class="edge">With overcard</div><div class="arrow">↓</div><div class="node yes">Call/mix</div></div>
+          <div class="col"><div class="edge">Naked (double unders)</div><div class="arrow">↓</div><div class="node no">Fold</div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="edge">High card</div>
+        <div class="arrow">↓</div>
+        <div class="node q">BDFD? Overcards?</div>
+        <div class="branch">
+          <div class="col"><div class="edge">Double overs + BDFD</div><div class="arrow">↓</div><div class="node yes">Pure call</div></div>
+          <div class="col"><div class="edge">A-high + BDFD</div><div class="arrow">↓</div><div class="node yes">Pure call (vs small)</div></div>
+          <div class="col"><div class="edge">No BDFD</div><div class="arrow">↓</div><div class="node q">3-straight + 3-flush?</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="node q" style="margin-top:14px">CR criteria: direct equity + BD straight + BD flush + opponent missed + small bet<br><span class="small">high card of suit &gt; low card (blocks linear RFI better)</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Hand Examples</h2>
+  <div class="ex-card"><span class="tag default">Pure CR</span><div class="ex-board">T52 rainbow · J♠6♠ (vs CO, ½ pot)</div><p><strong>System:</strong> BDFD + BD straight + overcard to T → pure check-raise.</p><p><strong>Solver:</strong> Pure CR. Agrees.</p></div>
+  <div class="ex-card"><span class="tag call">Pure call/raise</span><div class="ex-board">T72 (2 diamonds) · Q♦9 (vs BTN, 30%)</div><p><strong>System:</strong> Q♦ &gt; 9♦; overcard + BD flush → pure play. Student folded — mistake.</p><p><strong>Solver:</strong> Pure raise or call. Q♦ (high card diamond) better.</p></div>
+  <div class="ex-card"><span class="tag risk">Mix</span><div class="ex-board">K8x · K8s (vs HJ, ½ pot)</div><p><strong>System:</strong> K8 = mix. K7 close, K6 pure fold.</p><p><strong>Solver:</strong> Confirms K8 mix, K7 close, K6 pure fold.</p></div>
+  <div class="ex-card"><span class="tag call">Super gut shot</span><div class="ex-board">JT8 two-tone · 9♦7 (gut shot + BDFD)</div><p><strong>System:</strong> "Super gut shot" → call. Student folded — mistake.</p><p><strong>Solver:</strong> 9-7 offsuit pure fold, but 9♦7 is played (BDFD rescues it).</p></div>
+</section>
+<section><h2>Flashcards</h2><div class="cards-grid" id="flash-s9"></div></section>
+<section><h2>Quiz</h2><div class="progress"><div id="prog-s9"></div></div><div class="score" id="score-s9">0 / 0</div><div id="quiz-s9"></div></section>
+</div>

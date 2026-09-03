@@ -1,0 +1,68 @@
+<div class="page" id="page-s12">
+<section>
+  <h2>System 12 — Defending 3-Bets OOP</h2>
+  <p>RFI, call a 3-bet, out of position. EP open, HJ/BTN 3-bets, we call.</p>
+  <h3>Two board buckets</h3>
+  <table>
+    <tr><th>Board type</th><th>Strategy</th><th>Fold % vs 25–33% bet</th></tr>
+    <tr><td><strong>T-high+ (Broadway)</strong></td><td><span class="tag fold">Tight / fit-or-fold</span></td><td>50%+ (far above MDF ~20–25%)</td></tr>
+    <tr><td><strong>9-high & below</strong></td><td><span class="tag call">Resilient / sticky</span></td><td>Near MDF (~25–27%)</td></tr>
+    <tr><td><strong>A-high or K-high</strong></td><td><span class="tag fold">Extreme caution</span></td><td>Highest fold %; most over-defended</td></tr>
+  </table>
+  <div class="callout bad"><strong>Key thesis:</strong> 3-bettor is ahead preflop. High boards favor them; low boards favor caller. <em>Fold far more than MDF on high boards; defend robustly on low.</em></div>
+</section>
+<section>
+  <h2>Risk factors (low boards)</h2>
+  <table>
+    <tr><th>Factor</th><th>Effect</th><th>Severity</th></tr>
+    <tr><td><strong>Paired</strong></td><td>Slightly elevated fold %</td><td>Minor</td></tr>
+    <tr><td><strong>Disconnected</strong></td><td>Elevated fold %</td><td><span class="tag risk">Significant</span> (want straights)</td></tr>
+    <tr><td><strong>Deuce present</strong></td><td>Favors 3-bettor (misses both → preflop stronger wins)</td><td>Moderate</td></tr>
+  </table>
+  <h3>Common mistakes</h3>
+  <ol><li><strong>Over-defending preflop range</strong> — must fold the bottom.</li><li><strong>Over-defending weak pairs/draws on A/K-high</strong> — pocket 7s/8s/9s, BDFDs are all folds.</li><li><strong>Over-folding high card hands on low boards</strong> — K-J with BDFD, A-T with 3-straight are calls.</li></ol>
+</section>
+<section>
+  <h2>Decision Flow</h2>
+  <div class="flow">
+    <div class="node q">You called a 3-bet OOP. Flop comes. Board height?</div>
+    <div class="branch">
+      <div class="col">
+        <div class="edge">T-high+ (Broadway)</div>
+        <div class="arrow">↓</div>
+        <div class="node q">A-high or K-high?</div>
+        <div class="branch">
+          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node no">Extreme caution<br>fold 50%+ (most over-defended)<br>fold 77/88/99, BDFDs</div></div>
+          <div class="col"><div class="edge">NO (Q-J-T high)</div><div class="arrow">↓</div><div class="node no">Tight / fit-or-fold<br>fold 50%+</div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="edge">9-high & below</div>
+        <div class="arrow">↓</div>
+        <div class="node q">Risk factors?<br><span class="small">paired · disconnected · deuce</span></div>
+        <div class="branch">
+          <div class="col"><div class="edge">NONE</div><div class="arrow">↓</div><div class="node yes">Resilient / sticky<br>defend near MDF (~25%)<br>call pairs, gut shots, BDFDs</div></div>
+          <div class="col"><div class="edge">YES (disconnected + deuce)</div><div class="arrow">↓</div><div class="node no">Elevated fold %<br>(want straights; deuce favors 3-bettor)</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="node q" style="margin-top:14px">Remember: 3-bettor is ahead preflop.<br><span class="small">High boards favor them; low boards favor you. Fold far more than MDF on high.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Sizing response</h2>
+  <ul><li>vs small c-bet (20–33%) on high boards: fold 50%+ (not the 17–25% MDF suggests).</li><li>vs small c-bet on low boards: defend near MDF; call pairs, gut shots, BDFDs, 3-straight/flush.</li><li>vs jam on low disconnected board: often a call (neither range hits).</li></ul>
+</section>
+<section>
+  <h2>Hand Examples</h2>
+  <div class="ex-card"><span class="tag fold">Fold (high board)</span><div class="ex-board">K72 rainbow · AJs · ~20% c-bet</div><p><strong>System:</strong> Pure fold. A-T with BDFD also = 0. Even A-Q mixing fold.</p><p><strong>Solver:</strong> Pure fold (worth 0). Confirms.</p></div>
+  <div class="ex-card"><span class="tag fold">Fold (high board)</span><div class="ex-board">K84 rainbow · 77 · ~20% c-bet</div><p><strong>System:</strong> 77/66/55 heavy folds. A-J with BDFD = 0. Pocket tens mixing fold.</p><p><strong>Solver:</strong> Confirms. Medium pairs are folds on K-high.</p></div>
+  <div class="ex-card"><span class="tag call">Call (low board)</span><div class="ex-board">984 · 55 · ~33% c-bet</div><p><strong>System:</strong> Pure call (worth 100+ bb/100). Also defend A-Qo, K-Qs with BDFD, gut shots, A-T 3-straight.</p><p><strong>Solver:</strong> Pure call. Confirms low-board resilience.</p></div>
+  <div class="ex-card"><span class="tag call">Call vs jam</span><div class="ex-board">963 two-tone · 44♣ · Jam</div><p><strong>System:</strong> Pure call. Neither range hits board. Must defend reasonable chunk.</p><p><strong>Solver:</strong> Pure call. Confirms.</p></div>
+  <div class="ex-card"><span class="tag call">Call or jam</span><div class="ex-board">Low board · A-Q · 25bb · 25% c-bet</div><p><strong>System:</strong> A-Q worth 186 bb/100. Don't fold any pairs. K-J with BDFD playable. Even jamming (+172) &gt;&gt; folding (0).</p><p><strong>Solver:</strong> Confirms. Over-defending high cards on low boards is correct.</p></div>
+</section>
+<section><h2>Flashcards</h2><div class="cards-grid" id="flash-s12"></div></section>
+<section><h2>Quiz</h2><div class="progress"><div id="prog-s12"></div></div><div class="score" id="score-s12">0 / 0</div><div id="quiz-s12"></div></section>
+</div>

@@ -1,0 +1,69 @@
+<div class="page" id="page-s10">
+<section>
+  <h2>System 10 — River Value Betting</h2>
+  <p><strong>Central thesis: absolute strength is irrelevant. Relative strength (vs opponent's range) determines value.</strong></p>
+  <h3>Inflection points weakening villain's range</h3>
+  <ul><li>Villain checks turn or river → subtracts strong hands</li><li>No flop or turn raising → subtracts sets/2-pair/flushes</li><li>Very small bet sizes → thin value, not nuts</li></ul>
+  <div class="callout good">When villain's range weakens, your medium-strength hands become the <em>relative nuts</em> → bet for value.</div>
+</section>
+<section>
+  <h2>Decision framework</h2>
+  <table>
+    <tr><th>Situation</th><th>Action</th><th>Sizing</th></tr>
+    <tr><td>Can't CR but called by worse</td><td><span class="tag default">Bet</span></td><td>Don't let opponent polarize by checking</td></tr>
+    <tr><td>Opponent checked turn, medium hand</td><td><span class="tag default">Bet (block)</span></td><td>Small (25–33%) forces them to defend 75%+</td></tr>
+    <tr><td>Opponent capped (no nuts)</td><td><span class="tag default">Bet large / overbet</span></td><td>Large vs capped ranges</td></tr>
+    <tr><td>Opponent has high nut ratio</td><td>Bet small</td><td>Nuts frequency constrains sizing</td></tr>
+    <tr><td>Short SPR (&lt;2x pot)</td><td><span class="tag default">Prefer jamming</span></td><td>Checking loses optionality</td></tr>
+    <tr><td>Deep SPR</td><td>Checking competitive</td><td>Check-raise optionality adds value</td></tr>
+  </table>
+  <h3>Geometric sizing</h3>
+  <p>Bet similar fractions each street (pot-pot-pot) to get stacks in with strong hands.</p>
+</section>
+<section>
+  <h2>Key principles</h2>
+  <div class="callout bad"><strong>Checking converts strong hands into bluff catchers.</strong> IP auto-polarizes — bets hands that beat you, checks hands you beat. You lose value against the entire medium-strength region.</div>
+  <h3>Risk factors</h3>
+  <ul><li><strong>River cards that reintroduce strength:</strong> fills straights/flushes → re-uncaps villain → smaller sizing.</li><li><strong>Multi-way:</strong> IP checking back flop in multi-way = extremely capped (no sets, no TPTK). Largely ignore them.</li><li><strong>Donk bets:</strong> strip from solver — most players miss them in metagame.</li></ul>
+</section>
+<section>
+  <h2>Decision Flow</h2>
+  <div class="flow">
+    <div class="node q">River. You have a medium-strong hand. Villain's range?</div>
+    <div class="arrow">↓</div>
+    <div class="node q">Inflection points weakened villain?<br><span class="small">checked turn · no raising · small bets</span></div>
+    <div class="branch">
+      <div class="col">
+        <div class="edge">YES — villain capped</div>
+        <div class="arrow">↓</div>
+        <div class="node q">Can you check-raise?</div>
+        <div class="branch">
+          <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node yes">BET for value<br>don't let IP polarize by checking</div></div>
+          <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Check-raise</div></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="edge">NO — villain strong</div>
+        <div class="arrow">↓</div>
+        <div class="node q">Sizing?</div>
+        <div class="branch">
+          <div class="col"><div class="edge">High nut ratio</div><div class="arrow">↓</div><div class="node yes">Bet small<br>(nuts frequency constrains)</div></div>
+          <div class="col"><div class="edge">Short SPR (&lt;2x pot)</div><div class="arrow">↓</div><div class="node yes">Prefer jamming</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="node no" style="margin-top:14px">WARNING: checking converts strong hands into bluff catchers<br><span class="small">IP auto-polarizes — bets hands that beat you, checks hands you beat</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Hand Examples</h2>
+  <div class="ex-card"><span class="tag default">Triple barrel</span><div class="ex-board">Q♠7♠4♠ → J♠T♠ → blank · AQ · EP 4-way</div><p><strong>System:</strong> BB called flop+turn, no raise → lack of raising = bet for value.</p><p><strong>Solver:</strong> Triple barrel confirmed.</p></div>
+  <div class="ex-card"><span class="tag default">Block bet</span><div class="ex-board">Q56♥ → 5♦ → blank · JJ · IP checked turn</div><p><strong>System:</strong> Block ~15–33%. Checking lets IP polarize. Even 3♦ flush should bet (EV bet &gt;&gt; check).</p><p><strong>Solver:</strong> Blocking viable. Checking loses value.</p></div>
+  <div class="ex-card"><span class="tag default">Jam</span><div class="ex-board">K4x two-tone → blank → 2♠ (4-straight) · AK · BB checked to hero</div><p><strong>System:</strong> Pure jam. Checking costs ~270bb/100. Opp must call ~45% of range.</p><p><strong>Solver:</strong> Pure jam confirmed.</p></div>
+  <div class="ex-card"><span class="tag default">Bet (can't CR)</span><div class="ex-board">Q96 two-tone → 8♦ → T♥ · A7 (straight) · IP checked turn</div><p><strong>System:</strong> Can't CR → bet to get value from medium hands. Use K-T/A-T as bluff catcher instead.</p><p><strong>Solver:</strong> 7x pure bet. Small bet, not check.</p></div>
+</section>
+<section><h2>Flashcards</h2><div class="cards-grid" id="flash-s10"></div></section>
+<section><h2>Quiz</h2><div class="progress"><div id="prog-s10"></div></div><div class="score" id="score-s10">0 / 0</div><div id="quiz-s10"></div></section>
+</div>

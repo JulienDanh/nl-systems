@@ -1,0 +1,70 @@
+<div class="page active" id="page-s1">
+<section>
+  <h2>System 1 — UTG RFI vs BB Call · C-betting</h2>
+  <p>UTG opens, BB calls, BB checks. We decide our flop c-bet.</p>
+  <h3>Two flop buckets</h3>
+  <table>
+    <tr><th>Bucket</th><th>Boards</th><th>Default</th></tr>
+    <tr><td><strong>1 · T-high+</strong></td><td>T, J, Q, K, A high</td><td><span class="tag default">C-bet 100%</span> Subject to risk factors.</td></tr>
+    <tr><td><strong>2 · 9-high & below</strong></td><td>9-high to trips-deuces</td><td><span class="tag risk">~70/30 bet/check</span> Strong+weak bet; medium checks.</td></tr>
+  </table>
+  <div class="callout">Bucket 1 occurs far more often — one ace makes a flop ace-high. Highest-ROI piece.</div>
+  <h3>Why bet 100% on T-high+?</h3>
+  <p><strong>Overpair asymmetry</strong>: UTG has far more strong pairs than BB caller. Shorter stacks amplify → bet more. Deeper → more caution.</p>
+  <div class="callout warn"><strong>Bet MORE when shallow, not less.</strong> Most players do the opposite — correct the leak.</div>
+  <h3>Sizing</h3>
+  <p>Start at <code>1/4 to 1/3 pot</code>. Solver examples land at 25–40%.</p>
+</section>
+<section>
+  <h2>Decision Flow (Bucket 1)</h2>
+  <div class="flow">
+    <div class="node q">Flop is T-high or higher?</div>
+    <div class="arrow">↓ yes</div>
+    <div class="node q">Any risk factor?<br><span class="small">straights · ace-monotone · AKx · high-low-low · deep stacks</span></div>
+    <div class="branch">
+      <div class="col"><div class="edge">NO — clean</div><div class="arrow">↓</div>
+        <div class="node yes">C-bet <strong>100%</strong><br>small size (~25–40%)<br>no checks, any hand</div></div>
+      <div class="col"><div class="edge">YES — risk factor</div><div class="arrow">↓</div>
+        <div class="node no">Slow down — mix<br><strong>Bet:</strong> very strong + very weak<br><strong>Check:</strong> medium-strength</div></div>
+    </div>
+  </div>
+</section>
+<section>
+  <h2>Risk Factors (override "c-bet 100%")</h2>
+  <h3>1. Straights possible <span class="tag risk">primary</span></h3>
+  <ul><li><strong>1 straight</strong> → still bet frequently.</li><li><strong>3 straights</strong> → slow down heavily.</li></ul>
+  <h3>2. Ace-high monotone <span class="tag risk">secondary</span></h3>
+  <p>Bet very strong (flush, sets) + very weak (trash); check medium (88 no-heart, weak aces, KK no-heart).</p>
+  <h3>3. AKx family <span class="tag risk">secondary</span></h3>
+  <p>AK2, AK3, AK4 — "looks like that." Slow down.</p>
+  <h3>4. Stack depth <span class="tag risk">secondary</span></h3>
+  <p>Deeper (→150bb) → caution. Shallower (→20bb) → lean into 100%.</p>
+  <h3>5. High-Low-Low (paired low card) <span class="tag risk">secondary</span></h3>
+  <p>High card (T–A) with two paired low cards: <code>A22, K33, Q33, J66, T55</code>.</p>
+  <ul><li><strong>Bet:</strong> trips, overpairs (JJ, TT), very weak.</li><li><strong>Check:</strong> underpairs (99–66), medium aces, AK/AQ/AT.</li><li><strong>Blocker nuance:</strong> ATo bets more when ace blocks backdoor FD CRs.</li></ul>
+  <div class="callout bad"><strong>Not High-High-Low.</strong> KK3 rainbow is <em>not</em> a risk factor — c-bet 100%. Only paired low under high counts.</div>
+</section>
+<section>
+  <h2>Hand Examples</h2>
+  <div class="ex-card"><span class="tag default">Bucket 1 · clean</span><div class="ex-board">J-high · disconnected · no straights</div>
+    <p><strong>System:</strong> T-high+ clean → c-bet 100%. Hero checked — mistake.</p>
+    <p><strong>Solver:</strong> ~100% c-bet to 40%. Agrees.</p></div>
+  <div class="ex-card"><span class="tag default">Bucket 1 · clean</span><div class="ex-board">K♥K♦3♣ (high-high-low)</div>
+    <p><strong>System:</strong> High-high-low is NOT a risk factor → c-bet 100%.</p>
+    <p><strong>Solver:</strong> ~100% c-bet. Agrees.</p></div>
+  <div class="ex-card"><span class="tag default">Bucket 1 · clean</span><div class="ex-board">K-high · 8 · 3 · two-tone</div>
+    <p><strong>System:</strong> No risk factor → bet 100% — AK, AA, QJ, JTs, 77, everything.</p>
+    <p><strong>Solver:</strong> ~100% c-bet, 0 checks, 40%. Agrees.</p></div>
+  <div class="ex-card"><span class="tag risk">Risk: ace-high monotone</span><div class="ex-board">A♥9♥5♥</div>
+    <p><strong>System:</strong> Risk factor → slow down. But QJo no-heart is trash → still bet.</p>
+    <p><strong>Solver:</strong> Checks T9s, KK no-heart, A3s. Bets QJ no-heart. QJ with heart → checks.</p></div>
+  <div class="ex-card"><span class="tag risk">Risk: high-low-low (J66)</span><div class="ex-board">J♣6♦6♠</div>
+    <p><strong>System:</strong> High-low-low → check ~50%.</p>
+    <p><strong>Solver:</strong> Bets A6s, 76s, 65s, trips, JJ/TT; checks TT–77, AK, ATs.</p></div>
+  <div class="ex-card"><span class="tag risk">Risk: high-low-low (T55)</span><div class="ex-board">T♠5♥5♦</div>
+    <p><strong>System:</strong> Even though T-high+, paired-low wins → mix, not 100%.</p>
+    <p><strong>Solver:</strong> Bets A5s, 5x, TT, JJ; checks 99–66, A9, A8, AQ, AK.</p></div>
+</section>
+<section><h2>Flashcards</h2><div class="cards-grid" id="flash-s1"></div></section>
+<section><h2>Quiz</h2><div class="progress"><div id="prog-s1"></div></div><div class="score" id="score-s1">0 / 0</div><div id="quiz-s1"></div></section>
+</div>

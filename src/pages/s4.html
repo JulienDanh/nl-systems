@@ -1,0 +1,74 @@
+<div class="page" id="page-s4">
+<section>
+  <h2>System 4 — Missed River Bluffs</h2>
+  <p>Two-system approach. <strong>Prioritize System 1</strong> (easier) while acknowledging System 2 (solvers use it more).</p>
+  <h3>System 1 — Bottom of range up</h3>
+  <p>Bluff with <em>weakest</em> hands first — lowest EV when checking, lowest opportunity cost. <strong>Heuristic: prioritize the <em>lowest card</em> in the hand.</strong> 72o before 65o. 92o before 87o.</p>
+  <div class="callout">Low cards have good blocking effects vs linear ranges (deuce blocks few value, unblocks folds — opponents folded 2x preflop).</div>
+  <h3>System 2 — Blocking effects</h3>
+  <p>Bluff with combos that <strong>block opponent's calls/raises</strong> and <strong>unblock their folds</strong>, while checking opportunity cost. Very difficult to manage all three — System 1 is default.</p>
+</section>
+<section>
+  <h2>When to use which</h2>
+  <table>
+    <tr><th>Situation</th><th>System</th><th>Why</th></tr>
+    <tr><td>Board 3-flushes</td><td><strong>System 2</strong> (easy)</td><td>One-club bias obvious — blocks flushes + hero calls</td></tr>
+    <tr><td>Wide ranges, no obvious suit blanked</td><td><strong>System 1</strong></td><td>Too hard to identify blocking effects</td></tr>
+    <tr><td>Three Broadway, EP open</td><td><strong>System 1</strong></td><td>No offsuit air (linear range) — suited bluffs scarce, bluff them</td></tr>
+    <tr><td>Opponent called flop with specific suits</td><td><strong>System 2</strong> (avoid those)</td><td>Block how they fold, unblock how they call</td></tr>
+  </table>
+  <h3>Key blocking patterns</h3>
+  <ul><li><strong>3-flush river:</strong> bluff with one card of the flush suit. Blocks flushes AND hero calls.</li><li><strong>Two-tone flop called:</strong> opponent called with 2 suits. Bluff avoiding those; prefer others.</li><li><strong>High card vs low card of suit:</strong> high card heart is <em>worse</em> (blocks more folds). Low card heart less damaging.</li><li><strong>Busted straight + busted flush draw:</strong> <em>terrible</em> bluff — blocks both folding regions.</li></ul>
+</section>
+<section>
+  <h2>Decision Flow</h2>
+  <div class="flow">
+    <div class="node q">You have a value bet on the river?</div>
+    <div class="branch">
+      <div class="col"><div class="edge">NO</div><div class="arrow">↓</div><div class="node no">No bluffs needed<br>(rare — only in very strong ranges)</div></div>
+      <div class="col"><div class="edge">YES → you need bluffs</div><div class="arrow">↓</div>
+        <div class="node q">Board 3-flush or obvious suit blanked?</div>
+        <div class="branch">
+          <div class="col">
+            <div class="edge">YES (easy System 2)</div>
+            <div class="arrow">↓</div>
+            <div class="node q">Block the suit villain calls with</div>
+            <div class="arrow">↓</div>
+            <div class="node yes">Bluff with one card of that suit<br>(blocks flushes + hero calls)</div>
+          </div>
+          <div class="col">
+            <div class="edge">NO (wide ranges)</div>
+            <div class="arrow">↓</div>
+            <div class="node q">System 1: bottom of range up</div>
+            <div class="arrow">↓</div>
+            <div class="node yes">Bluff weakest hands first<br>prioritize the LOW card in hand</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="node q">Realism check: can you actually have this hand?<br><span class="small">if it bet flop/turn with equity, you won't have it on river</span></div>
+    <div class="branch">
+      <div class="col"><div class="edge">YES</div><div class="arrow">↓</div><div class="node yes">Bluff</div></div>
+      <div class="col"><div class="edge">NO — ideal unreachable</div><div class="arrow">↓</div><div class="node no">Bluff with what you<br>realistically arrived with</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>The realism constraint</h2>
+  <div class="callout bad"><strong>You can't always have the ideal bluff.</strong> If hearts bet flop+turn, you <em>won't have hearts left</em> on river. Don't wait for the perfect blocker — you'll have <em>no</em> bluffing range. Bluff with what you realistically arrived with.</div>
+  <h3>Value bets require bluffs</h3>
+  <p>If you identify value bets, you <em>must</em> have bluffs (in common scenarios). Bluffs need value to carry them.</p>
+</section>
+<section>
+  <h2>Hand Examples</h2>
+  <div class="ex-card"><span class="tag default">System 1+2 blend</span><div class="ex-board">AK4 two-tone → blank · 86o (6♥)</div><p><strong>System:</strong> Opp check-calls with hearts/clubs → avoid those. 6♥ is low-card heart (less damaging). Near bottom → pure bluff.</p><p><strong>Solver:</strong> 86o avoids clubs → pure bluff. High-card heart versions check; low-card heart can bet.</p></div>
+  <div class="ex-card"><span class="tag default">System 2 (easy)</span><div class="ex-board">Board 3-flushes · 75o (no club)</div><p><strong>System:</strong> 3-flush → one-club bias obvious. 75 no club = check-fold. 75 with 7♣ = bluff.</p><p><strong>Solver:</strong> All bluffs have a club. One club blocks flushes + hero calls.</p></div>
+  <div class="ex-card"><span class="tag risk">System 1 forced</span><div class="ex-board">Three Broadway, EP · T♠8♠</div><p><strong>System:</strong> Linear EP = no offsuit air. Only suited hands can bluff — scarce. Pure bluff. System 2 secondary (not enough bluffs to be picky).</p><p><strong>Solver:</strong> T8s pure bluff. No offsuit bluffs exist. 65s also pure. All equal-weight (can't differentiate when scarce).</p></div>
+  <div class="ex-card"><span class="tag risk">Realism check</span><div class="ex-board">Low board, BvB · 95o</div><p><strong>System:</strong> Ideal bluffs = 4x (84,94,T4) but they had gutshots on turn → already barreled. 95o is realistically at the bottom. Pure bluff.</p><p><strong>Solver:</strong> 95o pure bluff. 84/94 were turn barrels (gutshots) → won't reach river. Checking 95o = no bluffing range.</p></div>
+  <div class="ex-card"><span class="tag risk">Block both = bad</span><div class="ex-board">QJ♥ (busted straight + flush)</div><p><strong>System:</strong> QJ♥ blocks both busted straights AND flushes. Terrible bluff. Prefer 67♥, 78♥ (block flush only).</p><p><strong>Solver:</strong> QJ♥ checks. 67♥/78♥ bluff. Intersection of blocking both folding regions is very bad.</p></div>
+</section>
+<section><h2>Flashcards</h2><div class="cards-grid" id="flash-s4"></div></section>
+<section><h2>Quiz</h2><div class="progress"><div id="prog-s4"></div></div><div class="score" id="score-s4">0 / 0</div><div id="quiz-s4"></div></section>
+</div>

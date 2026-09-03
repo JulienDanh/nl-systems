@@ -1,0 +1,83 @@
+<div class="page" id="page-s11">
+<section>
+  <h2>System 11 — Hero Calling</h2>
+  <p>Systematically differentiating between bluff catchers on the river.</p>
+  <h3>Three keys</h3>
+  <table>
+    <tr><th>#</th><th>Key</th><th>Description</th></tr>
+    <tr><td>1</td><td><strong>Range awareness</strong></td><td>Know what combos you arrive with</td></tr>
+    <tr><td>2</td><td><strong>Unblock bluffs</strong></td><td>Prefer hands that don't block opponent's bluffing region</td></tr>
+    <tr><td>3</td><td><strong>Block value</strong></td><td>Prefer hands that block opponent's value region</td></tr>
+  </table>
+  <div class="callout">Value range <em>wide</em> → focus on #2 (unblock bluffs). <em>Narrow</em> → focus on #3 (block value).</div>
+</section>
+<section>
+  <h2>Core principle</h2>
+  <div class="callout"><strong>Opponent's required bluff frequency = your pot odds.</strong> Need 25% → they must bluff 25% of betting range. If balanced → worst callable = worth 0. But <em>better</em> bluff catchers (block value / unblock bluffs) = worth significant EV.</div>
+  <h3>Good vs bad bluff catchers</h3>
+  <table>
+    <tr><th>Attribute</th><th>Good</th><th>Bad</th></tr>
+    <tr><td>Blocks value</td><td>✅ King (blocks KK, KQ)</td><td>❌ 8/9 (blocks nothing valuable)</td></tr>
+    <tr><td>Unblocks bluffs</td><td>✅ 4, 3, deuce</td><td>❌ 8, 9, T (blocks offsuit opens)</td></tr>
+    <tr><td>Card vs open threshold</td><td>Below BTN open (4, 3, 2)</td><td>Above BTN open (8, 9, T)</td></tr>
+  </table>
+  <div class="callout warn"><strong>Preflop awareness:</strong> BTN opens suited 5+ and offsuit 8+. 4-x/3-x <em>unblock</em> bluffs (not opened); 8-x/9-x <em>block</em> bluffs (opened).</div>
+</section>
+<section>
+  <h2>Decision Flow</h2>
+  <div class="flow">
+    <div class="node q">River. Villain bets. You have a bluff catcher.</div>
+    <div class="arrow">↓</div>
+    <div class="node q">Can you identify where their bluffs come from?</div>
+    <div class="branch">
+      <div class="col">
+        <div class="edge">NO (no natural bluffs)</div>
+        <div class="arrow">↓</div>
+        <div class="node no">Fold — even if MDF says call</div>
+      </div>
+      <div class="col">
+        <div class="edge">YES</div>
+        <div class="arrow">↓</div>
+        <div class="node q">How wide is their value range?</div>
+        <div class="branch">
+          <div class="col">
+            <div class="edge">Wide</div>
+            <div class="arrow">↓</div>
+            <div class="node q">Does your hand unblock bluffs?</div>
+            <div class="branch">
+              <div class="col"><div class="edge">YES (4-x, 3-x, 2-x)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
+              <div class="col"><div class="edge">NO (8-x, 9-x, T-x)</div><div class="arrow">↓</div><div class="node no">Fold — blocks bluffs</div></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="edge">Narrow</div>
+            <div class="arrow">↓</div>
+            <div class="node q">Does your hand block value?</div>
+            <div class="branch">
+              <div class="col"><div class="edge">YES (King — blocks KK, KQ)</div><div class="arrow">↓</div><div class="node yes">Call</div></div>
+              <div class="col"><div class="edge">NO (8/9 — blocks nothing valuable)</div><div class="arrow">↓</div><div class="node no">Fold</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Exceptions</h2>
+  <ul><li><strong>Recreational players</strong> may bluff with too-strong hands → higher kickers marginally better.</li><li><strong>Check-raise opportunity:</strong> if opponent bets too small IP (1/3 pot, thin value), CR second pair can fold better + call worse.</li><li><strong>No natural bluffs:</strong> if no draws missed, opponent won't convert Ax to bluff → fold even if MDF says call.</li></ul>
+  <h3>CR sizing</h3>
+  <p>Modest CR (to ~25bb) can get hands you beat to call (KQ, QJ) and hands that beat you to fold (A-3/4/5♥).</p>
+</section>
+<section>
+  <h2>Hand Examples</h2>
+  <div class="ex-card"><span class="tag default">CR</span><div class="ex-board">QT2 → A → blank · A♥3♥ (second pair) · IP bet 1/3</div><p><strong>System:</strong> Range dense with KQ/QJ (12 combos) vs A-3/4/5♥ (3 combos). CR to ~25bb.</p><p><strong>Solver:</strong> May fold better (A-x hearts) and call worse (KQ, QJ).</p></div>
+  <div class="ex-card"><span class="tag fold">Fold</span><div class="ex-board">6xxx → 6 makes straight · A-J suited · BB overbet small</div><p><strong>System:</strong> Opponent won't bluff with A-2/3/4/5. No natural bluffs. Fold.</p><p><strong>Solver:</strong> Lost to A-7 (thin value, not 6-bluff). No natural bluffs available.</p></div>
+  <div class="ex-card"><span class="tag call">Call (blocker)</span><div class="ex-board">T42 → J (checked) → blank · T6o · IP bet ¼</div><p><strong>System:</strong> T-6 blocks pair of tens (value region). Call.</p><p><strong>Solver:</strong> Lost to K-T but correctly identified value source.</p></div>
+  <div class="ex-card"><span class="tag call">Blocker call</span><div class="ex-board">A72 → blank (turn checked) → Q♠ · K7/42/43 · IP bet 37.5%</div><p><strong>System:</strong> Call K7/K3/K2, 42/43/74; fold 87/82/97/92.</p><p><strong>Solver:</strong> K-x blocks value (KK/KQ); 4-x unblocks bluffs; 8/9-x block bluffs. Confirmed.</p></div>
+  <div class="ex-card"><span class="tag risk">Toy game</span><div class="ex-board">22237, SPR 1x · 88 vs 87s · OOP jams pot</div><p><strong>System:</strong> 88 = worth 0 (indifferent); 87s = ~27% pot. 87s blocks 77 (value, removes ⅔ of value combos) and unblocks JTs (bluff).</p><p><strong>Lesson:</strong> Not all bluff catchers are equal.</p></div>
+</section>
+<section><h2>Flashcards</h2><div class="cards-grid" id="flash-s11"></div></section>
+<section><h2>Quiz</h2><div class="progress"><div id="prog-s11"></div></div><div class="score" id="score-s11">0 / 0</div><div id="quiz-s11"></div></section>
+</div>
