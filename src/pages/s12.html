@@ -23,30 +23,26 @@
   <ol><li><strong>Over-defending preflop range</strong> — must fold the bottom.</li><li><strong>Over-defending weak pairs/draws on A/K-high</strong> — pocket 7s/8s/9s, BDFDs are all folds.</li><li><strong>Over-folding high card hands on low boards</strong> — K-J with BDFD, A-T with 3-straight are calls.</li></ol>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">You called a 3-bet OOP. Flop comes. Board height?</div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn cont"><span class="el">T-high+ (Broadway)</span></div>
-        <div class="node q">A-high or K-high?</div>
-        <div class="branch">
-          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Extreme caution<br>fold 50%+ (most over-defended)<br>fold 77/88/99, BDFDs</div></div>
-          <div class="col"><div class="conn no"><span class="el">NO (Q-J-T high)</span></div><div class="node no">Tight / fit-or-fold<br>fold 50%+</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">9-high & below</span></div>
-        <div class="node q">Risk factors?<br><span class="small">paired · disconnected · deuce</span></div>
-        <div class="branch">
-          <div class="col"><div class="conn no"><span class="el">NONE</span></div><div class="node yes">Resilient / sticky<br>defend near MDF (~25%)<br>call pairs, gut shots, BDFDs</div></div>
-          <div class="col"><div class="conn yes"><span class="el">YES (disconnected + deuce)</span></div><div class="node no">Elevated fold %<br>(want straights; deuce favors 3-bettor)</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="conn cont"></div>
-    <div class="node q" style="margin-top:14px">Remember: 3-bettor is ahead preflop.<br><span class="small">High boards favor them; low boards favor you. Fold far more than MDF on high.</span></div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">3-bettor is ahead preflop. Red = fold heavily. Green = defend. Orange = between.</p>
+  <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">Default</div>
+    <div class="dmatrix-head">With risk factors</div>
+
+    <div class="dm-label">A-high or K-high <small>(most over-defended)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold 50%+</div><div class="dm-sub">Extreme caution. Fold 77/88/99, BDFDs. Most over-defended bucket.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold 50%+</div><div class="dm-sub">No exception — always tight on A/K-high.</div></div>
+
+    <div class="dm-label">Q-J-T high <small>(Broadway)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold 50%+</div><div class="dm-sub">Tight / fit-or-fold. Far above MDF (~20–25%).</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold 50%+</div><div class="dm-sub">No exception.</div></div>
+
+    <div class="dm-label">9-high & below <small>(low boards)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend near MDF (~25%)</div><div class="dm-sub">Call pairs, gut shots, BDFDs, 3-straight/flush. K-J with BDFD, A-T 3-straight are calls.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Elevated fold %</div><div class="dm-sub">Risk factors: <span class="tag risk">paired</span><span class="tag risk">disconnected</span><span class="tag risk">deuce</span></div></div>
   </div>
+  <div class="callout bad"><strong>Key thesis:</strong> high boards favor the 3-bettor (fold far more than MDF). Low boards favor you (defend near MDF). The deuce is the only low-board factor that favors the 3-bettor.</div>
 </section>
 
 <section>

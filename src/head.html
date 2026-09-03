@@ -71,6 +71,21 @@
   .flow.in .node{animation:flowIn .4s ease forwards}
   @keyframes flowIn{to{opacity:1;transform:translateY(0)}}
   @media(max-width:560px){.branch{flex-direction:column}.branch .col{min-width:100%}}
+  /* ---- Decision Matrix ---- */
+  .dmatrix{display:grid;gap:6px;margin:16px 0;font-size:13px}
+  .dmatrix-head{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:4px 8px}
+  .dm-cell{border-radius:10px;padding:12px 14px;border:1px solid var(--line);background:var(--panel2);display:flex;flex-direction:column;gap:6px;transition:box-shadow .2s,transform .2s;min-height:64px}
+  .dm-cell.green{border-color:var(--good);background:rgba(95,208,168,.1)}
+  .dm-cell.green:hover{box-shadow:0 0 0 1px var(--good),0 0 18px rgba(95,208,168,.2);transform:translateY(-1px)}
+  .dm-cell.orange{border-color:var(--warn);background:rgba(240,184,110,.08)}
+  .dm-cell.orange:hover{box-shadow:0 0 0 1px var(--warn),0 0 18px rgba(240,184,110,.2);transform:translateY(-1px)}
+  .dm-cell.red{border-color:var(--bad);background:rgba(239,111,111,.08)}
+  .dm-cell.red:hover{box-shadow:0 0 0 1px var(--bad),0 0 18px rgba(239,111,111,.2);transform:translateY(-1px)}
+  .dm-action{font-weight:700;font-size:14px}
+  .dm-action.green{color:var(--good)}.dm-action.orange{color:var(--warn)}.dm-action.red{color:var(--bad)}
+  .dm-sub{font-size:11.5px;color:var(--muted);line-height:1.4}
+  .dm-label{font-weight:700;font-size:14px;margin-bottom:2px}
+  .dm-label small{font-weight:400;font-size:11px;color:var(--muted)}
   .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
   .flip{perspective:1000px;height:150px;cursor:pointer}
   .flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}

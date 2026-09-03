@@ -19,39 +19,26 @@
   <ul><li><strong>Two low cards:</strong> biggest risk factor (K63, K35 — the <em>second</em> low card). K92, KT3 are fine.</li><li><strong>Monotone:</strong> substantially more checking.</li><li><strong>Paired:</strong> less concerning here. <strong>Stack depth:</strong> noisier.</li></ul>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">What's the flop height?</div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn no"><span class="el">9-high or below</span></div>
-        <div class="node no">Always mix (~60/40)<br>Bet strong + weak (selective)<br>Check medium</div>
-      </div>
-      <div class="col">
-        <div class="conn yes"><span class="el">T-high or higher</span></div>
-        <div class="node q">Is a deuce or 3 present<br>AND board is T–K high?</div>
-        <div class="branch">
-          <div class="col">
-            <div class="conn yes"><span class="el">YES — disconnected</span></div>
-            <div class="node q">Any risk factor?<br><span class="small">two low cards · monotone</span></div>
-            <div class="branch">
-              <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
-              <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="conn no"><span class="el">NO — or ace-high</span></div>
-            <div class="node q">Any risk factor?<br><span class="small">deep · monotone · paired</span></div>
-            <div class="branch">
-              <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
-              <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Scan your flop type across one row. Green = c-bet 100%. Orange = mix (bet top + bottom, check middle).</p>
+  <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">Default</div>
+    <div class="dmatrix-head">If risk factor present</div>
+
+    <div class="dm-label">Ace-high <small>(A high)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">C-bet 100%</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix</div><div class="dm-sub">Risk factors: <span class="tag risk">deep</span><span class="tag risk">monotone</span><span class="tag risk">paired</span></div></div>
+
+    <div class="dm-label">T–K high + 2 or 3 <small>(disconnected)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">C-bet 100%</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix</div><div class="dm-sub">Risk factors: <span class="tag risk">two low cards</span><span class="tag risk">monotone</span></div></div>
+
+    <div class="dm-label">9-high & below <small>(always)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Always mix (~60/40)</div><div class="dm-sub">Bet strong + weak (selective). Check medium. No risk factor needed — this is the default.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix</div><div class="dm-sub">No 100% strategy exists here.</div></div>
   </div>
-  <p class="small" style="text-align:center;margin-top:14px">9-high & below always mixes. T–K high with a deuce/3 is the cleanest 100% c-bet. Ace-high is 100% unless a risk factor slows you down.</p>
+  <div class="callout"><strong>9-high & below always mixes</strong> — there's no risk-factor check, it's the default. For ace-high and T–K high + 2/3, bet 100% <em>unless</em> you spot a risk factor.</div>
 </section>
 
 <section>

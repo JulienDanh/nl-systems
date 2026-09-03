@@ -71,6 +71,21 @@
   .flow.in .node{animation:flowIn .4s ease forwards}
   @keyframes flowIn{to{opacity:1;transform:translateY(0)}}
   @media(max-width:560px){.branch{flex-direction:column}.branch .col{min-width:100%}}
+  /* ---- Decision Matrix ---- */
+  .dmatrix{display:grid;gap:6px;margin:16px 0;font-size:13px}
+  .dmatrix-head{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:4px 8px}
+  .dm-cell{border-radius:10px;padding:12px 14px;border:1px solid var(--line);background:var(--panel2);display:flex;flex-direction:column;gap:6px;transition:box-shadow .2s,transform .2s;min-height:64px}
+  .dm-cell.green{border-color:var(--good);background:rgba(95,208,168,.1)}
+  .dm-cell.green:hover{box-shadow:0 0 0 1px var(--good),0 0 18px rgba(95,208,168,.2);transform:translateY(-1px)}
+  .dm-cell.orange{border-color:var(--warn);background:rgba(240,184,110,.08)}
+  .dm-cell.orange:hover{box-shadow:0 0 0 1px var(--warn),0 0 18px rgba(240,184,110,.2);transform:translateY(-1px)}
+  .dm-cell.red{border-color:var(--bad);background:rgba(239,111,111,.08)}
+  .dm-cell.red:hover{box-shadow:0 0 0 1px var(--bad),0 0 18px rgba(239,111,111,.2);transform:translateY(-1px)}
+  .dm-action{font-weight:700;font-size:14px}
+  .dm-action.green{color:var(--good)}.dm-action.orange{color:var(--warn)}.dm-action.red{color:var(--bad)}
+  .dm-sub{font-size:11.5px;color:var(--muted);line-height:1.4}
+  .dm-label{font-weight:700;font-size:14px;margin-bottom:2px}
+  .dm-label small{font-weight:400;font-size:11px;color:var(--muted)}
   .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
   .flip{perspective:1000px;height:150px;cursor:pointer}
   .flip-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
@@ -250,39 +265,26 @@
   <ul><li><strong>Two low cards:</strong> biggest risk factor (K63, K35 — the <em>second</em> low card). K92, KT3 are fine.</li><li><strong>Monotone:</strong> substantially more checking.</li><li><strong>Paired:</strong> less concerning here. <strong>Stack depth:</strong> noisier.</li></ul>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">What's the flop height?</div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn no"><span class="el">9-high or below</span></div>
-        <div class="node no">Always mix (~60/40)<br>Bet strong + weak (selective)<br>Check medium</div>
-      </div>
-      <div class="col">
-        <div class="conn yes"><span class="el">T-high or higher</span></div>
-        <div class="node q">Is a deuce or 3 present<br>AND board is T–K high?</div>
-        <div class="branch">
-          <div class="col">
-            <div class="conn yes"><span class="el">YES — disconnected</span></div>
-            <div class="node q">Any risk factor?<br><span class="small">two low cards · monotone</span></div>
-            <div class="branch">
-              <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
-              <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="conn no"><span class="el">NO — or ace-high</span></div>
-            <div class="node q">Any risk factor?<br><span class="small">deep · monotone · paired</span></div>
-            <div class="branch">
-              <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
-              <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Scan your flop type across one row. Green = c-bet 100%. Orange = mix (bet top + bottom, check middle).</p>
+  <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">Default</div>
+    <div class="dmatrix-head">If risk factor present</div>
+
+    <div class="dm-label">Ace-high <small>(A high)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">C-bet 100%</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix</div><div class="dm-sub">Risk factors: <span class="tag risk">deep</span><span class="tag risk">monotone</span><span class="tag risk">paired</span></div></div>
+
+    <div class="dm-label">T–K high + 2 or 3 <small>(disconnected)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">C-bet 100%</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix</div><div class="dm-sub">Risk factors: <span class="tag risk">two low cards</span><span class="tag risk">monotone</span></div></div>
+
+    <div class="dm-label">9-high & below <small>(always)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Always mix (~60/40)</div><div class="dm-sub">Bet strong + weak (selective). Check medium. No risk factor needed — this is the default.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix</div><div class="dm-sub">No 100% strategy exists here.</div></div>
   </div>
-  <p class="small" style="text-align:center;margin-top:14px">9-high & below always mixes. T–K high with a deuce/3 is the cleanest 100% c-bet. Ace-high is 100% unless a risk factor slows you down.</p>
+  <div class="callout"><strong>9-high & below always mixes</strong> — there's no risk-factor check, it's the default. For ace-high and T–K high + 2/3, bet 100% <em>unless</em> you spot a risk factor.</div>
 </section>
 
 <section>
@@ -1023,30 +1025,26 @@
   <ol><li><strong>Over-defending preflop range</strong> — must fold the bottom.</li><li><strong>Over-defending weak pairs/draws on A/K-high</strong> — pocket 7s/8s/9s, BDFDs are all folds.</li><li><strong>Over-folding high card hands on low boards</strong> — K-J with BDFD, A-T with 3-straight are calls.</li></ol>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">You called a 3-bet OOP. Flop comes. Board height?</div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn cont"><span class="el">T-high+ (Broadway)</span></div>
-        <div class="node q">A-high or K-high?</div>
-        <div class="branch">
-          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Extreme caution<br>fold 50%+ (most over-defended)<br>fold 77/88/99, BDFDs</div></div>
-          <div class="col"><div class="conn no"><span class="el">NO (Q-J-T high)</span></div><div class="node no">Tight / fit-or-fold<br>fold 50%+</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">9-high & below</span></div>
-        <div class="node q">Risk factors?<br><span class="small">paired · disconnected · deuce</span></div>
-        <div class="branch">
-          <div class="col"><div class="conn no"><span class="el">NONE</span></div><div class="node yes">Resilient / sticky<br>defend near MDF (~25%)<br>call pairs, gut shots, BDFDs</div></div>
-          <div class="col"><div class="conn yes"><span class="el">YES (disconnected + deuce)</span></div><div class="node no">Elevated fold %<br>(want straights; deuce favors 3-bettor)</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="conn cont"></div>
-    <div class="node q" style="margin-top:14px">Remember: 3-bettor is ahead preflop.<br><span class="small">High boards favor them; low boards favor you. Fold far more than MDF on high.</span></div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">3-bettor is ahead preflop. Red = fold heavily. Green = defend. Orange = between.</p>
+  <div class="dmatrix" style="grid-template-columns:1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">Default</div>
+    <div class="dmatrix-head">With risk factors</div>
+
+    <div class="dm-label">A-high or K-high <small>(most over-defended)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold 50%+</div><div class="dm-sub">Extreme caution. Fold 77/88/99, BDFDs. Most over-defended bucket.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold 50%+</div><div class="dm-sub">No exception — always tight on A/K-high.</div></div>
+
+    <div class="dm-label">Q-J-T high <small>(Broadway)</small></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold 50%+</div><div class="dm-sub">Tight / fit-or-fold. Far above MDF (~20–25%).</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold 50%+</div><div class="dm-sub">No exception.</div></div>
+
+    <div class="dm-label">9-high & below <small>(low boards)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">Defend near MDF (~25%)</div><div class="dm-sub">Call pairs, gut shots, BDFDs, 3-straight/flush. K-J with BDFD, A-T 3-straight are calls.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Elevated fold %</div><div class="dm-sub">Risk factors: <span class="tag risk">paired</span><span class="tag risk">disconnected</span><span class="tag risk">deuce</span></div></div>
   </div>
+  <div class="callout bad"><strong>Key thesis:</strong> high boards favor the 3-bettor (fold far more than MDF). Low boards favor you (defend near MDF). The deuce is the only low-board factor that favors the 3-bettor.</div>
 </section>
 
 <section>
