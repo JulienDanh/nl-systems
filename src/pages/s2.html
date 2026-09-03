@@ -21,30 +21,37 @@
 <section>
   <h2>Decision Flow</h2>
   <div class="flow">
-    <div class="node q">What's the flop?</div>
+    <div class="node q">What's the flop height?</div>
     <div class="branch">
       <div class="col">
-        <div class="conn cont"><span class="el">Ace-high</span></div>
-        <div class="node q">Risk factor?<br><span class="small">deep · monotone · paired</span></div>
-        <div class="branch">
-          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
-          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
-        </div>
+        <div class="conn no"><span class="el">9-high or below</span></div>
+        <div class="node no">Always mix (~60/40)<br>Bet strong + weak (selective)<br>Check medium</div>
       </div>
       <div class="col">
-        <div class="conn cont"><span class="el">T–K high + 2 or 3</span></div>
-        <div class="node q">Risk factor?<br><span class="small">two low cards · monotone</span></div>
+        <div class="conn yes"><span class="el">T-high or higher</span></div>
+        <div class="node q">Is a deuce or 3 present<br>AND board is T–K high?</div>
         <div class="branch">
-          <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
-          <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
+          <div class="col">
+            <div class="conn yes"><span class="el">YES — disconnected</span></div>
+            <div class="node q">Any risk factor?<br><span class="small">two low cards · monotone</span></div>
+            <div class="branch">
+              <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
+              <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="conn no"><span class="el">NO — or ace-high</span></div>
+            <div class="node q">Any risk factor?<br><span class="small">deep · monotone · paired</span></div>
+            <div class="branch">
+              <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node yes">C-bet 100%</div></div>
+              <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node no">Mix — bet top+bottom<br>check middle</div></div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">9-high & below</span></div>
-        <div class="node no">Always mix (~60/40)<br><strong>Bet:</strong> strong + weak (selective)<br><strong>Check:</strong> medium</div>
       </div>
     </div>
   </div>
+  <p class="small" style="text-align:center;margin-top:14px">9-high & below always mixes. T–K high with a deuce/3 is the cleanest 100% c-bet. Ace-high is 100% unless a risk factor slows you down.</p>
 </section>
 
 <section>
