@@ -30,36 +30,30 @@
   </table>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">Villain c-bets. What's your hand type?</div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn cont"><span class="el">Weak pair + BDFD</span></div>
-        <div class="node yes">Call (BDFD > kicker)</div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">Gut shot</span></div>
-        <div class="node q">Also has BDFD?</div>
-        <div class="branch">
-          <div class="col"><div class="conn yes"><span class="el">YES (super gut shot)</span></div><div class="node yes">Call</div></div>
-          <div class="col"><div class="conn cont"><span class="el">With overcard</span></div><div class="node yes">Call/mix</div></div>
-          <div class="col"><div class="conn cont"><span class="el">Naked (double unders)</span></div><div class="node no">Fold</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">High card</span></div>
-        <div class="node q">BDFD? Overcards?</div>
-        <div class="branch">
-          <div class="col"><div class="conn cont"><span class="el">Double overs + BDFD</span></div><div class="node yes">Pure call</div></div>
-          <div class="col"><div class="conn cont"><span class="el">A-high + BDFD</span></div><div class="node yes">Pure call (vs small)</div></div>
-          <div class="col"><div class="conn no"><span class="el">No BDFD</span></div><div class="node q">3-straight + 3-flush?</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="conn cont"></div>
-    <div class="node q" style="margin-top:14px">CR criteria: direct equity + BD straight + BD flush + opponent missed + small bet<br><span class="small">high card of suit &gt; low card (blocks linear RFI better)</span></div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Hand type (row) x draws/conditions (column). Green = call, red = fold, orange = mix. Three inputs: weak own range + weak opponent range + small bet = defend very wide.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">With BDFD</div>
+    <div class="dmatrix-head">With overcard / 3-straight</div>
+    <div class="dmatrix-head">Naked (no draws)</div>
+
+    <div class="dm-label">Weak pair / bottom pair</div>
+    <div class="dm-cell green"><div class="dm-action green">Call</div><div class="dm-sub">BDFD &gt; good kicker almost always.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Call</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Fold vs large, call vs small</div></div>
+
+    <div class="dm-label">Gut shot</div>
+    <div class="dm-cell green"><div class="dm-action green">Call ("super gut shot")</div><div class="dm-sub">Turns combo draws on suit cards.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Call/mix</div><div class="dm-sub">With overcard = direct outs vs value.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Naked (double unders): no equity vs value range.</div></div>
+
+    <div class="dm-label">High card <small>(ace-high, K-high)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call (vs small)</div><div class="dm-sub">Double overs + BDFD = pure call.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">A-high + BDFD. 3-straight + 3-flush = call or CR.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">No BDFD, no 3-straight = naked high card.</div></div>
   </div>
+  <div class="callout">CR criteria: direct equity + BD straight + BD flush + opponent missed + small bet. High card of suit &gt; low card (blocks linear RFI better).</div>
 </section>
 
 <section>

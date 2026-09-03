@@ -16,18 +16,22 @@
   <p>Start at <code>1/4 to 1/3 pot</code>. Solver examples land at 25–40%.</p>
 </section>
 <section>
-  <h2>Decision Flow (Bucket 1)</h2>
-  <div class="flow">
-    <div class="node q">Flop is T-high or higher?</div>
-    <div class="conn cont"></div>
-    <div class="node q">Any risk factor?<br><span class="small">straights · ace-monotone · AKx · high-low-low · deep stacks</span></div>
-    <div class="branch">
-      <div class="col"><div class="conn no"><span class="el">NO — clean</span></div>
-        <div class="node yes">C-bet <strong>100%</strong><br>small size (~25–40%)<br>no checks, any hand</div></div>
-      <div class="col"><div class="conn yes"><span class="el">YES — risk factor</span></div>
-        <div class="node no">Slow down — mix<br><strong>Bet:</strong> very strong + very weak<br><strong>Check:</strong> medium-strength</div></div>
-    </div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Find your flop bucket (row) x risk factor presence (column). Green = c-bet 100%, orange = mix.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">No risk factor (clean)</div>
+    <div class="dmatrix-head">Risk factor present</div>
+
+    <div class="dm-label">T-high+ <small>(T, J, Q, K, A high)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">C-bet 100%</div><div class="dm-sub">Every hand — hit or miss. Small size (~25–40%). No checks.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix — bet strong + weak</div><div class="dm-sub">Check medium-strength. Risk factors: straights, ace-monotone, AKx, high-low-low, deep stacks.</div></div>
+
+    <div class="dm-label">9-high & below <small>(always)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Always mix (~70/30)</div><div class="dm-sub">Bet strong + weak. Check medium. No 100% strategy exists here.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix</div><div class="dm-sub">No exception — always a mix.</div></div>
   </div>
+  <div class="callout warn"><strong>Bet MORE when shallow, not less.</strong> Shorter stacks amplify the overpair asymmetry. Most players do the opposite — correct the leak.</div>
 </section>
 <section>
   <h2>Risk Factors (override "c-bet 100%")</h2>

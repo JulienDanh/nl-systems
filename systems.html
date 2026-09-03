@@ -191,18 +191,22 @@
   <p>Start at <code>1/4 to 1/3 pot</code>. Solver examples land at 25–40%.</p>
 </section>
 <section>
-  <h2>Decision Flow (Bucket 1)</h2>
-  <div class="flow">
-    <div class="node q">Flop is T-high or higher?</div>
-    <div class="conn cont"></div>
-    <div class="node q">Any risk factor?<br><span class="small">straights · ace-monotone · AKx · high-low-low · deep stacks</span></div>
-    <div class="branch">
-      <div class="col"><div class="conn no"><span class="el">NO — clean</span></div>
-        <div class="node yes">C-bet <strong>100%</strong><br>small size (~25–40%)<br>no checks, any hand</div></div>
-      <div class="col"><div class="conn yes"><span class="el">YES — risk factor</span></div>
-        <div class="node no">Slow down — mix<br><strong>Bet:</strong> very strong + very weak<br><strong>Check:</strong> medium-strength</div></div>
-    </div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Find your flop bucket (row) x risk factor presence (column). Green = c-bet 100%, orange = mix.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">No risk factor (clean)</div>
+    <div class="dmatrix-head">Risk factor present</div>
+
+    <div class="dm-label">T-high+ <small>(T, J, Q, K, A high)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">C-bet 100%</div><div class="dm-sub">Every hand — hit or miss. Small size (~25–40%). No checks.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix — bet strong + weak</div><div class="dm-sub">Check medium-strength. Risk factors: straights, ace-monotone, AKx, high-low-low, deep stacks.</div></div>
+
+    <div class="dm-label">9-high & below <small>(always)</small></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Always mix (~70/30)</div><div class="dm-sub">Bet strong + weak. Check medium. No 100% strategy exists here.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Mix</div><div class="dm-sub">No exception — always a mix.</div></div>
   </div>
+  <div class="callout warn"><strong>Bet MORE when shallow, not less.</strong> Shorter stacks amplify the overpair asymmetry. Most players do the opposite — correct the leak.</div>
 </section>
 <section>
   <h2>Risk Factors (override "c-bet 100%")</h2>
@@ -409,36 +413,30 @@
   <ul><li><strong>3-flush river:</strong> bluff with one card of the flush suit. Blocks flushes AND hero calls.</li><li><strong>Two-tone flop called:</strong> opponent called with 2 suits. Bluff avoiding those; prefer others.</li><li><strong>High card vs low card of suit:</strong> high card heart is <em>worse</em> (blocks more folds). Low card heart less damaging.</li><li><strong>Busted straight + busted flush draw:</strong> <em>terrible</em> bluff — blocks both folding regions.</li></ul>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">You have a value bet on the river?</div>
-    <div class="branch">
-      <div class="col"><div class="conn no"><span class="el">NO</span></div><div class="node no">No bluffs needed<br>(rare — only in very strong ranges)</div></div>
-      <div class="col"><div class="conn yes"><span class="el">YES → you need bluffs</span></div>
-        <div class="node q">Board 3-flush or obvious suit blanked?</div>
-        <div class="branch">
-          <div class="col">
-            <div class="conn yes"><span class="el">YES (easy System 2)</span></div>
-            <div class="node q">Block the suit villain calls with</div>
-            <div class="conn cont"></div>
-            <div class="node yes">Bluff with one card of that suit<br>(blocks flushes + hero calls)</div>
-          </div>
-          <div class="col">
-            <div class="conn no"><span class="el">NO (wide ranges)</span></div>
-            <div class="node q">System 1: bottom of range up</div>
-            <div class="conn cont"></div>
-            <div class="node yes">Bluff weakest hands first<br>prioritize the LOW card in hand</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="conn cont"></div>
-    <div class="node q">Realism check: can you actually have this hand?<br><span class="small">if it bet flop/turn with equity, you won't have it on river</span></div>
-    <div class="branch">
-      <div class="col"><div class="conn yes"><span class="el">YES</span></div><div class="node yes">Bluff</div></div>
-      <div class="col"><div class="conn no"><span class="el">NO — ideal unreachable</span></div><div class="node no">Bluff with what you<br>realistically arrived with</div></div>
-    </div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Board texture (row) x which system to use (column). Green = bluff, red = don't. First: do you have a value bet? If no, no bluffs needed.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">System 2 (blocking effects)</div>
+    <div class="dmatrix-head">System 1 (bottom of range up)</div>
+
+    <div class="dm-label">Board 3-flush or suit blanked <small>(easy System 2)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">Bluff with one card of that suit</div><div class="dm-sub">Blocks flushes AND hero calls. Obvious blocking effect.</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Secondary</div><div class="dm-sub">System 2 is easy here — use it first.</div></div>
+
+    <div class="dm-label">Wide ranges, no suit blanked</div>
+    <div class="dm-cell red"><div class="dm-action red">Too hard</div><div class="dm-sub">Can't identify blocking effects on wide ranges.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Bluff weakest hands first</div><div class="dm-sub">Prioritize the LOW card in hand. Lowest EV when checking = lowest opportunity cost.</div></div>
+
+    <div class="dm-label">Three Broadway, EP open</div>
+    <div class="dm-cell red"><div class="dm-action red">Too hard</div><div class="dm-sub">No offsuit air exists (linear range). Can't identify bluffs by suit.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Bluff all suited air</div><div class="dm-sub">Only suited hands can bluff — scarce. Pure bluff them all. Not enough to be picky.</div></div>
+
+    <div class="dm-label">Busted straight + flush draw</div>
+    <div class="dm-cell red"><div class="dm-action red">Terrible bluff</div><div class="dm-sub">Blocks both folding regions at once. Prefer one or the other.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Terrible bluff</div><div class="dm-sub">Same — blocks both. Don't bluff with QJ♥.</div></div>
   </div>
+  <div class="callout bad"><strong>Realism constraint:</strong> you can't always have the ideal bluff. If hearts bet flop+turn, you won't have hearts on the river. Don't wait for the perfect blocker — bluff with what you realistically arrived with.</div>
 </section>
 
 <section>
@@ -756,36 +754,30 @@
   </table>
 </section>
 <section>
-  <h2>Decision Flow</h2>
-  <div class="flow">
-    <div class="node q">Villain c-bets. What's your hand type?</div>
-    <div class="branch">
-      <div class="col">
-        <div class="conn cont"><span class="el">Weak pair + BDFD</span></div>
-        <div class="node yes">Call (BDFD > kicker)</div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">Gut shot</span></div>
-        <div class="node q">Also has BDFD?</div>
-        <div class="branch">
-          <div class="col"><div class="conn yes"><span class="el">YES (super gut shot)</span></div><div class="node yes">Call</div></div>
-          <div class="col"><div class="conn cont"><span class="el">With overcard</span></div><div class="node yes">Call/mix</div></div>
-          <div class="col"><div class="conn cont"><span class="el">Naked (double unders)</span></div><div class="node no">Fold</div></div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="conn cont"><span class="el">High card</span></div>
-        <div class="node q">BDFD? Overcards?</div>
-        <div class="branch">
-          <div class="col"><div class="conn cont"><span class="el">Double overs + BDFD</span></div><div class="node yes">Pure call</div></div>
-          <div class="col"><div class="conn cont"><span class="el">A-high + BDFD</span></div><div class="node yes">Pure call (vs small)</div></div>
-          <div class="col"><div class="conn no"><span class="el">No BDFD</span></div><div class="node q">3-straight + 3-flush?</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="conn cont"></div>
-    <div class="node q" style="margin-top:14px">CR criteria: direct equity + BD straight + BD flush + opponent missed + small bet<br><span class="small">high card of suit &gt; low card (blocks linear RFI better)</span></div>
+  <h2>Decision Matrix</h2>
+  <p class="muted">Hand type (row) x draws/conditions (column). Green = call, red = fold, orange = mix. Three inputs: weak own range + weak opponent range + small bet = defend very wide.</p>
+  <div class="dmatrix" style="grid-template-columns:1.2fr 1fr 1fr 1fr">
+    <div></div>
+    <div class="dmatrix-head">With BDFD</div>
+    <div class="dmatrix-head">With overcard / 3-straight</div>
+    <div class="dmatrix-head">Naked (no draws)</div>
+
+    <div class="dm-label">Weak pair / bottom pair</div>
+    <div class="dm-cell green"><div class="dm-action green">Call</div><div class="dm-sub">BDFD &gt; good kicker almost always.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Call</div></div>
+    <div class="dm-cell orange"><div class="dm-action orange">Fold vs large, call vs small</div></div>
+
+    <div class="dm-label">Gut shot</div>
+    <div class="dm-cell green"><div class="dm-action green">Call ("super gut shot")</div><div class="dm-sub">Turns combo draws on suit cards.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Call/mix</div><div class="dm-sub">With overcard = direct outs vs value.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">Naked (double unders): no equity vs value range.</div></div>
+
+    <div class="dm-label">High card <small>(ace-high, K-high)</small></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call (vs small)</div><div class="dm-sub">Double overs + BDFD = pure call.</div></div>
+    <div class="dm-cell green"><div class="dm-action green">Pure call</div><div class="dm-sub">A-high + BDFD. 3-straight + 3-flush = call or CR.</div></div>
+    <div class="dm-cell red"><div class="dm-action red">Fold</div><div class="dm-sub">No BDFD, no 3-straight = naked high card.</div></div>
   </div>
+  <div class="callout">CR criteria: direct equity + BD straight + BD flush + opponent missed + small bet. High card of suit &gt; low card (blocks linear RFI better).</div>
 </section>
 
 <section>
