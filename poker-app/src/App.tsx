@@ -38,6 +38,7 @@ function App() {
 
   return (
     <div className="layout">
+      <div className={`sidebar-backdrop ${sidebarOpen ? 'show' : ''}`} onClick={() => setSidebarOpen(false)} />
       <Sidebar activePage={page} onNavigate={navigate} open={sidebarOpen} />
       <main className="main">
         <div className="header-bar">

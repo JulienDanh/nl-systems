@@ -624,8 +624,86 @@ footer {
     left: -270px;
     z-index: 30;
     transition: left 0.25s;
+    width: 260px;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .sidebar.open { left: 0; }
   .menu-btn { display: block; }
-  .main { padding: 20px 16px 80px; }
+  .main { padding: 16px 14px 60px; max-width: 100%; }
+
+  /* Sections: less padding on mobile */
+  .section { padding: 16px 14px; margin: 12px 0; border-radius: 12px; }
+  .section h2 { font-size: 18px; }
+  .section h3 { font-size: 14px; }
+
+  /* Tables: horizontal scroll if needed */
+  table { font-size: 12px; }
+  th, td { padding: 6px 7px; }
+
+  /* Decision matrix: stack into single column */
+  .dmatrix { grid-template-columns: 1fr !important; gap: 4px; }
+  .dmatrix-head { display: none; }
+  .dm-cell { padding: 10px 12px; min-height: 0; }
+  .dm-label { padding: 4px 0 2px; font-size: 13px; }
+
+  /* Hand examples: stack, full width */
+  .ex-card { grid-template-columns: 1fr; padding: 14px; gap: 10px; }
+  .ex-board { font-size: 14px; padding: 7px 10px; }
+  .ex-verdict { font-size: 11px; padding: 2px 8px; }
+
+  /* Flashcards: single column, taller for touch */
+  .cards-grid { grid-template-columns: 1fr; gap: 10px; }
+  .flip { height: 130px; }
+  .face { padding: 12px; }
+  .face .q { font-size: 13px; }
+  .face .a { font-size: 12px; }
+
+  /* Quiz: buttons full width, bigger tap targets */
+  .quiz-card { padding: 14px; margin: 10px 0; }
+  .quiz-q { font-size: 13px; }
+  .choices { flex-direction: column; gap: 8px; }
+  .btn { width: 100%; padding: 12px 16px; font-size: 14px; text-align: left; min-height: 44px; }
+  .explanation { padding: 10px; font-size: 12px; }
+
+  /* Nav items: bigger touch targets */
+  .nav-item { padding: 10px 12px; font-size: 13px; min-height: 44px; }
+
+  /* Callouts: less padding */
+  .callout { padding: 10px 12px; margin: 10px 0; font-size: 13px; }
+
+  /* Code: smaller */
+  code { font-size: 12px; }
+
+  /* Footer */
+  footer { font-size: 11px; padding: 10px 0; }
+
+  /* Header bar */
+  .header-bar { margin-bottom: 12px; }
+  .crumbs { font-size: 11px; }
+  .pill { font-size: 10px; }
 }
+
+@media (max-width: 380px) {
+  .main { padding: 12px 10px 50px; }
+  .section { padding: 14px 10px; }
+  .section h2 { font-size: 16px; }
+  .ex-board { font-size: 13px; padding: 6px 8px; }
+}
+
+/* Sidebar overlay backdrop */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+}
+.sidebar-backdrop.show { display: block; }
+
+/* Prevent text selection on nav items (feels more native) */
+.nav-item { -webkit-tap-highlight-color: transparent; }
+.btn { -webkit-tap-highlight-color: transparent; }
+.flip { -webkit-tap-highlight-color: transparent; }
