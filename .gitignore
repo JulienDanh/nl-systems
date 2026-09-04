@@ -3,3 +3,5 @@
 # Build output is committed for simplicity (single-file deploy)
 # Uncomment to exclude if you prefer to build on CI:
 # systems.html
+poker-app/node_modules/
+poker-app/dist/
