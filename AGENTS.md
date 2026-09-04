@@ -1,8 +1,7 @@
 # AGENTS.md — Building Learning Content from Source Transcripts
 
 This repo contains poker training transcripts (`transcripts/simple_system/*.txt`) converted into
-a single-file interactive HTML study guide (`systems.html`). Follow these principles
-when extending or revising that content.
+a React + Vite study guide (`poker-app/`). Follow these principles when extending or revising content.
 
 ## Source material handling
 
@@ -88,27 +87,21 @@ summary comes first, then the detail, then the practice.
 - **Quiz questions apply, don't recite.** Give a new board/hand and ask for the
   action. The student has to run the system, not remember a slide.
 
-## HTML/build conventions
+## Build conventions
 
-- **Single file, no dependencies.** All CSS, JS, and content inline. The file must
-  open offline in any browser (including iTerm2's built-in browser).
-- **Consistent component classes.** `.tag.default` (green), `.tag.risk` (orange),
-  `.tag.call` (blue), `.tag.fold` (red) for decision labels. `.callout` with
-  `.warn` / `.bad` / `.good` variants for highlighted boxes. `.ex-card` for hand
-  examples. `.board` for notated boards.
-- **Decision Matrix component.** `.dmatrix` grid with `.dm-cell.green` / `.orange`
-  / `.red` for colored cells. `.dm-action` for the bold action label. `.dm-sub`
-  for the short sub. `.dm-label` for row labels. `.dmatrix-head` for column
-  headers. Hover glow on each cell. This is the visual summary at the top of
-  every system page.
-- **Per-system IDs.** Flashcard grid `flash-sN`, quiz host `quiz-sN`, progress bar
-  `prog-sN`, score `score-sN`. The JS build function uses `window['__start_sN']`
-  so quizzes lazy-init on first page visit.
-- **Sidebar nav.** One entry per system + primer + conclusion. Active state
-  toggles via `.nav-item.active`. Mobile collapses to a hamburger menu.
-- **Tag hand examples by decision type.** Each `.ex-card` starts with a colored
-  tag so the student can scan: green = default/bet, orange = risk factor, red =
-  fold, blue = call/defend.
+- **React + Vite + TypeScript.** The app lives in `poker-app/`. Page content
+  (sections, tables, matrices, examples) lives in `poker-app/src/pages/*.html`
+  and is loaded at build time via Vite's `import.meta.glob` raw imports.
+- **Flashcard and quiz data** live in `poker-app/src/data/content.ts` as typed
+  exports (`flashcards`, `quizzes`, `navTitles`).
+- **Components:** `Sidebar` (nav), `Flashcards` (flip cards), `Quiz` (scored
+  quiz), `SystemPage` (loads HTML content + injects React components for
+  flashcards/quiz).
+- **Styles:** `poker-app/src/styles/global.css` — all CSS in one file, ported
+  from the original vanilla version.
+- **Deploy:** GitHub Actions builds `poker-app/` and deploys `dist/` to Pages.
+  Base path is `/nl-systems/` (set in `vite.config.ts`).
+- **Develop locally:** `cd poker-app && npm run dev`.
 
 ## What to avoid
 
