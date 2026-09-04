@@ -101,97 +101,80 @@ export function Flashcards({ cards }: { cards: [string, string][] }) {
 }
 
 export function Quiz({ questions }: { questions: QuizQuestion[] }) {
-  const [idx, setIdx] = useState(0)
-  const [score, setScore] = useState(0)
-  const [picked, setPicked] = useState<number | null>(null)
-  const [showEx, setShowEx] = useState(false)
-  const [done, setDone] = useState(false)
+  const [answers, setAnswers] = useState<(number | null)[]>(questions.map(() => null))
 
   if (!questions.length) return null
-  if (done) {
-    return (
-      <div className="quiz-card" style={{ textAlign: 'center' }}>
-        <h3 style={{ border: 'none', padding: 0 }}>
-          Done — {score} / {questions.length}
-        </h3>
-        <p className="muted">
-          {score === questions.length
-            ? 'Clean run.'
-            : score >= questions.length * 0.7
-            ? 'Solid. Review the flashcards.'
-            : 'Re-read this system and retry.'}
-        </p>
-        <button
-          className="btn"
-          onClick={() => {
-            setIdx(0)
-            setScore(0)
-            setPicked(null)
-            setShowEx(false)
-            setDone(false)
-          }}
-        >
-          Retake
-        </button>
-      </div>
-    )
+
+  const score = answers.filter((a, i) => a === questions[i].a).length
+  const allAnswered = answers.every((a) => a !== null)
+
+  const handlePick = (qIdx: number, optIdx: number) => {
+    if (answers[qIdx] !== null) return
+    setAnswers(answers.map((a, i) => (i === qIdx ? optIdx : a)))
   }
 
-  const item = questions[idx]
-  const progress = (idx / questions.length) * 100
-
-  const handlePick = (i: number) => {
-    if (picked !== null) return
-    setPicked(i)
-    if (i === item.a) setScore(score + 1)
-    setShowEx(true)
-    setTimeout(() => {
-      if (idx + 1 >= questions.length) setDone(true)
-      else {
-        setIdx(idx + 1)
-        setPicked(null)
-        setShowEx(false)
-      }
-    }, 1400)
-  }
+  const reset = () => setAnswers(questions.map(() => null))
 
   return (
     <>
       <div className="progress">
-        <div style={{ width: `${progress}%` }} />
+        <div style={{ width: `${(score / questions.length) * 100}%` }} />
       </div>
       <div className="score">
         Score {score} / {questions.length}
       </div>
-      <div className="quiz-card">
-        <div className="quiz-q">
-          Q{idx + 1}/{questions.length}. {item.q}
-        </div>
-        <div className="choices">
-          {item.o.map((opt: string, i: number) => (
-            <button
-              key={i}
-              className={`btn ${
-                picked !== null && i === item.a
-                  ? 'correct'
-                  : picked === i && i !== item.a
-                  ? 'wrong'
-                  : ''
-              }`}
-              disabled={picked !== null}
-              onClick={() => handlePick(i)}
-            >
-              {opt}
-            </button>
-          ))}
-        </div>
-        {showEx && (
-          <div className="explanation" style={{ display: 'block' }}>
-            <strong>{picked === item.a ? 'Correct.' : 'Not quite.'}</strong>{' '}
-            {item.why}
+      {questions.map((item, qIdx) => {
+        const picked = answers[qIdx]
+        const answered = picked !== null
+        const isCorrect = answered && picked === item.a
+        return (
+          <div key={qIdx} className="quiz-card">
+            <div className="quiz-q">
+              Q{qIdx + 1}/{questions.length}. {item.q}
+            </div>
+            <div className="choices">
+              {item.o.map((opt, i) => {
+                let cls = ''
+                if (answered) {
+                  if (i === item.a) cls = 'correct'
+                  else if (i === picked) cls = 'wrong'
+                }
+                return (
+                  <button
+                    key={i}
+                    className={`btn ${cls}`}
+                    disabled={answered}
+                    onClick={() => handlePick(qIdx, i)}
+                  >
+                    {opt}
+                  </button>
+                )
+              })}
+            </div>
+            {answered && (
+              <div className="explanation" style={{ display: 'block' }}>
+                <strong>{isCorrect ? 'Correct.' : 'Not quite.'}</strong>{' '}
+                {item.why}
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        )
+      })}
+      {allAnswered && (
+        <div className="quiz-card" style={{ textAlign: 'center' }}>
+          <h3 style={{ border: 'none', padding: 0 }}>
+            Done — {score} / {questions.length}
+          </h3>
+          <p className="muted">
+            {score === questions.length
+              ? 'Clean run.'
+              : score >= questions.length * 0.7
+              ? 'Solid. Review the flashcards.'
+              : 'Re-read this system and retry.'}
+          </p>
+          <button className="btn" onClick={reset}>Retake</button>
+        </div>
+      )}
     </>
   )
 }
