@@ -3,10 +3,10 @@ import { flashcards, quizzes } from '../data/content'
 import type { HandExample } from '../components/ui'
 
 const examples: HandExample[] = [
-  { tag: "Pure CR", tagVariant: "default", board: <>T52 rainbow · J<S>♠</S>6<S>♠</S> (vs CO, ½ pot)</>, desc: "T-high · rainbow · J♠6♠ · vs CO", verdict: "agree", verdictText: "System agrees", system: "BDFD + BD straight + overcard to T → pure check-raise.", solver: "Pure CR. Agrees." },
-  { tag: "Pure call/raise", tagVariant: "call", board: <>T72 (2 diamonds) · Q<D>♦</D>9 (vs BTN, 30%)</>, desc: "T-high · Q♦9 · vs BTN", verdict: "agree", verdictText: "System agrees", system: "Q♦ > 9♦; overcard + BD flush → pure play. Student folded — mistake.", solver: "Pure raise or call. Q♦ (high card diamond) better." },
+  { tag: "Pure CR", tagVariant: "default", board: <>T<S>♠</S> 5<H>♥</H> 2<C>♣</C> · J<S>♠</S>6<S>♠</S> (vs CO, ½ pot)</>, desc: "T-high · rainbow · J♠6♠ · vs CO", verdict: "agree", verdictText: "System agrees", system: "BDFD + BD straight + overcard to T → pure check-raise.", solver: "Pure CR. Agrees." },
+  { tag: "Pure call/raise", tagVariant: "call", board: <>T<S>♠</S> 7<D>♦</D> 2<D>♦</D> · Q<D>♦</D>9 (vs BTN, 30%)</>, desc: "T-high · Q♦9 · vs BTN", verdict: "agree", verdictText: "System agrees", system: "Q♦ > 9♦; overcard + BD flush → pure play. Student folded — mistake.", solver: "Pure raise or call. Q♦ (high card diamond) better." },
   { tag: "Mix", tagVariant: "risk", board: <>K<S>♠</S> 8<H>♥</H> 4<C>♣</C></>, desc: "K-high · K8s · ½ pot", verdict: "agree", verdictText: "System agrees", system: "K8 = mix. K7 close, K6 pure fold.", solver: "Confirms K8 mix, K7 close, K6 pure fold." },
-  { tag: "Super gut shot", tagVariant: "call", board: <>JT8 two-tone · 9<D>♦</D>7 (gut shot + BDFD)</>, desc: "J-high · two-tone · 9♦7 · super gut shot", verdict: "agree", verdictText: "System agrees", system: "'Super gut shot' → call. Student folded — mistake.", solver: "9-7 offsuit pure fold, but 9♦7 is played (BDFD rescues it)." },
+  { tag: "Super gut shot", tagVariant: "call", board: <>J<S>♠</S> T<H>♥</H> 8<D>♦</D> · 9<D>♦</D>7 (gut shot + BDFD)</>, desc: "J-high · two-tone · 9♦7 · super gut shot", verdict: "agree", verdictText: "System agrees", system: "'Super gut shot' → call. Student folded — mistake.", solver: "9-7 offsuit pure fold, but 9♦7 is played (BDFD rescues it)." },
 ]
 
 export function S9Page() {
