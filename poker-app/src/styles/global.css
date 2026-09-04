@@ -400,6 +400,27 @@ th {
   padding: 0 2px;
 }
 
+.ex-hole {
+  display: inline-flex;
+  gap: 3px;
+  font-weight: 700;
+  font-size: 14px;
+  background: #0c1117;
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+  border-radius: 10px;
+  align-self: flex-start;
+  white-space: nowrap;
+}
+
+.ex-hole::before {
+  content: 'hole: ';
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  align-self: center;
+}
+
 .ex-verdict {
   display: inline-flex;
   align-items: center;

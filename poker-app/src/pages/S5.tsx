@@ -3,10 +3,10 @@ import { flashcards, quizzes } from '../data/content'
 import type { HandExample } from '../components/ui'
 
 const examples: HandExample[] = [
-  { tag: "Medium → check", tagVariant: "risk", board: <>Q73 two-tone → J<H>♥</H> · J9o</>, desc: "Q-high · two-tone · J9o", verdict: "agree", verdictText: "System agrees", system: "J9 (no kicker) is medium — loses to KJ/JT floats. Check.", solver: "Checks J9. AJ with A♦ is minimum jack to barrel." },
+  { tag: "Medium → check", tagVariant: "risk", board: <>Q73 two-tone → J<H>♥</H></>, holeCards: <>J9o</>, desc: "Q-high · two-tone · J9o", verdict: "agree", verdictText: "System agrees", system: "J9 (no kicker) is medium — loses to KJ/JT floats. Check.", solver: "Checks J9. AJ with A♦ is minimum jack to barrel." },
   { tag: "Medium → check", tagVariant: "risk", board: <>K<S>♠</S> 7<H>♥</H> 2<H>♥</H></>, desc: "K-high · two-tone · 99", verdict: "agree", verdictText: "System agrees", system: "Pocket 9s medium — opponent has many K-x calls. Check.", solver: "99 and 88 both check. 88 (open-ender) borderline. 99 pure check." },
   { tag: "Medium → check", tagVariant: "risk", board: <>Q<S>♠</S> 7<H>♥</H> 5<C>♣</C></>, desc: "Q-high · rainbow · JJ · bad turn", verdict: "agree", verdictText: "System agrees", system: "Bad card for range + medium strength → check.", solver: "JJ mostly checks (56%, →72% if no donk). 88/99 can barrel (open-ender)." },
-  { tag: "Merge → bet", tagVariant: "default", board: <>Q73 → J<H>♥</H> · ATo</>, desc: "Q-high · two-tone · ATo · merge", verdict: "agree", verdictText: "System agrees", system: "Merge — folds Q-x/K-x, called by J-T/J-4s/10x. Bet.", solver: "Confirms. ATo folds out Q-x/K-x, called by dominated J-x and draws." },
+  { tag: "Merge → bet", tagVariant: "default", board: <>Q73 → J<H>♥</H></>, holeCards: <>ATo</>, desc: "Q-high · two-tone · ATo · merge", verdict: "agree", verdictText: "System agrees", system: "Merge — folds Q-x/K-x, called by J-T/J-4s/10x. Bet.", solver: "Confirms. ATo folds out Q-x/K-x, called by dominated J-x and draws." },
 ]
 
 export function S5Page() {

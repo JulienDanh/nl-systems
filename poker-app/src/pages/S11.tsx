@@ -3,10 +3,10 @@ import { flashcards, quizzes } from '../data/content'
 import type { HandExample } from '../components/ui'
 
 const examples: HandExample[] = [
-  { tag: "CR", tagVariant: "default", board: <>QT2 → A → blank · A<H>♥</H>3<H>♥</H> (second pair) · IP bet 1/3</>, desc: "Q-high · A♥3♥ · CR opportunity", verdict: "agree", verdictText: "System agrees", system: "Range dense with KQ/QJ (12 combos) vs A-3/4/5♥ (3 combos). CR to ~25bb.", solver: "May fold better (A-x hearts) and call worse (KQ, QJ)." },
+  { tag: "CR", tagVariant: "default", board: <>QT2 → A → blank</>, holeCards: <>A<H>♥</H>3<H>♥</H> (second pair) · IP bet 1/3</>, desc: "Q-high · A♥3♥ · CR opportunity", verdict: "agree", verdictText: "System agrees", system: "Range dense with KQ/QJ (12 combos) vs A-3/4/5♥ (3 combos). CR to ~25bb.", solver: "May fold better (A-x hearts) and call worse (KQ, QJ)." },
   { tag: "Fold", tagVariant: "fold", board: <>6<S>♠</S> 5<H>♥</H> 4<C>♣</C></>, desc: "6-straight · AJs · no natural bluffs", verdict: "agree", verdictText: "System agrees", system: "Opponent won't bluff with A-2/3/4/5. No natural bluffs. Fold.", solver: "Lost to A-7 (thin value, not 6-bluff). No natural bluffs available." },
   { tag: "Call (blocker)", tagVariant: "call", board: <>T<S>♠</S> 4<H>♥</H> 2<C>♣</C></>, desc: "T-high · T6o · IP bet ¼", verdict: "agree", verdictText: "System agrees", system: "T-6 blocks pair of tens (value region). Call.", solver: "Lost to K-T but correctly identified value source." },
-  { tag: "Blocker call", tagVariant: "call", board: <>A72 → blank (turn checked) → Q<S>♠</S> · K7/42/43 · IP bet 37.5%</>, desc: "A-high · K7/42/43 · IP bet 37.5%", verdict: "agree", verdictText: "System agrees", system: "Call K7/K3/K2, 42/43/74; fold 87/82/97/92.", solver: "K-x blocks value (KK/KQ); 4-x unblocks bluffs; 8/9-x block bluffs. Confirmed." },
+  { tag: "Blocker call", tagVariant: "call", board: <>A72 → blank (turn checked) → Q<S>♠</S></>, holeCards: <>K7/42/43 · IP bet 37.5%</>, desc: "A-high · K7/42/43 · IP bet 37.5%", verdict: "agree", verdictText: "System agrees", system: "Call K7/K3/K2, 42/43/74; fold 87/82/97/92.", solver: "K-x blocks value (KK/KQ); 4-x unblocks bluffs; 8/9-x block bluffs. Confirmed." },
   { tag: "Toy game", tagVariant: "risk", board: <>2<S>♠</S> 2<H>♥</H> 2<C>♣</C> 3<D>♦</D> 7<S>♠</S></>, desc: "Toy game · 22237 · 88 vs 87s", verdict: "agree", verdictText: "System agrees", system: "88 = worth 0 (indifferent); 87s = ~27% pot. 87s blocks 77 (value) and unblocks JTs (bluff).", solver: "" },
 ]
 

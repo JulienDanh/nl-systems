@@ -90,6 +90,7 @@ export interface HandExample {
   tag: string
   tagVariant: 'default' | 'risk' | 'call' | 'fold'
   board: ReactNode
+  holeCards?: ReactNode
   desc: string
   verdict: 'agree' | 'mixed' | 'mistake'
   verdictText: string
@@ -103,6 +104,7 @@ export function HandExampleCard({ ex }: { ex: HandExample }) {
       <div className="ex-left">
         <Tag variant={ex.tagVariant}>{ex.tag}</Tag>
         <div className="ex-board">{ex.board}</div>
+        {ex.holeCards && <div className="ex-hole">{ex.holeCards}</div>}
         <div className="ex-desc">{ex.desc}</div>
       </div>
       <div className="ex-right">
