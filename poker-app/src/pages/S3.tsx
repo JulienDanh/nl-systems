@@ -1,4 +1,5 @@
 import { Section, Callout, DecisionMatrix, HandExampleCard, FlashcardsSection, QuizSection, S, H, D, C } from '../components/ui'
+import { flashcards, quizzes } from '../data/content'
 import type { HandExample } from '../components/ui'
 
 const examples: HandExample[] = [
@@ -57,8 +58,8 @@ export function S3Page() {
         <Callout>SB has a folding range; BB does not. 2x/3x favor BB. BB checking = capped (no AK/AQ/overpairs). SB has advantage on Broadway boards; BB on low boards.</Callout>
       </Section>
       <Section title="Hand Examples">{examples.map((ex, i) => <HandExampleCard key={i} ex={ex} />)}</Section>
-      <FlashcardsSection sys="s3" />
-      <QuizSection sys="s3" />
+      <FlashcardsSection cards={flashcards['s3']} />
+      <QuizSection questions={quizzes['s3']} />
     </>
   )
 }

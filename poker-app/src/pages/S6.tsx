@@ -1,4 +1,5 @@
 import { Section, Callout, DecisionMatrix, HandExampleCard, FlashcardsSection, QuizSection, S, H, C } from '../components/ui'
+import { flashcards, quizzes } from '../data/content'
 import type { HandExample } from '../components/ui'
 
 const examples: HandExample[] = [
@@ -49,8 +50,8 @@ export function S6Page() {
       </Section>
       <Section title="Sizing"><p>CR to <strong>small size</strong> (~3x the c-bet). Short stacks = 2-street game. No need for large CR sizes.</p></Section>
       <Section title="Hand Examples">{examples.map((ex, i) => <HandExampleCard key={i} ex={ex} />)}</Section>
-      <FlashcardsSection sys="s6" />
-      <QuizSection sys="s6" />
+      <FlashcardsSection cards={flashcards['s6']} />
+      <QuizSection questions={quizzes['s6']} />
     </>
   )
 }

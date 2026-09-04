@@ -1,4 +1,5 @@
 import { Section, Callout, Tag, DecisionMatrix, HandExampleCard, FlashcardsSection, QuizSection, S, H, D, C } from '../components/ui'
+import { flashcards, quizzes } from '../data/content'
 import type { HandExample } from '../components/ui'
 
 const examples: HandExample[] = [
@@ -49,8 +50,8 @@ export function S9Page() {
         </table>
       </Section>
       <Section title="Hand Examples">{examples.map((ex, i) => <HandExampleCard key={i} ex={ex} />)}</Section>
-      <FlashcardsSection sys="s9" />
-      <QuizSection sys="s9" />
+      <FlashcardsSection cards={flashcards['s9']} />
+      <QuizSection questions={quizzes['s9']} />
     </>
   )
 }

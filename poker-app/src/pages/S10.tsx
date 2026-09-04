@@ -1,4 +1,5 @@
 import { Section, Callout, Tag, DecisionMatrix, HandExampleCard, FlashcardsSection, QuizSection, S, H, D } from '../components/ui'
+import { flashcards, quizzes } from '../data/content'
 import type { HandExample } from '../components/ui'
 
 const examples: HandExample[] = [
@@ -44,8 +45,8 @@ export function S10Page() {
         <ul><li><strong>River cards that reintroduce strength:</strong> fills straights/flushes → re-uncaps villain → smaller sizing.</li><li><strong>Multi-way:</strong> IP checking back flop in multi-way = extremely capped (no sets, no TPTK). Largely ignore them.</li><li><strong>Donk bets:</strong> strip from solver — most players miss them in metagame.</li></ul>
       </Section>
       <Section title="Hand Examples">{examples.map((ex, i) => <HandExampleCard key={i} ex={ex} />)}</Section>
-      <FlashcardsSection sys="s10" />
-      <QuizSection sys="s10" />
+      <FlashcardsSection cards={flashcards['s10']} />
+      <QuizSection questions={quizzes['s10']} />
     </>
   )
 }

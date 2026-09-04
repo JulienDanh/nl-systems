@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { QuizQuestion } from '../data/content'
 
 interface SidebarProps {
   activePage: string
@@ -62,9 +63,8 @@ export function Sidebar({ activePage, onNavigate, open }: SidebarProps) {
   )
 }
 
-export function Flashcards({ sys }: { sys: string }) {
+export function Flashcards({ cards }: { cards: [string, string][] }) {
   const [flipped, setFlipped] = useState<Set<number>>(new Set())
-  const cards = (window as any).__flashcards?.[sys] || []
 
   const toggle = (i: number) => {
     setFlipped((prev) => {
@@ -100,8 +100,7 @@ export function Flashcards({ sys }: { sys: string }) {
   )
 }
 
-export function Quiz({ sys }: { sys: string }) {
-  const questions = (window as any).__quizzes?.[sys] || []
+export function Quiz({ questions }: { questions: QuizQuestion[] }) {
   const [idx, setIdx] = useState(0)
   const [score, setScore] = useState(0)
   const [picked, setPicked] = useState<number | null>(null)

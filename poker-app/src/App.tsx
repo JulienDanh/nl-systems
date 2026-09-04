@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Sidebar } from './components/Sidebar'
-import { flashcards, quizzes, navTitles } from './data/content'
+import { navTitles } from './data/content'
 import { PrimerPage } from './pages/Primer'
 import { S1Page } from './pages/S1'
 import { S2Page } from './pages/S2'
@@ -27,11 +27,6 @@ const PAGES: Record<PageId, React.FC> = {
 function App() {
   const [page, setPage] = useState<PageId>('s1')
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
-  useEffect(() => {
-    ;(window as any).__flashcards = flashcards
-    ;(window as any).__quizzes = quizzes
-  }, [])
 
   const navigate = (p: string) => {
     setPage(p as PageId)

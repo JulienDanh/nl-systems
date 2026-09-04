@@ -1,4 +1,5 @@
 import { Section, Callout, Tag, DecisionMatrix, HandExampleCard, FlashcardsSection, QuizSection, S, H, C } from '../components/ui'
+import { flashcards, quizzes } from '../data/content'
 import type { HandExample } from '../components/ui'
 
 const examples: HandExample[] = [
@@ -45,8 +46,8 @@ export function S5Page() {
       </Section>
       <Section title="Sizing"><p>Default turn: <strong>polarize</strong> — pot-ish or check. Solver often prefers ~116% overbet or check. Adding 60% allows thinner value (K8s) but doesn't rescue medium hands (99 still checks).</p></Section>
       <Section title="Hand Examples">{examples.map((ex, i) => <HandExampleCard key={i} ex={ex} />)}</Section>
-      <FlashcardsSection sys="s5" />
-      <QuizSection sys="s5" />
+      <FlashcardsSection cards={flashcards['s5']} />
+      <QuizSection questions={quizzes['s5']} />
     </>
   )
 }

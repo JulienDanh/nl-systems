@@ -1,4 +1,5 @@
 import { Section, Callout, Tag, DecisionMatrix, HandExampleCard, FlashcardsSection, QuizSection, S, H, D, C } from '../components/ui'
+import { flashcards, quizzes } from '../data/content'
 import type { HandExample } from '../components/ui'
 
 const examples: HandExample[] = [
@@ -47,8 +48,8 @@ export function S2Page() {
         <Callout variant="warn"><strong>K83 two-tone (hearts+diamonds):</strong> KJ with heart+diamond = pure bet. KJ with spades+clubs (both off) = pure check. KJ with a heart blocks BB's heart-based continuing range with no equity risk.</Callout>
       </Section>
       <Section title="Hand Examples">{examples.map((ex, i) => <HandExampleCard key={i} ex={ex} />)}</Section>
-      <FlashcardsSection sys="s2" />
-      <QuizSection sys="s2" />
+      <FlashcardsSection cards={flashcards['s2']} />
+      <QuizSection questions={quizzes['s2']} />
     </>
   )
 }

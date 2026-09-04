@@ -121,21 +121,22 @@ export function D({ children }: { children: ReactNode }) { return <span classNam
 export function C({ children }: { children: ReactNode }) { return <span className="c">{children}</span> }
 
 // ---- Flashcards + Quiz section wrapper ----
-export function FlashcardsSection({ sys }: { sys: string }) {
+export function FlashcardsSection({ cards }: { cards: [string, string][] }) {
   return (
     <Section title="Flashcards">
-      <FlashcardsGrid sys={sys} />
+      <FlashcardsGrid cards={cards} />
     </Section>
   )
 }
 
-export function QuizSection({ sys }: { sys: string }) {
+export function QuizSection({ questions }: { questions: QuizQuestion[] }) {
   return (
     <Section title="Quiz">
-      <QuizComponent sys={sys} />
+      <QuizComponent questions={questions} />
     </Section>
   )
 }
 
 // Inline imports to avoid circular deps — these come from Sidebar.tsx
 import { Flashcards as FlashcardsGrid, Quiz as QuizComponent } from './Sidebar'
+import type { QuizQuestion } from '../data/content'

@@ -1,4 +1,5 @@
 import { Section, Callout, DecisionMatrix, HandExampleCard, FlashcardsSection, QuizSection, S, H, D, C } from '../components/ui'
+import { flashcards, quizzes } from '../data/content'
 import type { HandExample } from '../components/ui'
 
 const examples: HandExample[] = [
@@ -52,8 +53,8 @@ export function S4Page() {
         <p>If you identify value bets, you <em>must</em> have bluffs (in common scenarios). Bluffs need value to carry them.</p>
       </Section>
       <Section title="Hand Examples">{examples.map((ex, i) => <HandExampleCard key={i} ex={ex} />)}</Section>
-      <FlashcardsSection sys="s4" />
-      <QuizSection sys="s4" />
+      <FlashcardsSection cards={flashcards['s4']} />
+      <QuizSection questions={quizzes['s4']} />
     </>
   )
 }
